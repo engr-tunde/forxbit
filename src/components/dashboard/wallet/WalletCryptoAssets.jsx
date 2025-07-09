@@ -243,7 +243,7 @@ const WalletCryptoAssets = ({ settings, hideAssets }) => {
           backdropFilter: showAddAsset ? "blur(5px)" : "",
         }}
       >
-        <div className="w-full md:w-[500px] h-max bg-titusDashCardDarkBG p-5 md:p-7">
+        <div className="w-[90%] mx-auto md:w-[500px] h-max bg-titusDashCardDarkBG p-5 md:p-7">
           <div className="flex justify-between items-center mb-5">
             <div className="text-white font-medium">
               Add Asset To Your Wallet
