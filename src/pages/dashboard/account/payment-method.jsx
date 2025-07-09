@@ -5,10 +5,15 @@ import { otherPAymentMethods, paymentMethods } from "../../../data/userData";
 import BankAccounts from "../../../components/dashboard/account/payment-method/BankAccounts";
 import OtherPaymentMethods from "../../../components/dashboard/account/payment-method/OtherPaymentMethods";
 import { fetchUserBankAccounts } from "../../../api";
+import { useEffect } from "react";
 axios.defaults.withCredentials = true;
 
 const PaymentMethodPage = () => {
   const { bankAccounts, bankAccountLoading, mutate } = fetchUserBankAccounts();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
 
   return (
     <>

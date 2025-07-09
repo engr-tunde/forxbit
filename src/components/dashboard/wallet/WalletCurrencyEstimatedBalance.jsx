@@ -38,12 +38,12 @@ const WalletCurrencyEstimatedBalance = ({
       <div className="w-full flex flex-col md:flex-row gap-8 md:gap-0 justify-between items-start md:items-end">
         <div className="w-full flex flex-row md:flex-col gap-3 justify-between">
           <div className="flex items-center gap-2 font-semibold text-white">
-            <span className="text-[16px] md:text-[18px]">Currency Assets</span>
+            <span className="text-[16px] md:text-[18px]">Fiat Assets</span>
             <FaEye onClick={handleToggleHideAsset} className="cursor-pointer" />
           </div>
           {currencyBalances && (
             <div className="flex items-end gap-2 text-white">
-              <span className=" font-semibold text-[28px]">
+              <span className=" font-semibold text-[24px] md:text-[28px]">
                 {selectedCurrency?.symbol}
                 {hideAssets
                   ? "*****"

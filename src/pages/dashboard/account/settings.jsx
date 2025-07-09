@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import Head from "../../../components/Head";
 import DashAccountHeader from "../../../components/dashboard/account/DashAccountHeader";
@@ -13,6 +13,10 @@ axios.defaults.withCredentials = true;
 
 const SettingsPage = () => {
   const { settings, settingsLoading, mutate } = userSettings();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <>
       <Head pageTitle="Dashboard - Settings" />
