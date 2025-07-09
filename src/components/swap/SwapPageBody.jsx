@@ -284,7 +284,7 @@ const SwapPageBody = () => {
           backdropFilter: showConfirmTrade ? "blur(5px)" : "",
         }}
       >
-        <div className="w-full md:w-[500px] h-max bg-titusDashCardDarkBG p-7 md:py-10 md:px-7 flex flex-col gap-8 md:gap-10">
+        <div className="w-[85%] mx-auto md:w-[500px] h-max bg-titusDashCardDarkBG p-7 md:py-10 md:px-7 flex flex-col gap-8 md:gap-10">
           <div className="flex justify-between items-center">
             <div className="text-white text-xl font-semibold">
               Confirm trade

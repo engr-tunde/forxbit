@@ -33,14 +33,14 @@ const ChangeCurrency = ({
     <div
       className={
         showChangeCurrency
-          ? "fixed w-screen h-screen top-0 left-0 flex items-center justify-center bg-black/25"
+          ? "fixed w-screen h-screen top-0 left-0 flex items-center justify-center bg-black/50"
           : "hidden"
       }
       style={{
         backdropFilter: showChangeCurrency ? "blur(5px)" : "",
       }}
     >
-      <div className="w-full md:w-[500px]  bg-titusDashCardDarkBG p-5 md:p-7">
+      <div className="w-[85%] mx-auto md:w-[500px]  bg-titusDashCardDarkBG p-5 md:p-7">
         <div className="flex justify-between items-center mb-5">
           <div className="text-white font-medium">Change App Currency</div>
           <div className="p-1 cursor-pointer hover:text-white ease-in duration-200">
@@ -50,7 +50,7 @@ const ChangeCurrency = ({
             />
           </div>
         </div>
-        <div className="h-[400px] md:h-[400px] overflow-y-scroll">
+        <div className="h-[350px] md:h-[400px] overflow-y-scroll">
           {currencies &&
             currencies?.data?.map((item, i) => (
               <div
