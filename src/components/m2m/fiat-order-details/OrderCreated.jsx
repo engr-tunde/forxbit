@@ -1,0 +1,55 @@
+import React from "react";
+import { FaCheck, FaCopy } from "react-icons/fa";
+import { copyFunc } from "../../../utils/helpers";
+
+const OrderCreated = ({ orderData }) => {
+  return (
+    <div className="w-full flex gap-5">
+      <div className="flex flex-col items-center">
+        <div className="h-5 w-5 flex items-center justify-center bg-[#bbb] text-[#222] p-0 m-0 text-[10px]">
+          <FaCheck />
+        </div>
+        <div className="h-full w-[2px] bg-[#bbb]"></div>
+      </div>
+
+      <div className="w-full flex flex-col mb-10 lg:mb-8">
+        <p className="text-sm lg:text-md font-medium text-white">
+          Order Created
+        </p>
+
+        <div className="w-full p-3 lg:p-5 rounded-lg border-[1px] border-titusLightBorder flex flex-col gap-5 text-sm">
+          <div className="flex items-center justify-between">
+            <span>Fiat amount</span>
+            <div className=" font-medium flex items-center gap-2">
+              <span className="text-titusYellowFaded">
+                {orderData.fiat_symbol}
+                {orderData.fiat_amount}
+              </span>
+              <FaCopy
+                onClick={() =>
+                  copyFunc(orderData.fiat_amount, "Amount copied!")
+                }
+                className="cursor-pointer text-[15px]"
+              />
+            </div>
+          </div>
+          <div className="flex items-center justify-between">
+            <span>Price</span>
+            <span className="font-medium text-titusChatText">
+              {orderData.fiat_symbol}
+              {orderData.price}
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span>Receive Quantity</span>
+            <span className="font-medium text-titusChatText">
+              {`${orderData.token_amount} ${orderData.token}`}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default OrderCreated;
