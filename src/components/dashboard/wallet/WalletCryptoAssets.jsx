@@ -243,7 +243,7 @@ const WalletCryptoAssets = ({ settings, hideAssets }) => {
           backdropFilter: showAddAsset ? "blur(5px)" : "",
         }}
       >
-        <div className="w-[90%] mx-auto md:w-[500px] h-max bg-titusDashCardDarkBG p-5 md:p-7">
+        <div className="w-[85%] mx-auto md:w-[500px] h-max bg-titusDashCardDarkBG p-5 md:p-7">
           <div className="flex justify-between items-center mb-5">
             <div className="text-white font-medium">
               Add Asset To Your Wallet
@@ -255,7 +255,7 @@ const WalletCryptoAssets = ({ settings, hideAssets }) => {
               />
             </div>
           </div>
-          <div className="flex flex-col gap-5 max-h-[50vh] overflow-y-scroll">
+          <div className="flex flex-col gap-5 max-h-[43vh] md:max-h-[50vh] overflow-y-scroll">
             <div className="flex flex-col gap-2">
               <div className="text-sm font-medium">Available Tokens To Add</div>
               <div className="max-h-[50vh] overflow-y-scroll">

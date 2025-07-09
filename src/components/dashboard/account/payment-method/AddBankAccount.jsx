@@ -46,14 +46,14 @@ const AddBankAccount = ({ showAddBank, setshowAddBank, mutate, data }) => {
     <div
       className={
         showAddBank
-          ? "fixed w-screen h-screen top-0 left-0 flex items-center justify-center bg-black/25"
+          ? "fixed w-screen h-screen top-0 left-0 flex items-center justify-center bg-black/50"
           : "hidden"
       }
       style={{
         backdropFilter: showAddBank ? "blur(5px)" : "",
       }}
     >
-      <div className="w-full md:w-[500px] h-max bg-titusDashCardDarkBG p-5 md:p-7">
+      <div className="w-[85%] mx-auto md:w-[500px] h-max bg-titusDashCardDarkBG p-5 md:p-7">
         <div className="flex justify-between items-center mb-5">
           <div className="text-white font-medium">
             {data
@@ -67,7 +67,7 @@ const AddBankAccount = ({ showAddBank, setshowAddBank, mutate, data }) => {
             />
           </div>
         </div>
-        <div className="max-h-[50vh] overflow-y-scroll">
+        <div className="max-h-[43vh] md:max-h-[50vh] overflow-y-scroll">
           <form onSubmit={onSubmit}>
             <div className="text-sm flex flex-col gap-8">
               <div className="flex flex-col -gap-1">

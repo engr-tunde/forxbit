@@ -277,7 +277,7 @@ const SwapPageBody = () => {
       <div
         className={
           showConfirmTrade
-            ? "fixed w-screen h-screen top-0 left-0 flex items-center justify-center bg-black/25"
+            ? "fixed w-screen h-screen top-0 left-0 flex items-center justify-center bg-black/50"
             : "hidden"
         }
         style={{
