@@ -36,28 +36,16 @@ const LoginBody = () => {
     <>
       <div className="w-[100wv] h-[100vh] bg-titusDarkBG">
         <div className="max-w-[500px] h-full mx-auto px-10 md:px-7 flex flex-col items-center justify-center pt-[90px] pb-[150px] md:py-0">
-          <div className="flex flex-col items-center px-3 w-full">
-            <Link
-              to="/"
-              className="flex gap-2 items-center justify-center mb-2"
-            >
+          <div className="flex flex-col gap-2 items-center px-3 w-full">
+            <Link to="/" className="">
               <img
-                src="/assets/images/logo.png"
+                src="/assets/images/logo-green.png"
                 alt=""
-                className="w-[40px] md:w-[50px]"
+                className="w-[90px] md:w-[120px]"
               />
-              <div className="flex flex-col items-start gap-0 text-white">
-                <span className="text-[11px] md:text-[12px] font-bold uppercase p-0 m-0 leading-[0.9em] text-start">
-                  TiTus
-                </span>
-                <span className="text-[8px] md:text-[8px] font-medium uppercase">
-                  Exchange
-                </span>
-              </div>
             </Link>
-            <div className="text-[24px] text-center mb-1 font-bold text-[#fff]"></div>
 
-            <div className="text-[14px] mb-5 text-[#ffffffc9]">
+            <div className="text-[16px] md:text-[18px] mb-5 text-[#ffffffc9]">
               Login to your account
             </div>
           </div>
