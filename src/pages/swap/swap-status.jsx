@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { changeNowFetcherMutate, useFetchChangeNow } from "../../api/changeNow";
 import Loader from "../../components/globals/Loader";
 import SwapStatusFinishedBody from "../../components/swap/SwapStatusFinishedBody";
+import Head from "../../components/Head";
 
 const SwapStatusPage = () => {
   const { id } = useParams();
@@ -18,14 +19,23 @@ const SwapStatusPage = () => {
   console.log("data", data);
 
   return (
-    <div className="col-span-1 md:col-span-3">
-      {data && data?.status == "finished" ? (
-        <SwapStatusFinishedBody trade={data} />
-      ) : (
-        <SwapStatusPageBody trade={data} />
-      )}
-      {loading && <Loader />}
-    </div>
+    <>
+      <Head
+        pageTitle={
+          data
+            ? `Swap ${data?.fromCurrency?.toUpperCase()} to ${data?.toCurrency?.toUpperCase()}`
+            : "Swap Cryptocurrencies"
+        }
+      />
+      <div className="col-span-1 md:col-span-3">
+        {data && data?.status == "finished" ? (
+          <SwapStatusFinishedBody trade={data} />
+        ) : (
+          <SwapStatusPageBody trade={data} />
+        )}
+        {loading && <Loader />}
+      </div>
+    </>
   );
 };
 

@@ -206,7 +206,7 @@ const NavBar = () => {
             <NoSessionMenuWidget handleNavToggle={handleNavToggle} />
           )} */}
           {sessionLoading ? (
-            <Loader />
+            <Loader size={0} />
           ) : session ? (
             <SessionMenuWidget nav={nav} setNav={setNav} />
           ) : (

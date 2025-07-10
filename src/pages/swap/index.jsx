@@ -1,3 +1,4 @@
+import Head from "../../components/Head";
 import SwapPageBody from "../../components/swap/SwapPageBody";
 import { useEffect } from "react";
 
@@ -7,9 +8,12 @@ const SwapPage = () => {
   }, []);
 
   return (
-    <div className="col-span-1 md:col-span-3">
-      <SwapPageBody />
-    </div>
+    <>
+      <Head pageTitle="Swap Cryptocurrencies" />
+      <div className="col-span-1 md:col-span-3">
+        <SwapPageBody />
+      </div>
+    </>
   );
 };
 
