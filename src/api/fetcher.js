@@ -25,8 +25,6 @@ export const sessionFetcher = (url) =>
   axiosInstance()
     .get(url, { withCredentials: true })
     .then((res) => {
-      console.log("s res", res);
-      console.log("s res status", res.status);
       if (res.status === 200) {
         // return true;
         return res.data;

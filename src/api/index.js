@@ -239,10 +239,7 @@ export const userResetPassword = async (id, token, values) => {
 
 // Profile
 export const userProfile = () => {
-  const { data, error, mutate } = useSWR(
-    { url: USER_PROFILE, withCredentials: true },
-    fetcher
-  );
+  const { data, error, mutate } = useSWR(USER_PROFILE, sessionFetcher);
   return {
     user: data,
     userLoading: !error && !data,

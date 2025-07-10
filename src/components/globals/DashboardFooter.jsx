@@ -35,7 +35,7 @@ const DashboardFooter = () => {
   return (
     <div className="w-full fixed bottom-3 md:bottom-7 left-0 z-[2000]">
       <div
-        className="dash-container-footer rounded-3xl border-[1px] border-titusLightBorder bg-titusDarkGrey/95 lg:bg-titusDarkGrey/70 overflow-x-scroll lg:overflow-x-hidden"
+        className="dash-container-footer rounded-3xl border-[1px] border-titusGreenFaded bg-titusDarkGrey/95 lg:bg-titusDarkGrey/70 overflow-x-scroll lg:overflow-x-hidden"
         style={{
           backdropFilter: !showSubmenu ? "blur(8px)" : "",
         }}
@@ -68,8 +68,7 @@ const DashboardFooter = () => {
                         <FaHome className="text-[16px]" />
                       ) : item.title === "Wallet" ? (
                         <FaWallet className="text-[16px]" />
-                      ) : item.title ===
-                        `${import.meta.env.VITE_P2P_NAME} Trading` ? (
+                      ) : item.title === `${import.meta.env.VITE_P2P_NAME}` ? (
                         <FaUsers className="text-[16px]" />
                       ) : item.title === "Orders" ? (
                         <FaShoppingBag className="text-[16px]" />

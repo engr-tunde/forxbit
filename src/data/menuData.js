@@ -27,7 +27,7 @@ export const dashboardSidebarMenu = [
     url: "/dashboard/wallet",
   },
   {
-    title: `${import.meta.env.VITE_P2P_NAME} Trading`,
+    title: `${import.meta.env.VITE_P2P_NAME}`,
     children: [
       {
         title: "Create Trade",

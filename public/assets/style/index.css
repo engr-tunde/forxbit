@@ -144,7 +144,7 @@ html {
   @apply max-w-[1200px] mx-auto pt-24 md:pt-24 lg:pt-28 pb-20 md:pb-24 lg:pb-32 px-5 lg:px-0;
 }
 .dash-container-footer {
-  @apply w-full lg:max-w-[80%] mx-auto px-3 lg:px-5 py-3;
+  @apply w-[92%] lg:max-w-[75%] mx-auto px-3 lg:px-5 py-3;
 }
 .card-padding {
   @apply p-5 md:p-10;

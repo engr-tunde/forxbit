@@ -9,6 +9,7 @@ import {
   FaSearch,
   FaTelegram,
   FaDiscord,
+  FaUser,
 } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { useOutsideClick } from "../../utils/helpers";
@@ -45,7 +46,7 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="fixed w-full shadow-lg z-[100] py-[1.5%] md:py-[3px] px-5 md:px-10 lg:px-16 bg-titusDarkGrey">
+      <div className="fixed w-full shadow-lg z-[100] py-[1.5%] md:py-[3px] px-2 md:px-10 lg:px-16 bg-titusDarkGrey">
         <div className="flex justify-between items-center w-full h-full">
           <div className="flex items-center gap-14">
             <Link to="/" className="flex items-center justify-center">
@@ -226,7 +227,24 @@ const NavBar = () => {
               : "hidden h-0 w-0"
           }
         >
-          <div className="flex w-full justify-end items-center mb-3">
+          <div
+            className={
+              session
+                ? "flex w-full justify-between items-center mb-3"
+                : "flex w-full justify-end items-center mb-3"
+            }
+          >
+            {session && (
+              <Link
+                to="/dashboard"
+                className="w-[37%] flex btnn-dark py-[8px] px-4 text-[13px] font-semibold justify-center items-center ease-in duration-300 mb-4"
+              >
+                <span className="mr-2">Dashboard</span>
+                <span>
+                  <FaUser className="text-titusYellow" />
+                </span>
+              </Link>
+            )}
             <div
               onClick={handleNavToggle}
               className="pl-3 pb-3 cursor-pointer text-gray-300 font-bold text-2xl"
@@ -234,26 +252,29 @@ const NavBar = () => {
               <AiOutlineCloseCircle size={30} />
             </div>
           </div>
-          <div className="flex justify-between items-center mb-6">
-            <Link
-              to="/login"
-              className="w-[47%] flex btnn-dark py-[8px] px-4 text-[13px] font-semibold justify-center items-center ease-in duration-300"
-            >
-              <span className="mr-2">Log In</span>
-              <span>
-                <FaArrowCircleRight className="text-titusGreen" />
-              </span>
-            </Link>
-            <Link
-              to="/register"
-              className="w-[47%] flex btnn1 py-[8px] px-4 text-[13px] font-semibold justify-center items-center ease-in duration-300"
-            >
-              <span className="mr-2">Sign Up</span>
-              <span>
-                <FaArrowCircleRight />
-              </span>
-            </Link>
-          </div>
+
+          {session ? null : (
+            <div className="flex justify-between items-center mb-6">
+              <Link
+                to="/login"
+                className="w-[47%] flex btnn-dark py-[8px] px-4 text-[13px] font-semibold justify-center items-center ease-in duration-300"
+              >
+                <span className="mr-2">Log In</span>
+                <span>
+                  <FaArrowCircleRight className="text-titusGreen" />
+                </span>
+              </Link>
+              <Link
+                to="/register"
+                className="w-[47%] flex btnn1 py-[8px] px-4 text-[13px] font-semibold justify-center items-center ease-in duration-300"
+              >
+                <span className="mr-2">Sign Up</span>
+                <span>
+                  <FaArrowCircleRight />
+                </span>
+              </Link>
+            </div>
+          )}
 
           <div className="flex w-full items-center justify-between px-2 border-[1px] border-[#ffffff73] rounded-lg mb-3">
             <FaSearch />

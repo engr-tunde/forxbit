@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { userLogout, userProfile } from "../../../api";
 import { errorNotification, successNotification } from "../../../utils/helpers";
 import { Link, useNavigate } from "react-router-dom";
@@ -28,7 +28,6 @@ const SessionMenuWidget = ({ nav, setNav }) => {
 
   const handleLogout = async () => {
     const response = await userLogout();
-    console.log("response on logout", response);
     if (response.status === 200) {
       setNav(false);
       successNotification(response.data.message);
@@ -39,7 +38,6 @@ const SessionMenuWidget = ({ nav, setNav }) => {
     }
   };
 
-  // console.log("user", user);
   return (
     <div className="flex items-center gap-4 md:gap-5">
       <div className="relative">
