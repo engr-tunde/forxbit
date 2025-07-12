@@ -32,6 +32,7 @@ const TransactionDetailsPage = () => {
                     )}
                   </span>
                 </div>
+
                 <div className="flex items-center justify-between">
                   <span>Transaction ID</span>
                   <div className="flex items-center gap-2">
@@ -51,6 +52,13 @@ const TransactionDetailsPage = () => {
                       className="cursor-pointer text-[15px] text-titusText"
                     />
                   </div>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <span>Status</span>
+                  <span className="text-titusChatText">
+                    {transaction?.data?.status}
+                  </span>
                 </div>
               </div>
             </div>

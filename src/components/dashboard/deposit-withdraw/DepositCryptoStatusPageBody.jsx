@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { copyFunc } from "../../utils/helpers";
 import { FaCopy } from "react-icons/fa";
 import QRCode from "react-qr-code";
-import SwapTxStatus from "./SwapTxStatus";
+import { copyFunc } from "../../../utils/helpers";
 
-const SwapStatusPageBody = ({ trade }) => {
+const DepositCryptoStatusPageBody = ({ trade }) => {
   const [qrCode, setqrCode] = useState("address");
+
+  const trade = {
+    id: "67DHGGHety35dggh3y3dd3",
+    amount: 0.032,
+    currency: "BTC",
+    payinAddress: "0x52543ghdhgdyTEhd736ghdyt36dh3",
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -32,7 +38,7 @@ const SwapStatusPageBody = ({ trade }) => {
             <div className="">
               <div className="text-sm font-medium">Amount</div>
               <div className="text-white font-semibold">
-                {trade?.expectedAmountFrom} {trade?.fromCurrency}
+                {trade?.amount} {trade?.currency}
               </div>
             </div>
 
@@ -100,7 +106,7 @@ const SwapStatusPageBody = ({ trade }) => {
                         maxWidth: "100%",
                         width: "100%",
                       }}
-                      value={trade?.expectedAmountFrom.toString()}
+                      value={trade?.amount.toString()}
                       viewBox={`0 0 256 256`}
                     />
                   </div>
@@ -110,35 +116,10 @@ const SwapStatusPageBody = ({ trade }) => {
           </div>
         </div>
 
-        {trade && <SwapTxStatus status={trade?.status} />}
-
-        <div className="flex flex-col gap-6 md:gap-5">
-          <div className="">
-            <div className="text-sm font-medium">You Get</div>
-            <div className="text-white font-semibold">
-              {trade?.expectedAmountTo} {trade?.toCurrency}
-            </div>
-          </div>
-          <div className="">
-            <div className="text-sm font-medium">Recipient Wallet</div>
-            <div className="text-white font-semibold">
-              {/* {trade?.payoutAddress} */}
-              <span className="text-sm text-white">
-                {trade?.payoutAddress.substr(0, 10)}.....
-                {trade?.payoutAddress.substr(trade?.payoutAddress?.length - 10)}
-              </span>
-              <FaCopy
-                className="cursor-pointer text-[15px] text-titusYellow"
-                onClick={() =>
-                  copyFunc(trade?.payoutAddress, "wallet address copied!")
-                }
-              />
-            </div>
-          </div>
-        </div>
+        {/* {trade && <SwapTxStatus status={trade?.status} />} */}
       </div>
     </div>
   );
 };
 
-export default SwapStatusPageBody;
+export default DepositCryptoStatusPageBody;

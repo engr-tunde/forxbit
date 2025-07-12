@@ -63,6 +63,10 @@ const REMOVE_TOKEN_FROM_WALLET = "/user-app/wallet/remove-token-from-wallet";
 const VERIFY_USERNAME = "/user-app/depo-withdraw-transfer/verify-username";
 const TRANSFER_FIAT = "/user-app/depo-withdraw-transfer/transfer-fiat";
 const TRANSFER_CRYPTO = "/user-app/depo-withdraw-transfer/transfer-crypto";
+const WITHDRAW_FIAT = "/user-app/depo-withdraw-transfer/withdraw-fiat";
+const DEPOSIT_FIAT = "/user-app/depo-withdraw-transfer/deposit-fiat";
+const WITHDRAW_CRYPTO = "/user-app/depo-withdraw-transfer/withdraw-crypto";
+const DEPOSIT_CRYPTO = "/user-app/depo-withdraw-transfer/deposit-crypto";
 const FETCH_USER_TRANSACTIONS =
   "/user-app/depo-withdraw-transfer/user-transactions";
 const FETCH_TRANSACTION_DETAILS =
@@ -107,6 +111,10 @@ export {
   VERIFY_USERNAME,
   TRANSFER_FIAT,
   TRANSFER_CRYPTO,
+  WITHDRAW_FIAT,
+  DEPOSIT_FIAT,
+  WITHDRAW_CRYPTO,
+  DEPOSIT_CRYPTO,
   FETCH_USER_TRANSACTIONS,
   FETCH_TRANSACTION_DETAILS,
   //

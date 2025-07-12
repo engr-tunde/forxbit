@@ -1,15 +1,16 @@
 import { useEffect } from "react";
-import {
-  fetchCurrencies,
-  fetchUserBankAccounts,
-  fetchUserCurrencyBalances,
-} from "../../../api";
+import { DepositFiatAsset, fetchUserCurrencyBalances } from "../../../api";
 import Loader from "../../../components/globals/Loader";
 import Head from "../../../components/Head";
 import { useFiatDepositWithdrawContext } from "../../../context/fiatDepositWithdrawContext";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import DepositWithdrawField from "../../../components/dashboard/deposit-withdraw/DepositWithdrawField";
 import DepositWithdrawHeader from "../../../components/globals/DepositWithdrawHeader";
+import {
+  errorNotification,
+  formatter,
+  successNotification,
+} from "../../../utils/helpers";
 
 const DepositFiatPage = () => {
   const location = useLocation();
@@ -30,7 +31,20 @@ const DepositFiatPage = () => {
     }
   }, [currencyBalances]);
 
-  const handleDeposit = async () => {};
+  const history = useNavigate();
+
+  const handleDeposit = async () => {
+    const values = { currency, amount };
+    const response = await DepositFiatAsset(values);
+    if (response.status == 200) {
+      successNotification(response?.data?.message);
+      setTimeout(() => {
+        history(`/dashboard/transaction-history/${response?.data?.data}`);
+      }, 1000);
+    } else {
+      errorNotification(response?.data?.error);
+    }
+  };
 
   return (
     <>
@@ -57,6 +71,7 @@ const DepositFiatPage = () => {
                     setamount={setamount}
                     errors={errors}
                     type="deposit"
+                    assetType="fiat"
                   />
                 )}
                 {currencyBalancesLoading && (
@@ -66,6 +81,14 @@ const DepositFiatPage = () => {
                   <div className="error">{errors.amount}</div>
                 ) : null}
               </div>
+            </div>
+
+            <div className="mb-2">
+              Current balance:{" "}
+              <span className="text-titusGreenFaded">
+                {currency?.symbol}
+                {formatter(currency?.balance).substring(1)}
+              </span>
             </div>
 
             <div

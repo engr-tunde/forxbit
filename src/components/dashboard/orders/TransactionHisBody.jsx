@@ -32,7 +32,7 @@ const TransactionHisBody = ({ data }) => {
       {data?.map((item, i) => (
         <div className="flex flex-col" key={i}>
           <Link
-            to={`/dashboard/orders/transaction-history/${item?.t_id}`}
+            to={`/dashboard/transaction-history/${item?.t_id}`}
             className="hidden w-full lg:grid lg:grid-cols-7 border-b-[#ffffff27] border-b-[0.1px] pb-7 lg:pb-4 gap-y-0 text-sm text-[#ccc]"
           >
             <div className="col-span-1 flex flex-col gap-2">
@@ -83,7 +83,7 @@ const TransactionHisBody = ({ data }) => {
           </Link>
 
           <Link
-            to={`/dashboard/orders/transaction-history/${item?.t_id}`}
+            to={`/dashboard/transaction-history/${item?.t_id}`}
             className="flex lg:hidden flex-col gap-3 border-b-[#ffffff27] border-b-[0.1px] pb-7 text-[13px]"
           >
             <div className="flex items-center justify-between">

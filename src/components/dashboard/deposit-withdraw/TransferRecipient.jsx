@@ -58,8 +58,8 @@ const TransferRecipient = ({ errors, setrecipient }) => {
 
   return (
     <div className="flex flex-col gap-1">
-      <div className="w-full flex items-center justify-between ">
-        <div className="w-[61%] md:w-[80%] flex flex-col border-[1px] border-titusLightBorder rounded-xl bg-titusDarkBG">
+      <div className="w-full flex items-center gap-2 justify-between ">
+        <div className="w-full md:w-[88%] flex flex-col border-[1px] border-titusLightBorder rounded-xl bg-titusDarkBG">
           <input
             //   disabled={disabled}
             type="text"

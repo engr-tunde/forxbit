@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import {
-  fetchCurrencies,
   fetchUserBankAccounts,
   fetchUserCurrencyBalances,
+  withdrawFiatAsset,
 } from "../../../api";
 import Loader from "../../../components/globals/Loader";
 import Head from "../../../components/Head";
@@ -10,7 +10,11 @@ import { useFiatDepositWithdrawContext } from "../../../context/fiatDepositWithd
 import { useLocation, useNavigate } from "react-router-dom";
 import DepositWithdrawField from "../../../components/dashboard/deposit-withdraw/DepositWithdrawField";
 import WithdrawFiatRecipientField from "../../../components/dashboard/deposit-withdraw/WithdrawFiatRecipientField";
-import { formatter } from "../../../utils/helpers";
+import {
+  errorNotification,
+  formatter,
+  successNotification,
+} from "../../../utils/helpers";
 import DepositWithdrawHeader from "../../../components/globals/DepositWithdrawHeader";
 
 const WithdrawFiatPage = () => {
@@ -39,19 +43,20 @@ const WithdrawFiatPage = () => {
     }
   }, [currencyBalances]);
 
-  // useEffect(() => {
-  //   if (!amount) {
-  //     // errors.amount = "Insufficient balance. Go lower!";
-  //     errors.amount = null;
-  //   } else if (amount > currency?.balance) {
-  //     errors.amount = "Insufficient balance. Go lower!";
-  //   } else {
-  //     errors.amount = null;
-  //     // delete errors["amount"];
-  //   }
-  // }, [amount]);
+  const history = useNavigate();
 
-  const handleWithdraw = async () => {};
+  const handleWithdraw = async () => {
+    const values = { bank_details, currency, amount };
+    const response = await withdrawFiatAsset(values);
+    if (response.status == 200) {
+      successNotification(response?.data?.message);
+      setTimeout(() => {
+        history(`/dashboard/transaction-history/${response?.data?.data}`);
+      }, 1000);
+    } else {
+      errorNotification(response?.data?.error);
+    }
+  };
 
   return (
     <>

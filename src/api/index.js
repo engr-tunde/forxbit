@@ -9,6 +9,8 @@ import {
   CREATE_M2M_ORDER,
   CURRENCIES,
   DELETE_BANK_ACCOUNT,
+  DEPOSIT_CRYPTO,
+  DEPOSIT_FIAT,
   FETCH_BANK_ACCOUNTS,
   FETCH_CURRENCY_BALANCES,
   FETCH_PAYMENT_METHODS,
@@ -43,6 +45,8 @@ import {
   USER_VERIFY_EMAIL,
   USER_VERIFY_LOGIN,
   VERIFY_USERNAME,
+  WITHDRAW_CRYPTO,
+  WITHDRAW_FIAT,
 } from "../constants/routes";
 import { mutationRequest } from "./sendData";
 import { fetcher, sessionFetcher } from "./fetcher";
@@ -405,6 +409,22 @@ export const transferFiatAsset = async (values) => {
 };
 export const transferCryptoAsset = async (values) => {
   const result = await mutationRequest(TRANSFER_CRYPTO, "post", values, true);
+  return result;
+};
+export const withdrawFiatAsset = async (values) => {
+  const result = await mutationRequest(WITHDRAW_FIAT, "post", values, true);
+  return result;
+};
+export const DepositFiatAsset = async (values) => {
+  const result = await mutationRequest(DEPOSIT_FIAT, "post", values, true);
+  return result;
+};
+export const withdrawCryptoAsset = async (values) => {
+  const result = await mutationRequest(WITHDRAW_CRYPTO, "post", values, true);
+  return result;
+};
+export const depositCryptoAsset = async (values) => {
+  const result = await mutationRequest(DEPOSIT_CRYPTO, "post", values, true);
   return result;
 };
 //

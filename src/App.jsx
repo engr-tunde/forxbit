@@ -168,11 +168,11 @@ function App() {
                         element={<SwapOrdersPage />}
                       />
                       <Route
-                        path="/dashboard/orders/transaction-history"
+                        path="/dashboard/transaction-history"
                         element={<TransactionHistoryPage />}
                       />
                       <Route
-                        path="/dashboard/orders/transaction-history/:t_id"
+                        path="/dashboard/transaction-history/:t_id"
                         element={<TransactionDetailsPage />}
                       />
 

@@ -46,7 +46,7 @@ const AddBankAccount = ({ showAddBank, setshowAddBank, mutate, data }) => {
     <div
       className={
         showAddBank
-          ? "fixed w-screen h-screen top-0 left-0 flex items-center justify-center bg-black/50"
+          ? "fixed w-screen h-screen top-0 left-0 z-50 flex items-center justify-center bg-black/50"
           : "hidden"
       }
       style={{
@@ -104,7 +104,7 @@ const AddBankAccount = ({ showAddBank, setshowAddBank, mutate, data }) => {
               <div className="flex flex-col ">
                 <label className="p-0">Account Type</label>
                 <AppSelectFieldLineUnder
-                  label="Select account type"
+                  // label="Select account type"
                   register={register}
                   name="account_type"
                   defaultValue={data?.account_type}

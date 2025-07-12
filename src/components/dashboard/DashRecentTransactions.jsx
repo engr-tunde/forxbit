@@ -13,7 +13,7 @@ const DashRecentTransactions = () => {
           Recent Transactions
         </div>
         <Link
-          to="/dashboard/orders/transaction-history"
+          to="/dashboard/transaction-history"
           className="flex items-center gap-2 cursor-pointer hover:text-titusGreen duration-300 ease-in"
         >
           <div className="text-sm md:text-md pb-[1px] border-b-[1px] border-b-titusYellowFaded hover:border-b-titusGreen">

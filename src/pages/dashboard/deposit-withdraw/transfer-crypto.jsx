@@ -48,9 +48,7 @@ const TransferCryptoPage = () => {
       successNotification(response?.data?.message);
       setshowConfirmTrade(false);
       setTimeout(() => {
-        history(
-          `/dashboard/orders/transaction-history/${response?.data?.data}`
-        );
+        history(`/dashboard/transaction-history/${response?.data?.data}`);
       }, 1000);
     } else {
       errorNotification(response?.data?.error);

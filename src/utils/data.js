@@ -98,7 +98,7 @@ export const dashboardSidebarMenu = [
       },
       {
         title: "Transaction History",
-        url: "/dashboard/orders/transaction-history",
+        url: "/dashboard/transaction-history",
       },
     ],
   },

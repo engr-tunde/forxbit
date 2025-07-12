@@ -69,7 +69,7 @@ export const dashboardSidebarMenu = [
       {
         title: "Transaction History",
         subtitle: "Your deposit/withdrawals history",
-        url: "/dashboard/orders/transaction-history",
+        url: "/dashboard/transaction-history",
       },
     ],
   },

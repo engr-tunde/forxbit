@@ -1,8 +1,13 @@
 import { useRef, useState } from "react";
 import { FaArrowCircleDown } from "react-icons/fa";
 import { useOutsideClick } from "../../../utils/helpers";
+import { Link } from "react-router-dom";
+import AddBankAccount from "../account/payment-method/AddBankAccount";
+import { fetchUserBankAccounts } from "../../../api";
 
 const WithdrawFiatRecipientField = ({ data, setdata, array }) => {
+  const [showAddBank, setshowAddBank] = useState(false);
+  const { mutate } = fetchUserBankAccounts();
   const [showAsset, setshowAsset] = useState(false);
   const ref = useRef();
   // useOutsideClick(ref.current, () => setshowAsset(false));
@@ -44,30 +49,51 @@ const WithdrawFiatRecipientField = ({ data, setdata, array }) => {
         >
           <div className="w-full relative">
             <div className="px-2 pb-5">
-              {array?.map((item, i) => (
-                <div
-                  className="md:px-3 border-b-[1px] border-b-titusLightBorder flex items-center gap-4 hover:bg-[#ffffff1a] hover:text-black p-2 cursor-pointer"
-                  key={i}
-                  onClick={() => {
-                    setdata(item);
-                    setshowAsset(false);
-                  }}
-                >
-                  <div className="w-full flex flex-col">
-                    <div className="text-sm text-white">
-                      {item?.account_name}
-                    </div>
-                    <div className="flex gap-3 text-[12px] font-light">
-                      <span>{item?.bank_name}</span>
-                      <span>({item?.account_number})</span>
+              {array?.length ? (
+                array?.map((item, i) => (
+                  <div
+                    className="md:px-3 border-b-[1px] border-b-titusLightBorder flex items-center gap-4 hover:bg-[#ffffff1a] hover:text-black p-2 cursor-pointer"
+                    key={i}
+                    onClick={() => {
+                      setdata(item);
+                      setshowAsset(false);
+                    }}
+                  >
+                    <div className="w-full flex flex-col">
+                      <div className="text-sm text-white">
+                        {item?.account_name}
+                      </div>
+                      <div className="flex gap-3 text-[12px] font-light">
+                        <span>{item?.bank_name}</span>
+                        <span>({item?.account_number})</span>
+                      </div>
                     </div>
                   </div>
+                ))
+              ) : (
+                <div className="text-sm">
+                  No payment details added yet.{" "}
+                  <span
+                    onClick={() => {
+                      setshowAsset(!showAsset);
+                      setshowAddBank(true);
+                    }}
+                    className="text-titusYellowFaded"
+                  >
+                    Add bank account
+                  </span>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </div>
       </div>
+      <AddBankAccount
+        showAddBank={showAddBank}
+        setshowAddBank={setshowAddBank}
+        mutate={mutate}
+        // data={array}
+      />
     </>
   );
 };
