@@ -48,8 +48,8 @@ const SessionMenuWidget = ({ nav, setNav }) => {
           {user ? (
             <>
               <div className="h-6 w-6 md:h-7 md:w-7 rounded-full bg-titusYellow flex items-center justify-center text-black text-sm md:text-md font-medium">
-                {user?.data?.name?.split(" ")[0].charAt(0)}
-                {user?.data?.name?.split(" ")[1].charAt(0)}
+                {user?.data?.name?.split(" ")[0]?.charAt(0)}
+                {user?.data?.name?.split(" ")[1]?.charAt(0)}
               </div>
               <div className="flex gap-2 md:gap-7 items-center">
                 <div className="text-sm font-medium">
@@ -62,7 +62,7 @@ const SessionMenuWidget = ({ nav, setNav }) => {
               </div>
             </>
           ) : null}
-          {userLoading && <Loader />}
+          {/* {userLoading && <Loader />} */}
           {/* {userError ? <ErrorWidget error={userError} color="white" /> : null} */}
         </div>
         {/* menu */}

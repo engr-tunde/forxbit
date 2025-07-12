@@ -7,6 +7,8 @@ import DashTokenEstimatedBalance from "./DashTokenEstimatedBalance";
 const DashboardOverview = ({ handleToggleHideAsset, hideAssets, settings }) => {
   const { user, userLoading, userError } = userProfile();
 
+  console.log("user user", user);
+
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-10">
       <div className="col-span-1">
