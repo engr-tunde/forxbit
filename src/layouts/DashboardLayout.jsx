@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import DashboardNavBar from "../components/globals/DashboardNavBar";
 import DashboardFooter from "../components/globals/DashboardFooter";
+import { checkSession } from "../api";
 
 const DashboardLayout = () => {
   const [nav, setNav] = useState(false);
+
+  const { session, sessionLoading, sessionError } = checkSession();
+  useEffect(() => {
+    if (sessionError) {
+      window.location.href = "/login";
+    }
+  }, [session]);
+
   return (
     <>
       <DashboardNavBar nav={nav} setNav={setNav} />
