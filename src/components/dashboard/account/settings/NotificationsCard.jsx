@@ -1,9 +1,6 @@
 import Switch from "../../../globals/Switch";
 import { updateUserSettings } from "../../../../api";
-import {
-  errorNotification,
-  successNotification,
-} from "../../../../utils/helpers";
+import { errorNotification } from "../../../../utils/helpers";
 
 const NotificationsCard = ({ settings, mutate }) => {
   const handleEnablePushNot = async () => {
@@ -12,8 +9,6 @@ const NotificationsCard = ({ settings, mutate }) => {
         push_notification: !settings?.push_notification,
       });
       if (response.status === 200) {
-        const data = response.data;
-        successNotification(data.message);
         mutate();
         setshowChangeCurrency(false);
       } else {
@@ -34,8 +29,6 @@ const NotificationsCard = ({ settings, mutate }) => {
         newsletter: !settings?.newsletter,
       });
       if (response.status === 200) {
-        const data = response.data;
-        successNotification(data.message);
         mutate();
         setshowChangeCurrency(false);
       } else {

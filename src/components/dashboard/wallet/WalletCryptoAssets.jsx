@@ -198,7 +198,7 @@ const WalletCryptoAssets = ({ settings, hideAssets }) => {
 
   return (
     <>
-      <div className="w-full rounded-xl p-5 flex flex-col gap-7 overflow-y-scroll relative bg-titusDashCardDarkBG mb-16 lg:mb-0">
+      <div className="w-full rounded-xl p-5 flex flex-col gap-7 overflow-y-scroll relative bg-titusDashCardDarkBG">
         <div className="flex flex-col gap-5 md:flex-row items-center justify-between text-white">
           <div className="w-full flex justify-between md:justify-start items-end gap-6">
             <div className="text-[16px] md:text-[18px] font-semibold">

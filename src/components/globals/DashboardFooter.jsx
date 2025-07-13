@@ -65,19 +65,21 @@ const DashboardFooter = () => {
                       // onMouseEnter={() => handleShowSubmenu(item)}
                     >
                       {item.title === "Dashboard" ? (
-                        <FaHome className="text-[16px]" />
+                        <FaHome className="text-[22px] md:text-[16px]" />
                       ) : item.title === "Wallet" ? (
-                        <FaWallet className="text-[16px]" />
+                        <FaWallet className="text-[22px] md:text-[16px]" />
                       ) : item.title === `${import.meta.env.VITE_P2P_NAME}` ? (
-                        <FaUsers className="text-[16px]" />
+                        <FaUsers className="text-[25px] md:text-[16px]" />
                       ) : item.title === "Orders" ? (
-                        <FaShoppingBag className="text-[16px]" />
+                        <FaShoppingBag className="text-[21px] md:text-[16px]" />
                       ) : item.title === "Account" ? (
-                        <FaUser className="text-[16px]" />
+                        <FaUser className="text-[21px] md:text-[16px]" />
                       ) : (
-                        <FaToolbox className="text-[16px]" />
+                        <FaToolbox className="text-[25px] md:text-[16px]" />
                       )}
-                      <span className="text-sm w-max">{item.title}</span>
+                      <span className="text-[0px] md:text-sm w-max">
+                        {item.title}
+                      </span>
                     </div>
 
                     <div
@@ -171,7 +173,7 @@ const DashboardFooter = () => {
                                 )}
                               </div>
                               <div className="flex flex-col gap-2">
-                                <span className="text-white md:font-semibold">
+                                <span className=" text-white md:font-semibold">
                                   {child.title}
                                 </span>
                                 <span className="hidden md:block text-sm">
@@ -194,20 +196,20 @@ const DashboardFooter = () => {
                     }
                   >
                     {item.title === "Dashboard" ? (
-                      <FaHome className="text-[16px]" />
+                      <FaHome className="text-[22px] md:text-[16px]" />
                     ) : item.title === "Wallet" ? (
-                      <FaWallet className="text-[16px]" />
+                      <FaWallet className="text-[22px] md:text-[16px]" />
                     ) : item.title ===
                       `${import.meta.env.VITE_P2P_NAME} Trading` ? (
-                      <FaUsers className="text-[16px]" />
+                      <FaUsers className="text-[20px] md:text-[16px]" />
                     ) : item.title === "Orders" ? (
-                      <FaShoppingBag className="text-[16px]" />
+                      <FaShoppingBag className="text-[18px] md:text-[16px]" />
                     ) : item.title === "Account" ? (
-                      <FaUser className="text-[16px]" />
+                      <FaUser className="text-[18px] md:text-[16px]" />
                     ) : (
-                      <FaToolbox className="text-[16px]" />
+                      <FaToolbox className="text-[18px] md:text-[16px]" />
                     )}
-                    <span className="w-max">{item.title}</span>
+                    <span className="hidden md:block w-max">{item.title}</span>
                   </Link>
                 )}
               </div>

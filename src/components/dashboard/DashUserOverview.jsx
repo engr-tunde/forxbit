@@ -5,8 +5,8 @@ import { copyFunc } from "../../utils/helpers";
 const DashUserOverview = ({ user }) => {
   console.log("user", user);
   return (
-    <div className="grid grid-cols-2 gap-6 rounded-xl bg-titusDashCardDarkBG p-5 h-full items-center">
-      <div className="col-span-1 flex gap-5">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 rounded-xl bg-titusDashCardDarkBG p-5 h-full items-center">
+      <div className="col-span-1 flex gap-5 justify-between md:justify-normal">
         <img
           src="/assets/images/avatar.avif"
           className="w-12 rounded-lg"
@@ -22,9 +22,9 @@ const DashUserOverview = ({ user }) => {
             />
           </div>
         </div>
-        <div className="h-[70%] my-auto w-[2px] bg-titusLightBorder"></div>
+        {/* <div className="h-[70%] my-auto w-[2px] bg-titusLightBorder"></div> */}
       </div>
-      <div className="col-span-1 flex flex-col gap-0">
+      <div className="hidden col-span-1 md:flex flex-col gap-0">
         <div className="">user ID</div>
         <div className="flex items-center gap-2">
           <div className="text-white text-sm">

@@ -43,7 +43,7 @@ const WalletPage = () => {
   return (
     <>
       <Head pageTitle="User Dashboard - Wallet" />
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-x-10">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-x-10 gap-y-5">
         <div className="col-span-1 md:col-span-3">
           <WalletTokenEstimatedBalance
             hideAssets={hideAssets}

@@ -9,7 +9,7 @@ const DashRecentTransactions = () => {
   return (
     <div className="w-full rounded-xl bg-titusDashCardDarkBG p-5 flex flex-col gap-7">
       <div className="flex items-center justify-between text-white">
-        <div className="text-[18px] md:text-xl font-semibold">
+        <div className="text-[18px] md:text-xl font-medium md:font-semibold">
           Recent Transactions
         </div>
         <Link

@@ -20,6 +20,7 @@ import {
   FETCH_USER_SETTINGS,
   FETCH_USER_TRANSACTIONS,
   FETCH_USER_UNADDED_TOKENS,
+  FETCH_WALLET_TOKENS,
   OPEN_M2M_POSTS,
   P2P_TOKENS,
   POST_M2M_TRADE,
@@ -367,9 +368,9 @@ export const fetchUserUnaddedWalletTokens = () => {
     mutate,
   };
 };
-export const fetchdWalletTokens = () => {
+export const fetchWalletTokens = () => {
   const { data, error, mutate } = useSWR(
-    { url: FETCH_USER_UNADDED_TOKENS, withCredentials: true },
+    { url: FETCH_WALLET_TOKENS, withCredentials: true },
     fetcher
   );
   return {

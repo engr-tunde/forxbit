@@ -11,9 +11,11 @@ const DashMarkets = () => {
     inactive: "text-titusText font-medium cursor-pointer hover:text-white",
   };
   return (
-    <div className="w-full rounded-xl bg-titusDashCardDarkBG p-5 flex flex-col gap-7">
+    <div className="hidden w-full rounded-xl bg-titusDashCardDarkBG p-5 md:flex flex-col gap-7">
       <div className="flex items-center justify-between text-white">
-        <div className="text-[18px] md:text-xl font-semibold">Markets</div>
+        <div className="text-[18px] md:text-xl font-medium md:font-semibold">
+          Markets
+        </div>
         <Link
           to=""
           className="flex items-center gap-2 cursor-pointer hover:text-titusGreen duration-300 ease-in"

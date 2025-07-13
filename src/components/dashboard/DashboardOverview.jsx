@@ -13,7 +13,7 @@ const DashboardOverview = ({ handleToggleHideAsset, hideAssets, settings }) => {
     <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-10">
       <div className="col-span-1">
         {user ? <DashUserOverview user={user?.data} /> : null}
-        {userLoading ? <Loader /> : null}
+        {/* {userLoading ? <Loader /> : null} */}
         {userError ? (
           <ErrorWidget error={userError?.toString()} color="white" />
         ) : null}

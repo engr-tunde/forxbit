@@ -1,10 +1,7 @@
 import { FaArrowAltCircleRight, FaTimesCircle } from "react-icons/fa";
 import { fetchCurrencies, updateUserSettings } from "../../../../api";
 import Loader from "../../../globals/Loader";
-import {
-  errorNotification,
-  successNotification,
-} from "../../../../utils/helpers";
+import { errorNotification } from "../../../../utils/helpers";
 
 const ChangeCurrency = ({
   showChangeCurrency,
@@ -17,8 +14,6 @@ const ChangeCurrency = ({
     try {
       const response = await updateUserSettings({ currency: item });
       if (response.status === 200) {
-        const data = response.data;
-        successNotification(data.message);
         mutate();
         setshowChangeCurrency(false);
       } else {
