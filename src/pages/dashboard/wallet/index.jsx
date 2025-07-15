@@ -53,7 +53,7 @@ const WalletPage = () => {
         </div>
         <div className="col-span-1 p-3">
           <img
-            src="/assets/images/banners/wallet-ad-banner-1.jpg"
+            src="/assets/images/banners/wallet-ad-banner-3.jpg"
             alt=""
             className="rounded-lg leftRight"
           />
