@@ -19,7 +19,7 @@ const DashboardLayout = () => {
       <DashboardNavBar nav={nav} setNav={setNav} />
       <div className="h-full w-full">
         <div
-          className="dash-container flex flex-col gap-10 mb-8 lg:mb-2"
+          className="dash-container flex flex-col gap-11 md:gap-10 mb-8 lg:mb-2"
           style={{
             backdropFilter: nav ? "blur(8px)" : "",
           }}

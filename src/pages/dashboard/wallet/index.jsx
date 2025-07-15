@@ -43,7 +43,7 @@ const WalletPage = () => {
   return (
     <>
       <Head pageTitle="User Dashboard - Wallet" />
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-x-10 gap-y-5">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-x-10 gap-y-10">
         <div className="col-span-1 md:col-span-3">
           <WalletTokenEstimatedBalance
             hideAssets={hideAssets}
@@ -51,8 +51,12 @@ const WalletPage = () => {
             settings={settings?.data}
           />
         </div>
-        <div className="col-span-1">
-          <img src="/assets/images/banners/wallet-ad-banner-1.jpg" alt="" />
+        <div className="col-span-1 p-3">
+          <img
+            src="/assets/images/banners/wallet-ad-banner-1.jpg"
+            alt=""
+            className="rounded-lg leftRight"
+          />
         </div>
       </div>
       {/* <DashMarkets /> */}
