@@ -51,11 +51,11 @@ const WalletPage = () => {
             settings={settings?.data}
           />
         </div>
-        <div className="col-span-1 p-3">
+        <div className="col-span-1 p-3 md:p-0">
           <img
             src="/assets/images/banners/wallet-ad-banner-3.jpg"
             alt=""
-            className="rounded-lg leftRight"
+            className="h-full rounded-lg leftRight"
           />
         </div>
       </div>

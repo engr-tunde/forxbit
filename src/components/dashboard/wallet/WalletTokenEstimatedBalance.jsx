@@ -53,7 +53,7 @@ const WalletTokenEstimatedBalance = ({
       <div className="w-full flex flex-col md:flex-row gap-10 md:gap-0 justify-between items-start md:items-end">
         <div className="flex flex-col gap-3 justify-between">
           <div className="flex items-center gap-2 font-semibold text-white">
-            <span className="text-lg">Crypto Actions</span>
+            <span className="text-lg">Crypto Shortcuts</span>
             <FaEye onClick={handleToggleHideAsset} className="cursor-pointer" />
           </div>
           {tokenBalances && (
