@@ -52,7 +52,7 @@ const WalletPage = () => {
           />
         </div>
         <div className="col-span-1">
-          <img src="/assets/images/banners/dashboard-ad-1.jpg" alt="" />
+          <img src="/assets/images/banners/wallet-ad-banner-1.jpg" alt="" />
         </div>
       </div>
       {/* <DashMarkets /> */}
