@@ -42,7 +42,6 @@ const VerifyEmailBody = () => {
 
   const resendOTP = async () => {
     const response = await userResendVerifyEmailOTP({ userId });
-    console.log("response", response);
     if (response.status === 200) {
       successNotification("New OTP successfully sent!");
     } else {
@@ -61,8 +60,6 @@ const VerifyEmailBody = () => {
     console.log("response", response);
     if (response.status === 200) {
       Cookies.set("u-x", response?.headers["u-x-key"]);
-      const data = response.data;
-      successNotification(data.message);
       setTimeout(() => history("/dashboard"), 3000);
     } else {
       errorNotification(response?.data?.error);
@@ -77,8 +74,6 @@ const VerifyEmailBody = () => {
     } else {
       setdisabled(false);
     }
-    console.log("opt length", otp.length);
-    console.log("otpLength", otpLength);
   }, [otp]);
 
   return (

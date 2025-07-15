@@ -29,10 +29,8 @@ const SwapExternalAddress = () => {
       address,
       to_token?.network?.toLowerCase()
     );
-    console.log("verifyAddressRes bsc", verifyAddressRes);
     if (verifyAddressRes) {
       setrecipient_address(address);
-      successNotification("Wallet address validated!");
       setverify("Verified");
     } else {
       errorNotification(

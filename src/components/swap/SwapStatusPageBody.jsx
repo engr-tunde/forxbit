@@ -51,6 +51,20 @@ const SwapStatusPageBody = ({ trade }) => {
                 />
               </div>
             </div>
+            {trade?.payinExtraId && (
+              <div className="">
+                <div className="text-sm font-medium">Destination tag</div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-white">
+                    {trade?.payinExtraId}
+                  </span>
+                  <FaCopy
+                    className="cursor-pointer text-[15px] text-titusYellow"
+                    onClick={() => copyFunc(trade?.payinExtraId, "Tag copied!")}
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="col-span-1 md:col-span-2 flex flex-col gap-5 md:justify-end ">
@@ -59,8 +73,8 @@ const SwapStatusPageBody = ({ trade }) => {
                 onClick={() => setqrCode("address")}
                 className={
                   qrCode === "address"
-                    ? "bg-titusGreen text-sm text-black py-1 px-3 rounded-md cursor-pointer"
-                    : "text-titusLightText text-sm py-1 px-3 rounded-md hover:bg-titusGreen hover:text-black duration-300 ease-in cursor-pointer"
+                    ? "bg-titusGreen text-sm text-black py-1 px-8 md:px-3 rounded-md cursor-pointer"
+                    : "text-titusLightText text-sm py-1 px-8 md:px-3 rounded-md hover:bg-titusGreen hover:text-black duration-300 ease-in cursor-pointer"
                 }
               >
                 Address
@@ -69,8 +83,8 @@ const SwapStatusPageBody = ({ trade }) => {
                 onClick={() => setqrCode("amount")}
                 className={
                   qrCode === "amount"
-                    ? "bg-titusGreen text-sm text-black py-1 px-3 rounded-md cursor-pointer"
-                    : "text-titusLightText text-sm py-1 px-3 rounded-md hover:bg-titusGreen hover:text-black duration-300 ease-in cursor-pointer"
+                    ? "bg-titusGreen text-sm text-black py-1 px-8 md:px-3 rounded-md cursor-pointer"
+                    : "text-titusLightText text-sm py-1 px-8 md:px-3 rounded-md hover:bg-titusGreen hover:text-black duration-300 ease-in cursor-pointer"
                 }
               >
                 Amount

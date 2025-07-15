@@ -1,6 +1,8 @@
 import React from "react";
 // import CurrencyAssetDropdownMini from "../globals/trade/CurrencyAssetDropdownMini";
 import SwapAssetDropdownMini from "./SwapAssetDropdownMini";
+import { changeNowFetcher } from "../../api/changeNow";
+import { useSwapContext } from "../../context/swapContext";
 
 const SwapTokenField = ({
   token,
@@ -13,9 +15,40 @@ const SwapTokenField = ({
   disabled = false,
 }) => {
   let ta;
+
+  const {
+    from_token,
+    // to_token,
+    from_token_amount,
+    // setto_token_amount,
+
+    errors,
+  } = useSwapContext();
+
   const handleChange = (val) => {
-    let value = Number(val);
     settoken_amount(val);
+    if (from_token != null && to_token != null) {
+      const runFuncti = async () => {
+        const toAmount = await changeNowFetcher(
+          `v2/exchange/estimated-amount?fromCurrency=${from_token?.ticker}&toCurrency=${to_token?.ticker}&fromAmount=${val}&toAmount=&fromNetwork=${from_token?.network}&toNetwork=${to_token?.network}&flow=fixed-rate`
+        );
+        if (toAmount) {
+          if (toAmount?.error?.length > 0) {
+            errors.from_token_amount = toAmount?.message;
+            setto_token_amount(0);
+          } else {
+            delete errors["from_token_amount"];
+            const toAmnt = toAmount?.toAmount;
+            setto_token_amount(toAmnt);
+            settoken_amount(val);
+          }
+        }
+      };
+      runFuncti();
+    }
+
+    let value = Number(val);
+    // settoken_amount(val);
   };
 
   return (

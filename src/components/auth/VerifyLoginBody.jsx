@@ -40,7 +40,6 @@ const VerifyLoginBody = () => {
 
   const resendOTP = async () => {
     const response = await userResendVerifyLoginOTP({ userId });
-    console.log("response", response);
     if (response.status === 200) {
       successNotification("New OTP successfully sent!");
     } else {
@@ -58,8 +57,6 @@ const VerifyLoginBody = () => {
     console.log("response", response);
     if (response.status === 200) {
       Cookies.set("u-x", response?.headers["u-x-key"]);
-      const data = response.data;
-      successNotification(data.message);
       setTimeout(() => history("/dashboard"), 1500);
     } else {
       errorNotification(response?.data?.error);

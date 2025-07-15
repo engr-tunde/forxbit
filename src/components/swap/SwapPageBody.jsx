@@ -36,7 +36,7 @@ const SwapPageBody = () => {
   const { tokens, tokensLoading } = CG_fetchSwapTokens();
   const [showConfirmTrade, setshowConfirmTrade] = useState(false);
   const [toTokens, settoTokens] = useState();
-  const [min, setmin] = useState();
+  const [min, setmin] = useState(null);
   // const [userIP, setuserIP] = useState("0.0.0.0");
 
   // Fetch To tokens
@@ -52,12 +52,6 @@ const SwapPageBody = () => {
   (function () {
     if (to_token_amount > 0) {
       delete errors["to_token_amount"];
-    }
-
-    if (from_token_amount < Number(min)) {
-      errors.from_token_amount = "Amount too low. Go higher!";
-    } else if (Number(from_token_amount) >= Number(min)) {
-      delete errors["from_token_amount"];
     }
 
     console.log("errors", errors);
@@ -89,32 +83,7 @@ const SwapPageBody = () => {
       };
       runFunc();
     }
-  }, [from_token_amount]);
-
-  // Generate to-token-amount
-  useEffect(() => {
-    if (from_token_amount && !errors.from_token_amount) {
-      const runFuncti = async () => {
-        const toAmount = await changeNowFetcher(
-          `v2/exchange/estimated-amount?fromCurrency=${from_token?.ticker}&toCurrency=${to_token?.ticker}&fromAmount=${from_token_amount}&toAmount=&fromNetwork=${from_token?.network}&toNetwork=${to_token?.network}&flow=fixed-rate`
-        );
-        console.log("toAmnt newRes", toAmount);
-        console.log("toAmnt newRes toAmount?.error", toAmount?.error?.length);
-        if (toAmount) {
-          if (toAmount?.error?.length > 0) {
-            errors.from_token_amount = "Too low. Go higher!";
-            errorNotification("Amount too low. Go higher!");
-            setto_token_amount(0);
-          } else {
-            delete errors["from_token_amount"];
-            const toAmnt = toAmount?.toAmount;
-            setto_token_amount(toAmnt);
-          }
-        }
-      };
-      runFuncti();
-    }
-  }, [from_token, to_token, from_token_amount]);
+  }, [from_token]);
 
   const handleChangeFromToToken = () => {
     if (from_token && to_token) {
@@ -174,9 +143,9 @@ const SwapPageBody = () => {
       } else {
         const response = await postTrade.json();
         console.log("response", response);
-        successNotification(
-          "Trade successfully created! Continue on next screen"
-        );
+        // successNotification(
+        //   "Trade successfully created! Continue on next screen"
+        // );
         setTimeout(() => history(`/swap-status/${response?.id}`), 1500);
       }
     }
@@ -207,6 +176,15 @@ const SwapPageBody = () => {
             ) : null}
           </div>
         </div>
+
+        {min && (
+          <div className="flex gap-2 text-xs -mt-6">
+            <span>Minimum allowed:</span>
+            <span className="text-titusYellow">
+              {min} {from_token?.ticker?.toUpperCase()}
+            </span>
+          </div>
+        )}
 
         <div className="flex items-center justify-between -my-3 text-sm">
           <div className="">
