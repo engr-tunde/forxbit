@@ -31,7 +31,7 @@ const HomeSectionFour = () => {
           </div>
           <div className="col-span-1 flex justify-center items-center">
             <img
-              src="/assets/images/pro.webp"
+              src="/assets/images/home/Get-seamless-trading-experiences.png"
               alt=""
               className="dancingSlide rounded-[0px]"
             />

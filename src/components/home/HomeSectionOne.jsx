@@ -4,12 +4,14 @@ import { FaCoins } from "react-icons/fa";
 const HomeSectionOne = () => {
   return (
     <div className="bg-black relative z-10">
-      <div className="container pt-32 lg:pt-32 pb-[200px] lg:pb-[150px] px-8 md:px-10 lg:px-0">
+      <div className="container pt-28 lg:pt-10 pb-[30px] lg:pb-[0px] pl-8 md:px-10 lg:px-0">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-          <div className="col-span-1 flex flex-col gap-8 lg:gap-10">
+          <div className="col-span-1 flex flex-col gap-8 lg:gap-10 pr-8">
             <h1 className="text-[36px] lg:text-[60px] font-bold leading-[1.2em] font-sans text-[#fff]">
-              Your <span className="text-titusGreen"> Number 1</span> Gateway to
-              Web3
+              Your <span className="text-titusGreen"> Number 1</span> Gateway to{" "}
+              <div className="text-titusYellow leftRight inline-block">
+                Web3
+              </div>
             </h1>
             <p className="">
               Buy, Sell, Trade with Peers and Swap Cryptos in Lightening Speed,
@@ -23,16 +25,20 @@ const HomeSectionOne = () => {
               <FaCoins className="text-black" />
             </Link>
           </div>
-          <div className="col-span-1">
-            <img src="/assets/images/bg.jpg" alt="" className="updown" />
+          <div className="col-span-1 -mt-16 md:mt-0">
+            <img
+              src="/assets/images/home/Phone-Mock-gif-2.gif"
+              alt=""
+              className="updown"
+            />
           </div>
         </div>
       </div>
-      <img
+      {/* <img
         src="/assets/images/hand.png"
         alt=""
         className="w-[300px] lg:w-[500px] absolute right-0 bottom-0 lg:-bottom-40 z-0"
-      />
+      /> */}
     </div>
   );
 };

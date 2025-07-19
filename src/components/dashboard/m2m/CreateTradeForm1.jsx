@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { fetchCurrencies, fetchP2PTokenList } from "../../../api";
+import { fetchCurrencies, fetchUserTokenBalances } from "../../../api";
 import { useM2MContext } from "../../../context/m2mContext";
 import { toDecimal, useOutsideClick } from "../../../utils/helpers";
 import CreateTradeSelectAsset from "./create-trade-form-1/CreateTradeSelectAsset";
@@ -7,6 +7,7 @@ import CreateTradeSelectCurrency from "./create-trade-form-1/CreateTradeSelectCu
 import CreateTradeSelectPriceType from "./create-trade-form-1/CreateTradeSelectPriceType";
 import CreateTradeSetPrice from "./create-trade-form-1/CreateTradeSetPrice";
 import useFetchCrypComp from "../../../api/useFetchCrypComp";
+import { changeNowFetcher } from "../../../api/changeNow";
 import Loader from "../../globals/Loader";
 import ErrorWidget from "./../../globals/ErrorWidget";
 import HandleFuncButton from "../../forms/buttons/HandleFuncButton";
@@ -25,7 +26,8 @@ const CreateTradeForm1 = () => {
     m2mpercent,
   } = useM2MContext();
   const { currencies, currenciesLoading, currenciesError } = fetchCurrencies();
-  const { tokens, tokensLoading, tokensError } = fetchP2PTokenList();
+  const { tokenBalances, tokenBalancesLoading, tokenBalancesError } =
+    fetchUserTokenBalances();
   const { data, loading, error } = useFetchCrypComp(
     `price?fsym=${m2mAsset?.symbol}&tsyms=${m2mCurrency?.ticker}`
   );
@@ -35,17 +37,15 @@ const CreateTradeForm1 = () => {
   const [disabled, setdisabled] = useState(false);
 
   const ref = useRef();
-  useOutsideClick(ref.current, () => {
-    setshowCurrencyList(false);
-    setshowAssetList(false);
-  });
-
+  // useOutsideClick(ref.current, () => {
+  //   setshowCurrencyList(false);
+  //   setshowAssetList(false);
+  // });
   useEffect(() => {
     if (data) {
       const default_price = Object.values(data)[0];
       console.log("default_price", default_price);
       setm2moriginal_price(default_price);
-      // setm2masset_price(default_price);
       let user_pri = Number((m2mpercent / 100) * default_price);
       setm2masset_price(user_pri);
     }
@@ -70,16 +70,16 @@ const CreateTradeForm1 = () => {
     <>
       <div className="w-full md:w-[80%] flex items-center flex-col md:flex-row justify-between gap-6">
         <>
-          {tokens ? (
+          {tokenBalances ? (
             <CreateTradeSelectAsset
-              tokens={tokens?.data}
+              tokens={tokenBalances?.data}
               showAssetList={showAssetList}
               setshowAssetList={setshowAssetList}
             />
           ) : null}
-          {tokensLoading ? <Loader size={30} color="#eee" /> : null}
-          {tokensError ? (
-            <ErrorWidget error={tokensError} color="#eee" />
+          {tokenBalancesLoading ? <Loader size={30} color="#eee" /> : null}
+          {tokenBalancesError ? (
+            <ErrorWidget error={tokenBalancesError} color="#eee" />
           ) : null}
         </>
 
@@ -99,12 +99,14 @@ const CreateTradeForm1 = () => {
       </div>
 
       <div className="w-full md:w-[25%] flex flex-col gap-3">
-        <div className="text-white text-sm md:text-md">Select Price Type</div>
+        <div className="text-white text-sm md:text-md opacity-70">
+          Select Price Type
+        </div>
         <CreateTradeSelectPriceType />
       </div>
 
       <div className="w-full md:w-[40.5%] flex flex-col gap-3">
-        <div className="text-white text-sm md:text-md">
+        <div className="text-white text-sm md:text-md opacity-70">
           {m2mmargin_type} Price Type
         </div>
         <CreateTradeSetPrice />
@@ -115,14 +117,15 @@ const CreateTradeForm1 = () => {
       <div className="w-full md:w-[50%] flex items-center justify-between">
         <div className="flex flex-col gap-1">
           <div className="text-sm md:text-md">Your Price</div>
-          <div className="text-white text-lg md:text-xl font-semibold">
+          <div className="text-white text-lg md:text-xl font-medium">
             {m2mCurrency?.ticker} {toDecimal(m2masset_price, 3)}
           </div>
         </div>
         <div className="flex flex-col gap-1">
           <div className="text-sm md:text-md">Average Market Price</div>
-          <div className="text-white text-lg md:text-xl font-semibold">
-            {m2mCurrency?.ticker} {toDecimal(m2moriginal_price, 3)}
+          <div className="text-white text-lg md:text-xl font-medium">
+            {/* {m2mCurrency?.ticker} {toDecimal(m2moriginal_price, 3)} */}
+            {m2mCurrency?.ticker} {m2moriginal_price}
           </div>
         </div>
       </div>

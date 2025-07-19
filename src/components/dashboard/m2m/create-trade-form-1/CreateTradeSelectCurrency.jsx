@@ -17,7 +17,7 @@ const CreateTradeSelectCurrency = ({
     <div className="relative w-full md:w-[45%]">
       <div className="flex flex-col gap-2">
         <div className="text-white text-sm md:text-md">
-          {m2mTradeType === "buy" ? "Buy in" : "Sell in"}
+          {m2mTradeType === "Buy" ? "Buy in" : "Sell in"}
         </div>
         <div
           className="w-full flex items-center justify-between border-[1px] border-titusLightBorder hover:border-titusGreenFaded rounded-lg p-3"
