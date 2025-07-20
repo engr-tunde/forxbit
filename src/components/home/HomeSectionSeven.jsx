@@ -1,7 +1,3 @@
-import React from "react";
-import { IoIosSpeedometer } from "react-icons/io";
-import { RiSecurePaymentFill } from "react-icons/ri";
-import { MdDesignServices, MdOutlineSupportAgent } from "react-icons/md";
 import { mediaPosts } from "../../utils/data";
 
 const HomeSectionSeven = () => {

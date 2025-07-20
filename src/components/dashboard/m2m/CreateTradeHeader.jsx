@@ -1,4 +1,3 @@
-import React from "react";
 import { FaCheck } from "react-icons/fa";
 import { useM2MContext } from "../../../context/m2mContext";
 import { successNotification } from "../../../utils/helpers";
@@ -7,7 +6,7 @@ const CreateTradeHeader = () => {
   const { m2mCurrentStage, m2mTradeType, setm2mTradeType } = useM2MContext();
 
   return (
-    <div className="flex flex-col gap-7">
+    <div className="w-full flex flex-col gap-9 md:gap-7">
       <div className="text-xl md:text-2xl font-semibold text-white">
         Create Trade
       </div>
@@ -23,8 +22,8 @@ const CreateTradeHeader = () => {
           <div
             className={
               m2mCurrentStage >= 1
-                ? "text-[12px] md:text-sm text-white w-[95%] leading-[14px]"
-                : "text-[12px] md:text-sm text-titusText w-[95%] leading-[14px]"
+                ? "text-[10px] md:text-xs text-white w-[95%] leading-[14px]"
+                : "text-[10px] md:text-xs text-titusText w-[95%] leading-[14px]"
             }
           >
             Set Type & Price
@@ -51,11 +50,11 @@ const CreateTradeHeader = () => {
           <div
             className={
               m2mCurrentStage >= 2
-                ? "text-[12px] md:text-sm text-white w-[95%] text-center leading-[14px]"
-                : "text-[12px] md:text-sm text-titusText w-[95%] text-center leading-[14px]"
+                ? "text-[10px] md:text-xs text-white w-[95%] text-center leading-[14px]"
+                : "text-[10px] md:text-xs text-titusText w-[95%] text-center leading-[14px]"
             }
           >
-            Set Total Amount & Payment Method
+            Set Amounts & Payment Method
           </div>
         </div>
         <div className="col-span-1 flex flex-col items-end gap-2">
@@ -78,11 +77,11 @@ const CreateTradeHeader = () => {
           <div
             className={
               m2mCurrentStage >= 3
-                ? "text-[12px] md:text-sm text-white w-[95%] text-end leading-[14px]"
-                : "text-[12px] md:text-sm text-titusText w-[95%] text-end leading-[14px]"
+                ? "text-[10px] md:text-xs text-white w-[95%] text-end leading-[14px]"
+                : "text-[10px] md:text-xs text-titusText w-[95%] text-end leading-[14px]"
             }
           >
-            Set Remarks & Automatic Response
+            Remarks & Finish
           </div>
         </div>
       </div>
@@ -172,8 +171,8 @@ const CreateTradeHeader = () => {
         <div
           className={
             m2mTradeType.toLowerCase() === "buy"
-              ? "text-white md:text-xl font-medium cursor-pointer border-b-[2px] border-b-titusGreenFaded rounded-b-lg pb-2"
-              : "hover:text-white md:text-xl font-medium cursor-pointer pb-2"
+              ? "text-white md:text-xl md:font-medium cursor-pointer border-b-[2px] border-b-titusGreenFaded rounded-b-lg pb-2"
+              : "hover:text-white md:text-xl md:font-medium cursor-pointer pb-2"
           }
           onClick={() => {
             setm2mTradeType("Buy");
@@ -184,9 +183,9 @@ const CreateTradeHeader = () => {
         </div>
         <div
           className={
-            m2mTradeType.toLowerCase() === "Sell"
-              ? "text-white md:text-xl font-medium cursor-pointer border-b-[2px] border-b-titusGreenFaded rounded-b-lg pb-2"
-              : "hover:text-white md:text-xl font-medium cursor-pointer pb-2"
+            m2mTradeType.toLowerCase() === "sell"
+              ? "text-white md:text-xl md:font-medium cursor-pointer border-b-[2px] border-b-titusGreenFaded rounded-b-lg pb-2"
+              : "hover:text-white md:text-xl md:font-medium cursor-pointer pb-2"
           }
           onClick={() => {
             setm2mTradeType("Sell");

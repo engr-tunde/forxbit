@@ -8,7 +8,7 @@ export const fetcher = ({ url, withCredentials = false }) =>
       console.log("res.status", res.status);
       if (res.status == 401) {
         Cookies.remove("u-x");
-        window.location.href = "/login";
+        // window.location.href = "/login";
       }
       return res.data;
     })
@@ -16,7 +16,7 @@ export const fetcher = ({ url, withCredentials = false }) =>
       console.log("fetch error", err);
       if (err.response.status == 401) {
         Cookies.remove("u-x");
-        window.location.href = "/login";
+        // window.location.href = "/login";
       }
       throw Error(err);
     });

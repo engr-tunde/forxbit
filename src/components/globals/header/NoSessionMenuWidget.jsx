@@ -1,4 +1,3 @@
-import React from "react";
 import { FaArrowCircleRight, FaDownload } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { successNotification } from "../../../utils/helpers";

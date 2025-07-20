@@ -31,23 +31,23 @@ const CreateTradeSetPrice = () => {
     setm2masset_price(newpriceDiff);
   };
 
-  const handleFloatingInputChance = (val) => {
-    let pc = val.toString().split("%")[0];
-    pc = Number(pc);
-    pc = parseFloat(pc.toFixed(2));
-    let newpriceDiff = parseFloat(
-      ((pc / 100) * Number(m2moriginal_price)).toFixed(2)
-    );
-    setm2mPercent(pc);
-    setm2masset_price(newpriceDiff);
-  };
-
-  const handleFixedInputChance = (val) => {
-    let value = Number(val);
-    let newPercent = Number((value * 100) / Number(m2moriginal_price));
-    newPercent = parseFloat(newPercent.toFixed(2));
-    setm2mPercent(newPercent);
-    setm2masset_price(val);
+  const handleInputChance = (val) => {
+    if (m2mmargin_type === "Floating") {
+      let pc = val.toString().split("%")[0];
+      pc = Number(pc);
+      pc = parseFloat(pc.toFixed(2));
+      let newpriceDiff = parseFloat(
+        ((pc / 100) * Number(m2masset_price)).toFixed(2)
+      );
+      setm2mPercent(pc);
+      setm2masset_price(newpriceDiff);
+    } else {
+      let value = Number(val);
+      let newPercent = Number((value * 100) / Number(m2masset_price));
+      newPercent = parseFloat(newPercent.toFixed(2));
+      setm2mPercent(newPercent);
+      setm2masset_price(value);
+    }
   };
 
   return (
@@ -60,27 +60,14 @@ const CreateTradeSetPrice = () => {
           <FaMinus />
         </div>
         <div className="flex items-center gap-1 text-white font-semibold text-md">
-          {m2mmargin_type === "Floating" ? (
-            <input
-              type="text"
-              className="border-0 bg-transparent text-white font-semibold text-[17px] md:text-lg text-center w-[200px]"
-              value={m2mpercent && `${m2mpercent}%`}
-              onChange={(e) => handleFloatingInputChance(e.target.value)}
-            />
-          ) : (
-            <input
-              type="number"
-              // type="text"
-              // pattern="(?:0|[1-9]\d*)"
-              // inputMode="decimal"
-              // min={0}
-              // step={1}
-              className="border-0 bg-transparent text-white font-semibold text-[17px] md:text-lg text-center w-[200px]"
-              value={m2masset_price}
-              // defaultValue={m2masset_price}
-              onChange={(e) => handleFixedInputChance(e.target.value)}
-            />
-          )}
+          <input
+            type={m2mmargin_type === "Floating" ? "text" : "text"}
+            className="border-0 bg-transparent text-white font-semibold text-[17px] md:text-lg text-center w-[200px]"
+            value={
+              m2mmargin_type === "Floating" ? `${m2mpercent}%` : m2masset_price
+            }
+            onChange={(e) => handleInputChance(e.target.value)}
+          />
         </div>
         <div
           className="text-lg font-semibold hover:text-titusGreenFaded cursor-pointer"
@@ -90,8 +77,7 @@ const CreateTradeSetPrice = () => {
         </div>
       </div>
       <div className="text-[12px]">
-        Pricing formular: {m2moriginal_price && toDecimal(m2moriginal_price, 3)}{" "}
-        Pricing formular: {m2moriginal_price} * {m2mpercent}% ≈{" "}
+        Pricing formular: {toDecimal(m2moriginal_price, 3)} * {m2mpercent}% ≈{" "}
         <span className="text-white text-md font-semibold">
           {m2masset_price} {m2mCurrency?.ticker}
         </span>

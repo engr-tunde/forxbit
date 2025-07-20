@@ -7,7 +7,7 @@ const HandleFuncButton = ({
 }) => {
   return (
     <div
-      onClick={!disabled && !isSubmitting && handleSubmit}
+      onClick={!disabled && !isSubmitting ? handleSubmit : () => null}
       className={
         disabled
           ? `${className} btnn1-disabled py-2 text-center text-sm font-medium`

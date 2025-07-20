@@ -26,6 +26,8 @@ const CreateTradeForm2 = () => {
     setToken_amount,
     payment_methods,
     setpayment_methods,
+
+    m2mTradeType,
   } = useM2MContext();
 
   const { paymentMethods } = fetchPaymentMethods();
@@ -42,17 +44,65 @@ const CreateTradeForm2 = () => {
   const [showPaymentTimeWindow, setShowPaymentTimeWindow] = useState(false);
 
   useEffect(() => {
-    let amntInCurrency = Number(Number(token_amount) * Number(m2masset_price));
-    setFiat_amount(amntInCurrency);
-    let min = Number(min_limit / m2masset_price);
-    setmin_limitInAsset(min);
-    let max = Number(max_limit / m2masset_price);
-    setmax_limitInAsset(max);
+    if (token_amount && token_amount > 0) {
+      let amntInCurrency = Number(
+        Number(token_amount) * Number(m2masset_price)
+      );
+      setFiat_amount(amntInCurrency);
+      if (
+        m2mTradeType?.toLowerCase() == "sell" &&
+        m2masset_price > m2mAsset?.balance
+      ) {
+        settoken_amountErr(`You cannot sell more than your balance`);
+      } else {
+        settoken_amountErr();
+      }
+    }
+  }, [token_amount]);
+
+  useEffect(() => {
+    if (min_limit && min_limit > 0) {
+      let min = Number(min_limit / m2masset_price);
+      setmin_limitInAsset(min);
+
+      if (max_limit && min_limit >= max_limit) {
+        setmin_limErr(
+          "Minimum limit cannot be more than or equal to Maximum limit!"
+        );
+      } else if (fiat_amount && min_limit >= fiat_amount) {
+        setmin_limErr("Minimum limit must be lower!");
+      } else {
+        setmin_limErr();
+      }
+    }
+  }, [min_limit, fiat_amount, max_limit]);
+
+  useEffect(() => {
+    if (max_limit && max_limit > 0) {
+      let max = Number(max_limit / m2masset_price);
+      setmax_limitInAsset(max);
+
+      if (min_limit && max_limit <= min_limit) {
+        setmax_limErr(
+          "Maximum limit cannot be less than or equal to Minimum limit!"
+        );
+      } else if (fiat_amount && max_limit > fiat_amount) {
+        setmax_limErr("Already more than expected value!");
+      } else {
+        setmax_limErr();
+      }
+    }
+  }, [max_limit, fiat_amount, min_limit]);
+
+  useEffect(() => {
     if (
-      token_amount > 0 &&
-      min_limit > 0 &&
-      max_limit > 0 &&
-      payment_methods.length > 0
+      (min_limit &&
+        min_limit > 0 &&
+        max_limit &&
+        max_limit > 0 &&
+        token_amount &&
+        token_amount > 0 &&
+        payment_methods.length > 0) == true
     ) {
       setdisabled(false);
     } else {
@@ -71,6 +121,20 @@ const CreateTradeForm2 = () => {
       paymentArr.push(item);
       setpayment_methods(paymentArr);
     }
+
+    if (
+      min_limit &&
+      min_limit > 0 &&
+      max_limit &&
+      max_limit > 0 &&
+      token_amount &&
+      token_amount > 0
+    ) {
+      setdisabled(false);
+    } else {
+      setdisabled(true);
+    }
+
     forceUpdate();
   };
 
@@ -83,34 +147,89 @@ const CreateTradeForm2 = () => {
 
   const ref = useRef();
   useOutsideClick(ref.current, () => {
-    setShowAddPaymentMethod(false);
-    setShowPaymentTimeWindow(false);
+    // setShowAddPaymentMethod(false);
+    // setShowPaymentTimeWindow(false);
   });
 
   const handleShowNextTab = () => {
     setm2mCurrentStage(3);
   };
-  useEffect(() => {
-    if (min_limit >= fiat_amount) {
-      setmin_limErr("Minimum limit must be lower!");
-    } else {
-      setmin_limErr();
-    }
-    if (max_limit > fiat_amount) {
-      setmax_limErr("Maximum limit cannot exceed trade amount!");
-    } else {
-      setmax_limErr();
-    }
-  }, [min_limit, max_limit, fiat_amount]);
 
   const [token_amountErr, settoken_amountErr] = useState();
   const [min_limErr, setmin_limErr] = useState();
   const [max_limErr, setmax_limErr] = useState();
 
+  const handleTokenAmount = (val) => {
+    if (!val) {
+      let err = `How many ${m2mAsset?.symbol?.toUpperCase()} are you ${m2mTradeType}ing?`;
+      settoken_amountErr(err);
+      setToken_amount(val);
+    } else if (
+      m2mTradeType?.toLowerCase() == "sell" &&
+      val > m2mAsset?.balance
+    ) {
+      settoken_amountErr(`You cannot sell more than your balance`);
+      setToken_amount(val);
+    } else {
+      settoken_amountErr();
+      setToken_amount(val);
+    }
+  };
+
+  const handleMinAmount = (val) => {
+    if (!val || val == 0) {
+      setmin_limErr(`Minimum limit cannot be empty`);
+      setmin_limit(val);
+    } else if (max_limit && val >= max_limit) {
+      setmin_limErr(
+        "Minimum limit cannot be more than or equal to Maximum limit!"
+      );
+      setmin_limit(val);
+    } else if (fiat_amount && val >= fiat_amount) {
+      setmin_limErr("Minimum limit must be lower!");
+      setmin_limit(val);
+    } else {
+      setmin_limErr();
+      setmin_limit(val);
+    }
+  };
+
+  const handleMaxAmount = (val) => {
+    if (!val || val == 0) {
+      setmax_limErr(`Maximum limit cannot be empty`);
+      setmax_limit(val);
+    } else if (min_limit && val <= min_limit) {
+      setmax_limErr(
+        "Maximum limit cannot be less than or equal to Minimum limit!"
+      );
+      setmax_limit(val);
+    } else if (fiat_amount && val > fiat_amount) {
+      setmax_limErr("Already more than expected value!");
+      setmax_limit(val);
+    } else {
+      setmax_limErr();
+      setmax_limit(val);
+    }
+  };
+
   return (
     <>
       <div className="w-full md:w-[95%] flex flex-col justify-between gap-2">
-        <div className="text-white text-sm md:text-md">Total amount</div>
+        <div
+          className={m2mTradeType?.toLowerCase() == "sell" ? "flex gap-2" : ""}
+        >
+          <div className="text-white text-sm md:text-md">Token amount</div>{" "}
+          {m2mTradeType?.toLowerCase() == "sell" && (
+            <div className="text-sm">
+              (balance:{" "}
+              <span className="text-titusYellow">
+                {m2mAsset?.balance} {m2mAsset?.ticker}
+              </span>
+              )
+            </div>
+          )}
+        </div>
+
         <div className="flex flex-col gap-1">
           <div className="flex flex-col gap-1">
             <div className="w-full flex items-center justify-between border-[1px] border-titusLightBorder rounded-lg py-1 px-3">
@@ -118,23 +237,26 @@ const CreateTradeForm2 = () => {
                 type="number"
                 className="block border-0 bg-transparent text-white font-medium text-[16px] input-no-border w-[85%]"
                 value={token_amount}
-                onChange={(e) => setToken_amount(Number(e.target.value))}
+                // defaultValue={0}
+                onChange={(e) => handleTokenAmount(e.target.value)}
               />
-              <div className="text-sm text-white w-max">{m2mAsset.symbol}</div>
+              <div className="text-sm text-white w-max">{m2mAsset.ticker}</div>
             </div>
             {token_amountErr ? (
               <div className="error">{token_amountErr}</div>
             ) : null}
           </div>
           <div className="text-[11px] font-medium">
-            {token_amount} {m2mAsset.symbol} ≈ {fiat_amount}{" "}
-            {m2mCurrency.ticker}
+            {token_amount} {m2mAsset.ticker} ≈{" "}
+            {fiat_amount && toDecimal(fiat_amount, 8)} {m2mCurrency.ticker}
           </div>
         </div>
       </div>
 
       <div className="w-full flex flex-col gap-2">
-        <div className="text-white text-sm md:text-md">Order Limits</div>
+        <div className="text-white text-sm md:text-md">
+          Order Limits (in fiat)
+        </div>
         <div className="w-full md:w-[95%] flex justify-between">
           <div className="w-[43%] flex flex-col gap-1">
             <div className="w-full flex items-center justify-between border-[1px] border-titusLightBorder rounded-lg md:py-1 px-2 md:px-3">
@@ -142,12 +264,13 @@ const CreateTradeForm2 = () => {
                 type="number"
                 className="border-0 bg-transparent text-white font-medium text-[16px] input-no-border w-[85%]"
                 value={min_limit}
-                onChange={(e) => setmin_limit(Number(e.target.value))}
+                onChange={(e) => handleMinAmount(e.target.value)}
               />
               <div className="text-sm">{m2mCurrency.ticker}</div>
             </div>
             <div className="text-[12px] font-medium">
-              ≈ {toDecimal(min_limitInAsset, 8)} {m2mAsset.ticker}
+              ≈ {min_limitInAsset && toDecimal(min_limitInAsset, 6)}{" "}
+              {m2mAsset.ticker}
             </div>
             {min_limErr ? (
               <div className="error text-xs">{min_limErr}</div>
@@ -160,12 +283,13 @@ const CreateTradeForm2 = () => {
                 type="number"
                 className="border-0 bg-transparent text-white font-medium text-[16px] input-no-border w-[85%]"
                 value={max_limit}
-                onChange={(e) => setmax_limit(Number(e.target.value))}
+                onChange={(e) => handleMaxAmount(e.target.value)}
               />
               <div className="text-sm">{m2mCurrency.ticker}</div>
             </div>
             <div className="text-[12px] font-medium">
-              ≈ {toDecimal(max_limitInAsset, 8)} {m2mAsset.ticker}
+              ≈ {max_limitInAsset && toDecimal(max_limitInAsset, 8)}{" "}
+              {m2mAsset.ticker}
             </div>
             {max_limErr ? (
               <div className="error text-xs">{max_limErr}</div>
@@ -188,8 +312,8 @@ const CreateTradeForm2 = () => {
 
           <div
             className="w-max flex gap-2 items-center btnn-dark py-[6px] px-10 md:px-14 text-sm"
-            // onClick={() => setShowAddPaymentMethod(true)}
-            onMouseOver={() => setShowAddPaymentMethod(true)}
+            onClick={() => setShowAddPaymentMethod(true)}
+            // onMouseOver={() => setShowAddPaymentMethod(true)}
           >
             <FaPlus />
             <span>Add </span>

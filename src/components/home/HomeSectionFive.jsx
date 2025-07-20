@@ -1,8 +1,3 @@
-import React from "react";
-import { IoIosSpeedometer } from "react-icons/io";
-import { RiSecurePaymentFill } from "react-icons/ri";
-import { MdDesignServices, MdOutlineSupportAgent } from "react-icons/md";
-
 const HomeSectionFive = () => {
   return (
     <div
@@ -26,17 +21,22 @@ const HomeSectionFive = () => {
               </p>
             </div>
             <img
-              src="/assets/images/home-why-us.png"
-              alt=""
+              src="/assets/images/home/Why-trade-with-us.png"
+              alt={import.meta.env.VITE_APP_NAME}
               className="dancingSlide rounded-[0px]"
             />
           </div>
           <div className="col-span-5 flex flex-col gap-12 md:gap-10 text-titusLightText">
             <div className="flex flex-col gap-10 lg:gap-6">
               <div className="feature-card">
-                <div className="h-max rounded-full p-3 bg-titusGreen text-black text-3xl">
-                  <IoIosSpeedometer />
+                <div className="h-max flex justify-center items-center bg-titusGreen rounded-full">
+                  <img
+                    src="/assets/images/icons/home-icons/Lightning-Speed-Transactions-01.svg"
+                    alt={import.meta.env.VITE_APP_NAME}
+                    className="w-32"
+                  />
                 </div>
+
                 <div className="flex flex-col gap-2">
                   <span className="text-white text-[16px] lg:text-xl font-medium">
                     Lightning Speed Transactions
@@ -49,8 +49,12 @@ const HomeSectionFive = () => {
                 </div>
               </div>
               <div className="feature-card">
-                <div className="h-max rounded-full p-3 bg-titusGreen text-black text-3xl">
-                  <RiSecurePaymentFill />
+                <div className="h-max flex justify-center items-center bg-titusGreen rounded-full">
+                  <img
+                    src="/assets/images/icons/home-icons/Advanced-Security-01.svg"
+                    alt={import.meta.env.VITE_APP_NAME}
+                    className="w-32"
+                  />
                 </div>
                 <div className="flex flex-col gap-2">
                   <span className="text-white text-[16px] lg:text-xl font-medium">
@@ -64,8 +68,12 @@ const HomeSectionFive = () => {
                 </div>
               </div>
               <div className="feature-card">
-                <div className="h-max rounded-full p-3 bg-titusGreen text-black text-3xl">
-                  <MdDesignServices />
+                <div className="h-max flex justify-center items-center bg-titusGreen rounded-full">
+                  <img
+                    src="/assets/images/icons/home-icons/Intuitive-Interface-01.svg"
+                    alt={import.meta.env.VITE_APP_NAME}
+                    className="w-32"
+                  />
                 </div>
                 <div className="flex flex-col gap-2">
                   <span className="text-white text-[16px] lg:text-xl font-medium">
@@ -80,8 +88,12 @@ const HomeSectionFive = () => {
                 </div>
               </div>
               <div className="feature-card">
-                <div className="h-max rounded-full p-3 bg-titusGreen text-black text-3xl">
-                  <MdOutlineSupportAgent />
+                <div className="h-max flex justify-center items-center bg-titusGreen rounded-full">
+                  <img
+                    src="/assets/images/icons/home-icons/247-Support-01.svg"
+                    alt={import.meta.env.VITE_APP_NAME}
+                    className="w-32"
+                  />
                 </div>
                 <div className="flex flex-col gap-2">
                   <span className="text-white text-[16px] lg:text-xl font-medium">

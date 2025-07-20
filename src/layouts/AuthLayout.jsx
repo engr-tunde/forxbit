@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import NavBar from "../components/globals/NavBar";
 import { Outlet } from "react-router-dom";
 import { checkSession } from "../api";
 
 const AuthLayout = () => {
-  const { session, sessionLoading, sessionError } = checkSession();
+  const { session } = checkSession();
   useEffect(() => {
     if (session) {
       window.location.href = "/dashboard";

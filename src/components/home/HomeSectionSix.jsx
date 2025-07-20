@@ -1,4 +1,3 @@
-import React from "react";
 import { partnerLogos } from "../../utils/data";
 
 const HomeSectionSix = () => {

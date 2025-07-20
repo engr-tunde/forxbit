@@ -7,13 +7,20 @@ const CreateTradeSelectAsset = ({
   showAssetList,
   setshowAssetList,
 }) => {
-  const { m2mAsset, setm2mAsset, m2mTradeType } = useM2MContext();
+  const {
+    m2mAsset,
+    setm2mAsset,
+    m2mTradeType,
+    setm2masset_price,
+    setm2mPercent,
+  } = useM2MContext();
   const { networks } = fetchUserTokenNetworks();
 
   const handleSelectAsset = (item) => {
-    console.log("item 1", item);
     setm2mAsset(item);
     setshowAssetList(false);
+    setm2masset_price(0);
+    setm2mPercent(0);
   };
 
   // console.log("tokens", tokens);
@@ -40,7 +47,7 @@ const CreateTradeSelectAsset = ({
               className="w-[15px] lg:w-[20px]"
             />
             <div className="text-white text-sm font-medium">
-              {m2mAsset?.symbol}
+              {m2mAsset?.ticker}
             </div>
           </div>
           <FaArrowCircleDown className="" />
@@ -76,7 +83,7 @@ const CreateTradeSelectAsset = ({
                 <div className="relative">
                   <img
                     alt=""
-                    src={item.logoURI}
+                    src={item?.logoURI}
                     className="md:hidden xl:block w-6 h-6 rounded-full object-cover"
                   />
                   {item.network && (

@@ -155,8 +155,8 @@ const DashTokenEstimatedBalance = ({
                 <span>
                   {hideAssets ? (
                     "*****"
-                  ) : cryptoCalculated ? (
-                    cryptoValue.toFixed(2)
+                  ) : cryptoCalculated && cryptoValue > 0 ? (
+                    cryptoValue?.toFixed(2)
                   ) : (
                     <span className="text-sm">Calculating...</span>
                   )}

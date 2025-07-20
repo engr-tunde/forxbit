@@ -8,7 +8,7 @@ const CreateTradePage = () => {
   return (
     <>
       <Head pageTitle="User Dashboard - Create Trade" />
-      <div className="h-full max-w-[1000px] mx-auto flex flex-col gap-10 overflow-y-scroll">
+      <div className="h-full w-full lg:max-w-[65%] mx-auto flex flex-col gap-10 overflow-y-scroll">
         <CreateTradeHeader />
 
         <CreateTradeForm />

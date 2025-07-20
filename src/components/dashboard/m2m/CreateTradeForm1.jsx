@@ -29,7 +29,7 @@ const CreateTradeForm1 = () => {
   const { tokenBalances, tokenBalancesLoading, tokenBalancesError } =
     fetchUserTokenBalances();
   const { data, loading, error } = useFetchCrypComp(
-    `price?fsym=${m2mAsset?.symbol}&tsyms=${m2mCurrency?.ticker}`
+    `price?fsym=${m2mAsset?.ticker}&tsyms=${m2mCurrency?.ticker}`
   );
   const [showCurrencyList, setshowCurrencyList] = useState(false);
   const [showAssetList, setshowAssetList] = useState(false);
@@ -44,31 +44,36 @@ const CreateTradeForm1 = () => {
   useEffect(() => {
     if (data) {
       const default_price = Object.values(data)[0];
-      console.log("default_price", default_price);
       setm2moriginal_price(default_price);
-      let user_pri = Number((m2mpercent / 100) * default_price);
-      setm2masset_price(user_pri);
+      // setm2masset_price(default_price);
+      // let user_pri = Number((m2mpercent / 100) * default_price);
+      // setm2masset_price(user_pri);
     }
-  }, [data, m2mAsset, m2mCurrency, m2mpercent]);
+  }, [data, m2mAsset, m2mCurrency]);
 
   useEffect(() => {
     if (loading) {
       setisSubmitting(true);
-      setdisabled(true);
     }
     if (data) {
       setisSubmitting(false);
-      setdisabled(false);
     }
     if (error) {
       setisSubmitting(false);
-      setdisabled(true);
     }
   }, [data, loading, error]);
 
+  useEffect(() => {
+    if (!m2masset_price || m2masset_price == 0) {
+      setdisabled(true);
+    } else {
+      setdisabled(false);
+    }
+  }, [m2masset_price]);
+
   return (
     <>
-      <div className="w-full md:w-[80%] flex items-center flex-col md:flex-row justify-between gap-6">
+      <div className="w-full md:w-[95%] flex items-center flex-col md:flex-row justify-between gap-6">
         <>
           {tokenBalances ? (
             <CreateTradeSelectAsset
@@ -118,7 +123,8 @@ const CreateTradeForm1 = () => {
         <div className="flex flex-col gap-1">
           <div className="text-sm md:text-md">Your Price</div>
           <div className="text-white text-lg md:text-xl font-medium">
-            {m2mCurrency?.ticker} {toDecimal(m2masset_price, 3)}
+            {/* {m2mCurrency?.ticker} {toDecimal(m2masset_price, 3)} */}
+            {m2mCurrency?.ticker} {m2masset_price}
           </div>
         </div>
         <div className="flex flex-col gap-1">

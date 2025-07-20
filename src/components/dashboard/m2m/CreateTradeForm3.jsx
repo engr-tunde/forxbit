@@ -21,12 +21,10 @@ const CreateTradeForm3 = () => {
     payment_time_limit,
     terms_tags,
     remarks,
-    auto_reply,
 
     setterms_tags,
     setm2mCurrentStage,
     setremarks,
-    setauto_reply,
 
     setreset,
   } = useM2MContext();
@@ -76,7 +74,6 @@ const CreateTradeForm3 = () => {
       completion_window: payment_time_limit,
       terms_tags: terms_tags,
       remarks: remarks,
-      auto_reply: auto_reply,
     };
     console.log("payload", payload);
     const response = await postM2MTrade(payload);
@@ -99,10 +96,10 @@ const CreateTradeForm3 = () => {
     <>
       <div className="w-full p-3 md:p-4 rounded-lg bg-titusGreenDeep text-white flex gap-2">
         <FaInfo className="block text-xl" />
-        <div className="flex flex-col  gap-[10px] md:gap-[4px] text-[12px]">
-          <div className="font-medium">
-            Please ensure that you comply with P2P rules to avoid account
-            suspension or expulsion from the Binance Merchant Program.
+        <div className="flex flex-col gap-[10px] md:gap-[4px] text-[12px]">
+          <div className="md:font-medium">
+            Please ensure that you comply with {import.meta.env.VITE_P2P_NAME}{" "}
+            rules to avoid account suspension or expulsion from this service.
             Especially:
           </div>
           <div className="">
@@ -110,13 +107,10 @@ const CreateTradeForm3 = () => {
             to indicate the requirement in the 'Remarks' section of your
             advertisement.
           </div>
-          <div className="">
-            2. Imposing extra fees on takers is not allowed in all scenarios.
-          </div>
         </div>
       </div>
 
-      <div className="w-full md:w-[70%] flex flex-col gap-2">
+      <div className="w-full md:w-[100%] flex flex-col gap-2">
         <div className="text-white text-sm md:text-md">
           Terms Tags (Optional)
         </div>
@@ -214,29 +208,6 @@ const CreateTradeForm3 = () => {
             </div>
             <div className="h-full w-[8%] text-sm flex items-end justify-end">
               <span className="">{remarks.length}</span>
-              <span className="">/1000</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="w-full md:w-full flex flex-col justify-between gap-2">
-        <div className="text-white text-sm md:text-md">
-          Auto Reply (Optional)
-        </div>
-        <div className="flex flex-col gap-1">
-          <div className="w-full flex items-center justify-between border-[1px] border-titusLightBorder rounded-lg py-1 px-2 md:px-3">
-            <div className="w-[92%] flex items-end">
-              <textarea
-                type="text"
-                className="w-full h-24 border-0 bg-transparent text-white text-[14px] input-no-border"
-                value={auto_reply}
-                onChange={(e) => setauto_reply(e.target.value)}
-                maxlength="1000"
-              />
-            </div>
-            <div className="h-full w-[8%] text-sm flex items-end justify-end">
-              <span className="">{auto_reply.length}</span>
               <span className="">/1000</span>
             </div>
           </div>

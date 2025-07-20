@@ -36,7 +36,7 @@ const AboutSectionOne = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10">
-          <div className="col-span-1 flex gap-5 md:gap-5">
+          <div className="col-span-1 flex items-center gap-5 md:gap-3">
             <GiTrade className="text-[35px] lg:text-[55px]" />
             <div className="flex flex-col h-full justify-between">
               <p className=" text-[#eee] text-[19px] md:text-[20px] font-semibold">
@@ -47,26 +47,30 @@ const AboutSectionOne = () => {
               </p>
             </div>
           </div>
-          <div className="col-span-1 flex gap-5 md:gap-5">
+          <div className="col-span-1 flex items-center gap-5 md:gap-3">
             <FaUserFriends className="text-[35px] lg:text-[55px]" />
-            <div className="flex flex-col h-full justify-between">
-              <p className=" text-[#eee] text-[19px] md:text-[20px] font-semibold">
+            <div className="flex flex-col h-max justify-between gap-2">
+              <div className=" text-[#eee] text-[19px] md:text-[20px] font-semibold">
                 10,000
-              </p>
-              <p className="text-sm text-[#ffffff9e] font-medium">
-                Already registsred users
-              </p>
+              </div>
+              <div className="text-sm text-[#ffffff9e] font-medium">
+                Users already joined our waitlist
+              </div>
             </div>
           </div>
-          <div className="col-span-1 flex gap-5 md:gap-5">
-            <MdSupportAgent className="text-[35px] lg:text-[55px]" />
-            <div className="flex flex-col h-full justify-between">
-              <p className=" text-[#eee] text-[19px] md:text-[20px] font-semibold">
+          <div className="col-span-1 flex items-center gap-5 md:gap-3">
+            <img
+              src="/assets/images/icons/home-icons/247-Support-03.svg"
+              alt={import.meta.env.VITE_APP_NAME}
+              className="w-24"
+            />
+            <div className="flex flex-col h-max justify-between gap-2">
+              <div className=" text-[#eee] text-[19px] md:text-[20px] font-semibold">
                 24/7
-              </p>
-              <p className="text-sm text-[#ffffff9e] font-medium">
-                Customer Support in 20 languages
-              </p>
+              </div>
+              <div className="text-sm text-[#ffffff9e] font-medium">
+                Customer Support at all time
+              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { paymentLimitWindows } from "../utils/data";
-import { fetchCurrencies, fetchP2PTokenList } from "../api";
+import {
+  fetchCurrencies,
+  fetchP2PTokenList,
+  fetchUserTokenBalances,
+} from "../api";
 
 const M2MContext = createContext();
 
@@ -10,32 +14,29 @@ const M2MProvider = ({ children }) => {
   const [m2masset_price, setm2masset_price] = useState(0);
   const [m2moriginal_price, setm2moriginal_price] = useState(0);
 
-  const { tokens } = fetchP2PTokenList();
+  const { tokenBalances } = fetchUserTokenBalances();
   const { currencies } = fetchCurrencies();
 
   useEffect(() => {
-    if (tokens) {
-      let tk = tokens?.data[0];
+    if (tokenBalances) {
+      let tk = tokenBalances?.data[0];
       setm2mAsset(tk);
     }
     if (currencies) {
       let cr = currencies?.data[0];
       setm2mCurrency(cr);
     }
-  }, [tokens, currencies]);
+  }, [tokenBalances, currencies]);
 
   const [m2mCurrentStage, setm2mCurrentStage] = useState(1);
   const [m2mTradeType, setm2mTradeType] = useState("Buy");
 
   const [m2mmargin_type, setm2mMargin_type] = useState("Fixed");
-  const [m2mpercent, setm2mPercent] = useState(100);
+  const [m2mpercent, setm2mPercent] = useState(0);
 
   //   Create Ad form 2
-  const [min_limit, setmin_limit] = useState(Number(5));
-  const [max_limit, setmax_limit] = useState(
-    // Number(10 * m2mTradeCurrencies[0].value)
-    Number(10)
-  );
+  const [min_limit, setmin_limit] = useState(0);
+  const [max_limit, setmax_limit] = useState(0);
   const [payment_time_limit, setpayment_time_limit] = useState(
     paymentLimitWindows[0]
   );
@@ -67,8 +68,8 @@ const M2MProvider = ({ children }) => {
       setterms_tags([]);
       setremarks("");
       setauto_reply("");
-      if (reset && tokens) {
-        let tk = tokens?.data[0];
+      if (reset && tokenBalances) {
+        let tk = tokenBalances?.data[0];
         setm2mAsset(tk);
       }
       if (reset && currencies) {
@@ -76,7 +77,7 @@ const M2MProvider = ({ children }) => {
         setm2mCurrency(cr);
       }
     }
-  }, [reset, tokens, currencies]);
+  }, [reset, tokenBalances, currencies]);
 
   return (
     <M2MContext.Provider

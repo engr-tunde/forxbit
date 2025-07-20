@@ -8,7 +8,7 @@ const HowP2PWorks = () => {
       <div className="container flex flex-col gap-8 px-5 lg:px-0">
         <div className="flex justify-between items-center">
           <h2 className="text-lg lg:text-2xl font-semibold text-white">
-            How P2P Works
+            How {import.meta.env.VITE_P2P_NAME} Works
           </h2>
           <div className="flex gap-2 text-[12px] lg:text-sm">
             <div

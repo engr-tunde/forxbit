@@ -519,44 +519,48 @@ export const openAdsData = [
 export const buySellFaq = [
   {
     title: "1. Place an Order",
-    description:
-      "Once you place a P2P order, the crypto asset will be escrowed by Binance P2P.",
-    icon: "order.svg",
+    description: `Once you place a ${
+      import.meta.env.VITE_P2P_NAME
+    } order, the crypto asset will be escrowed by ${import.meta.env.APP_NAME}.`,
+    icon: "Place-an-Order.svg",
     type: "Buy",
   },
   {
     title: "2. Pay the Seller",
-    description:
-      "Send money to the seller via the suggested payment methods. Complete the fiat transaction and click 'Transferred, notify seller' on Binance P2P.",
-    icon: "pay.svg",
+    description: `Send money to the seller via the suggested payment methods. Complete the fiat transaction and click 'Transferred, notify seller' on ${
+      import.meta.env.VITE_APP_NAME
+    }.`,
+    icon: "Pay-the-Seller-01.svg",
     type: "Buy",
   },
   {
     title: "3. Receive Crypto",
     description:
       "Once the seller confirms receipt of money, the escrowed crypto will be released to you.",
-    icon: "receive.svg",
+    icon: "Receive-Crypto-01.svg",
     type: "Buy",
   },
   {
     title: "1. Place an Order",
-    description:
-      "After you place an order, your crypto will be escrowed by Binance P2P.",
-    icon: "order.svg",
+    description: `After you place an order, your crypto will be escrowed by ${
+      import.meta.env.VITE_APP_NAME
+    }.`,
+    icon: "Place-an-Order.svg",
     type: "Sell",
   },
   {
     title: "2. Verify Payment",
     description:
       "Check the transaction record in the given payment account, and make sure you receive the money sent by the buyer.",
-    icon: "verify.svg",
+    icon: "Verify-Payment-01.svg",
     type: "Sell",
   },
   {
     title: "3. Release Crypto",
-    description:
-      "Once you confirm the receipt of money, release crypto to the buyer on Binance P2P.",
-    icon: "release.svg",
+    description: `Once you confirm the receipt of money, release crypto to the buyer on ${
+      import.meta.env.VITE_APP_NAME
+    }.`,
+    icon: "Release-crypto-01.svg",
     type: "Sell",
   },
 ];

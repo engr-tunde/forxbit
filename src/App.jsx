@@ -56,174 +56,166 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <M2MProvider>
-          <BuySellProvider>
-            <SwapProvider>
-              <FiatDepositWithdrawContext>
-                {/* <NavBar /> */}
-                <div className="">
-                  <ToastContainer
-                    position="bottom-right"
-                    autoClose={3000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                  />
-                  <Routes>
-                    <Route element={<WebsiteLayout />}>
-                      <Route path="/" element={<HomePage />} />
-                      <Route path="/about" element={<AboutPage />} />
-                      <Route path="/careers" element={<CareersPage />} />
-                      <Route
-                        path="/industry-updates"
-                        element={<IndustryUpdatesPage />}
-                      />
-                      <Route
-                        path="/product-updates"
-                        element={<ProductUpdatesPage />}
-                      />
-                      <Route
-                        path="/posts/:permalink"
-                        element={<BlogSinglePage />}
-                      />
+        <BuySellProvider>
+          <SwapProvider>
+            <FiatDepositWithdrawContext>
+              {/* <NavBar /> */}
+              <div className="">
+                <ToastContainer
+                  position="bottom-right"
+                  autoClose={3000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                />
+                <Routes>
+                  <Route element={<WebsiteLayout />}>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="/careers" element={<CareersPage />} />
+                    <Route
+                      path="/industry-updates"
+                      element={<IndustryUpdatesPage />}
+                    />
+                    <Route
+                      path="/product-updates"
+                      element={<ProductUpdatesPage />}
+                    />
+                    <Route
+                      path="/posts/:permalink"
+                      element={<BlogSinglePage />}
+                    />
 
-                      <Route path="/m2m" element={<M2MPage />} />
+                    <Route path="/m2m" element={<M2MPage />} />
 
-                      <Route
-                        path="/m2m/fiat-order-details"
-                        element={<FiatOrderDetailsPage />}
-                      />
-                      <Route path="/markets" element={<MarketsPage />} />
-                      <Route path="/contact" element={<ContactPage />} />
-                    </Route>
+                    <Route
+                      path="/m2m/fiat-order-details"
+                      element={<FiatOrderDetailsPage />}
+                    />
+                    <Route path="/markets" element={<MarketsPage />} />
+                    <Route path="/contact" element={<ContactPage />} />
+                  </Route>
 
-                    <Route element={<BuySellLayout />}>
-                      <Route path="/buy-sell" element={<BuySellPage />} />
-                      <Route path="/swap" element={<SwapPage />} />
-                      <Route
-                        path="/swap-status/:id"
-                        element={<SwapStatusPage />}
-                      />
-                    </Route>
+                  <Route element={<BuySellLayout />}>
+                    <Route path="/buy-sell" element={<BuySellPage />} />
+                    <Route path="/swap" element={<SwapPage />} />
+                    <Route
+                      path="/swap-status/:id"
+                      element={<SwapStatusPage />}
+                    />
+                  </Route>
 
-                    <Route element={<DashboardLayout />}>
-                      <Route path="/dashboard" element={<DashboardPage />} />
-                      <Route
-                        path="/dashboard/wallet"
-                        element={<WalletPage />}
-                      />
+                  <Route element={<DashboardLayout />}>
+                    <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path="/dashboard/wallet" element={<WalletPage />} />
 
-                      {/* Fiat */}
-                      <Route
-                        path="/dashboard/deposit-fiat"
-                        element={<DepositFiatPage />}
-                      />
-                      <Route
-                        path="/dashboard/withdraw-fiat"
-                        element={<WithdrawFiatPage />}
-                      />
-                      <Route
-                        path="/dashboard/transfer-fiat"
-                        element={<TransferFiatPage />}
-                      />
-                      <Route
-                        path="/dashboard/transfer-crypto"
-                        element={<TransferCryptoPage />}
-                      />
-                      {/* Crypto */}
+                    {/* Fiat */}
+                    <Route
+                      path="/dashboard/deposit-fiat"
+                      element={<DepositFiatPage />}
+                    />
+                    <Route
+                      path="/dashboard/withdraw-fiat"
+                      element={<WithdrawFiatPage />}
+                    />
+                    <Route
+                      path="/dashboard/transfer-fiat"
+                      element={<TransferFiatPage />}
+                    />
+                    <Route
+                      path="/dashboard/transfer-crypto"
+                      element={<TransferCryptoPage />}
+                    />
+                    {/* Crypto */}
 
-                      {/* M2M */}
-                      <Route
-                        path="/dashboard/m2m/create-trade"
-                        element={<CreateTradePage />}
-                      />
-                      <Route
-                        path="/dashboard/m2m/my-trades"
-                        element={<MyM2MTradesPage />}
-                      />
+                    {/* M2M */}
+                    <Route
+                      path="/dashboard/m2m/create-trade"
+                      element={<CreateTradePage />}
+                    />
+                    <Route
+                      path="/dashboard/m2m/my-trades"
+                      element={<MyM2MTradesPage />}
+                    />
 
-                      {/* Orders */}
-                      <Route
-                        path="/dashboard/orders/m2m"
-                        element={<M2MOrdersPage />}
-                      />
-                      <Route
-                        path="/dashboard/orders/m2m/order-details/:order_no"
-                        element={<M2MOrderDetailsPage />}
-                      />
-                      <Route
-                        path="/dashboard/orders/buy-sell"
-                        element={<BuySellOrdersPage />}
-                      />
-                      <Route
-                        path="/dashboard/orders/fiat"
-                        element={<FiatOrdersPage />}
-                      />
-                      <Route
-                        path="/dashboard/orders/swap"
-                        element={<SwapOrdersPage />}
-                      />
-                      <Route
-                        path="/dashboard/transaction-history"
-                        element={<TransactionHistoryPage />}
-                      />
-                      <Route
-                        path="/dashboard/transaction-history/:t_id"
-                        element={<TransactionDetailsPage />}
-                      />
+                    {/* Orders */}
+                    <Route
+                      path="/dashboard/orders/m2m"
+                      element={<M2MOrdersPage />}
+                    />
+                    <Route
+                      path="/dashboard/orders/m2m/order-details/:order_no"
+                      element={<M2MOrderDetailsPage />}
+                    />
+                    <Route
+                      path="/dashboard/orders/buy-sell"
+                      element={<BuySellOrdersPage />}
+                    />
+                    <Route
+                      path="/dashboard/orders/fiat"
+                      element={<FiatOrdersPage />}
+                    />
+                    <Route
+                      path="/dashboard/orders/swap"
+                      element={<SwapOrdersPage />}
+                    />
+                    <Route
+                      path="/dashboard/transaction-history"
+                      element={<TransactionHistoryPage />}
+                    />
+                    <Route
+                      path="/dashboard/transaction-history/:t_id"
+                      element={<TransactionDetailsPage />}
+                    />
 
-                      {/* Account */}
-                      <Route
-                        path="dashboard/account/manage-profile"
-                        element={<EditProfilePage />}
-                      />
-                      <Route
-                        path="dashboard/account/manage-password"
-                        element={<ManagePasswordPage />}
-                      />
-                      <Route
-                        path="dashboard/account/payment-method"
-                        element={<PaymentMethodPage />}
-                      />
-                      <Route
-                        path="dashboard/account/settings"
-                        element={<SettingsPage />}
-                      />
-                    </Route>
+                    {/* Account */}
+                    <Route
+                      path="dashboard/account/manage-profile"
+                      element={<EditProfilePage />}
+                    />
+                    <Route
+                      path="dashboard/account/manage-password"
+                      element={<ManagePasswordPage />}
+                    />
+                    <Route
+                      path="dashboard/account/payment-method"
+                      element={<PaymentMethodPage />}
+                    />
+                    <Route
+                      path="dashboard/account/settings"
+                      element={<SettingsPage />}
+                    />
+                  </Route>
 
-                    <Route element={<AuthLayout />}>
-                      <Route path="/register" element={<RegisterPage />} />
-                      <Route
-                        path="/verify-account"
-                        element={<VerifyEmailPage />}
-                      />
-                      <Route path="/login" element={<LoginPage />} />
-                      <Route
-                        path="/verify-login"
-                        element={<VerifyLoginPage />}
-                      />
-                      <Route
-                        path="/forgot-password"
-                        element={<ForgotPasswordPage />}
-                      />
-                      <Route
-                        path="/reset-password"
-                        element={<ResetPasswordPage />}
-                      />
-                    </Route>
+                  <Route element={<AuthLayout />}>
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route
+                      path="/verify-account"
+                      element={<VerifyEmailPage />}
+                    />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/verify-login" element={<VerifyLoginPage />} />
+                    <Route
+                      path="/forgot-password"
+                      element={<ForgotPasswordPage />}
+                    />
+                    <Route
+                      path="/reset-password"
+                      element={<ResetPasswordPage />}
+                    />
+                  </Route>
 
-                    <Route path="/*" element={<NotFound />} />
-                  </Routes>
-                </div>
-                {/* <Footer /> */}
-              </FiatDepositWithdrawContext>
-            </SwapProvider>
-          </BuySellProvider>
-        </M2MProvider>
+                  <Route path="/*" element={<NotFound />} />
+                </Routes>
+              </div>
+              {/* <Footer /> */}
+            </FiatDepositWithdrawContext>
+          </SwapProvider>
+        </BuySellProvider>
       </BrowserRouter>
     </>
   );

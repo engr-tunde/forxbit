@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiOutlineCloseCircle, AiOutlineMenu } from "react-icons/ai";
 import {
   FaInstagram,
@@ -38,7 +38,7 @@ const NavBar = () => {
     setShowCompany(false);
   });
 
-  const { session, sessionLoading, sessionError } = checkSession();
+  const { session } = checkSession();
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -201,11 +201,6 @@ const NavBar = () => {
             </div>
           </div>
 
-          {/* {session ? (
-            <SessionMenuWidget nav={nav} setNav={setNav} />
-          ) : (
-            <NoSessionMenuWidget handleNavToggle={handleNavToggle} />
-          )} */}
           {session ? (
             <SessionMenuWidget nav={nav} setNav={setNav} />
           ) : (
