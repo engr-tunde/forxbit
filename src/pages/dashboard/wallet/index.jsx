@@ -55,7 +55,7 @@ const WalletPage = () => {
           <img
             src="/assets/images/banners/wallet-ad-banner-3.jpg"
             alt=""
-            className="h-full rounded-lg leftRight"
+            className="w-full rounded-lg leftRight"
           />
         </div>
       </div>
