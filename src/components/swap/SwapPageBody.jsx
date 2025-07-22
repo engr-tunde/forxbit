@@ -242,13 +242,24 @@ const SwapPageBody = () => {
             recipient_address.length &&
             setrecipient_network.length &&
             !showConfirmTrade
-              ? "w-full btnn1 py-[8px] px-8 text-center text-sm  font-medium"
-              : "w-full btnn1 py-[8px] px-8 text-center text-sm  font-medium opacity-50"
+              ? "w-full btnn1 py-[8px] px-8 flex justify-center items-center gap-2 text-sm font-medium"
+              : "w-full btnn1 py-[8px] px-8 flex justify-center items-center gap-2 text-sm font-medium opacity-50"
           }
           onClick={handleTradeShowConfirm}
         >
-          Swap {from_token?.ticker.toUpperCase()} to{" "}
-          {to_token?.ticker.toUpperCase()}
+          {from_token ? (
+            <span>
+              Swap {from_token?.ticker.toUpperCase()} to{" "}
+              {to_token?.ticker.toUpperCase()}
+            </span>
+          ) : (
+            <span>Swap</span>
+          )}
+          <img
+            src="/assets/images/icons/home-icons/Asset-Swap-02.svg"
+            alt=""
+            className="w-5"
+          />
         </div>
       </div>
 
@@ -262,7 +273,7 @@ const SwapPageBody = () => {
           backdropFilter: showConfirmTrade ? "blur(5px)" : "",
         }}
       >
-        <div className="w-[85%] mx-auto md:w-[500px] h-max bg-titusDashCardDarkBG p-7 md:py-10 md:px-7 flex flex-col gap-8 md:gap-10">
+        <div className="w-[85%] mx-auto md:w-[500px] h-max bg-titusDashCardDarkBG p-7 pb-12 md:py-10 md:px-7 flex flex-col gap-8 md:gap-10">
           <div className="flex justify-between items-center">
             <div className="text-white text-xl font-semibold">
               Confirm trade
@@ -290,10 +301,15 @@ const SwapPageBody = () => {
             ?
           </div>
           <div
-            className="w-full btnn1 py-[10px] px-8 text-center text-sm  font-medium"
+            className="w-full btnn1 py-[10px] px-8 flex justify-center items-center gap-2 text-sm  font-medium"
             onClick={handleTrade}
           >
-            Confirm Swap
+            <span>Confirm Swap</span>
+            <img
+              src="/assets/images/icons/home-icons/Asset-Swap-02.svg"
+              alt=""
+              className="w-5"
+            />
           </div>
         </div>
       </div>

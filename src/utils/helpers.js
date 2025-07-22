@@ -64,7 +64,7 @@ export const copyFunc = (txt, title) => {
 };
 
 export const toDecimal = (num, decimal) => {
-  let result = parseFloat(num.toFixed(decimal));
+  let result = num && parseFloat(num.toFixed(decimal));
   return result;
 };
 

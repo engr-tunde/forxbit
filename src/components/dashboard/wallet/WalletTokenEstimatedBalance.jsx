@@ -19,6 +19,7 @@ const WalletTokenEstimatedBalance = ({
   hideAssets,
 }) => {
   const [selectedToken, setSelectedToken] = useState(userBalances[0]);
+  const [hover, sethover] = useState();
   const [showTokenList, setShowTokenList] = useState(false);
   const { tokenBalances } = fetchUserTokenBalances();
   const { networks } = fetchUserTokenNetworks();
@@ -150,7 +151,6 @@ const WalletTokenEstimatedBalance = ({
           </Link>
           <div
             onClick={() => handleLink("/dashboard/transfer-crypto")}
-            // to={`/dashboard/deposit-asset/${selectedToken?.ticker?.toLowerCase()}`}
             className="text-sm bg-titusChatBg py-2 w-24 h-max text-center rounded-md text-white hover:opacity-80 cursor-pointer"
           >
             Transfer
@@ -161,20 +161,19 @@ const WalletTokenEstimatedBalance = ({
         {dashActionsMenu.map((item, i) => (
           <Link
             to={item.url}
-            className="col-span-1 rounded-lg p-4 md:p-3 bg-titusDashCardDarkItemBG flex items-center gap-3 hover:text-white ease-in duration-200"
+            className="col-span-1 rounded-lg p-3 md:p-2 bg-titusDashCardDarkItemBG flex items-center gap-3 hover:text-white ease-in duration-200 hover:scale-95"
             key={i}
+            onMouseEnter={() => sethover(i)}
+            onMouseLeave={() => sethover()}
           >
-            <div className="h-8 w-8 md:h-12 md:w-12 flex items-center justify-center rounded-full bg-titusDarkBG text-white">
-              {item.title === "Buy/Sell" ? (
-                <FaShoppingCart className="text-2xl" />
-              ) : item.title === `Trade ${import.meta.env.VITE_P2P_NAME}` ? (
-                <FaUsers className="text-2xl" />
-              ) : item.title === "Swap Assets" ? (
-                <FaUsers className="text-2xl" />
-              ) : (
-                <FaToolbox className="text-2xl" />
-              )}
-            </div>
+            <img
+              src={
+                hover == i
+                  ? `/assets/images/wallet/${item?.hoverImg}`
+                  : `/assets/images/wallet/${item?.img}`
+              }
+              className="h-10 md:h-12 bg-titusDarkBG rounded-full p-2 md:p-3"
+            />
             <div className="text-sm">{item.title}</div>
           </Link>
         ))}

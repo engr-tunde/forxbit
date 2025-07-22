@@ -22,7 +22,12 @@ const HomeSectionOne = () => {
               className="w-max btnn1 flex items-center gap-2 py-3 px-10 font-semibold"
             >
               <div className="span">Swap Your Assets</div>
-              <FaCoins className="text-black" />
+              <img
+                src="/assets/images/icons/home-icons/Asset-Swap-02.svg"
+                alt=""
+                className="w-6"
+              />
+              {/* <FaCoins className="text-black" /> */}
             </Link>
           </div>
           <div className="col-span-1 -mt-16 md:mt-0">

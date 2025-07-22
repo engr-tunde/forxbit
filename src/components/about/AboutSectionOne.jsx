@@ -7,17 +7,19 @@ const AboutSectionOne = () => {
   return (
     <div className="w-full">
       <div className="container pt-[120px] md:pt-[200px] pb-[100px] md:pb-[50px] px-7 md:px-0">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-24 md:gap-20 text-[#ffffff9e] items-center mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-20 text-[#ffffff9e] items-center mb-14 md:mb-12">
           <div className="w-full lg:w-[85%] col-span-1 lg:col-span-2 p-2 lg:p-1 rounded-lg flex flex-col gap-5">
             <h1 className="text-white text-[30px] md:text-[40px] mb-5 ">
               Your Crypto Ark and Gateway to{" "}
-              <span className="text-titusGreen">Web3</span>
+              <span className="text-titusGreen leftRight inline-block">
+                Web3
+              </span>
               {/* Welcome to{" "}
             <span className="text-titusYellow">
               {import.meta.env.VITE_APP_NAME}
             </span> */}
             </h1>
-            <p className="text-lg font-medium">
+            <p className=" font-medium">
               Next Level Reliability, Products & Opportunities in Web3.
               Unleashing the full potential of crypto believers seeking to level
               up via Web3 with the next generation tools, support, and
@@ -28,28 +30,37 @@ const AboutSectionOne = () => {
           </div>
           <div className="col-span-1 scale-100 lg:scale-150">
             <img
-              src="/assets/images/about/banner.png"
+              src="/assets/images/about/Your-Crypto-Ark-and-Gateway-to-Web3.png"
               alt=""
-              className="w-full lg:w-[900px]"
+              className="w-full lg:w-[900px] dancingSlide"
             />
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10">
-          <div className="col-span-1 flex items-center gap-5 md:gap-3">
-            <GiTrade className="text-[35px] lg:text-[55px]" />
-            <div className="flex flex-col h-full justify-between">
-              <p className=" text-[#eee] text-[19px] md:text-[20px] font-semibold">
+          <div className="col-span-1 flex items-center gap-5 md:gap-5">
+            <img
+              src="/assets/images/about/Estimated-market-projection-03.svg"
+              alt={import.meta.env.VITE_APP_NAME}
+              className="w-12"
+            />
+            <div className="flex flex-col h-max justify-between">
+              <div className=" text-[#eee] text-[19px] md:text-[20px] font-semibold">
                 $1 million
-              </p>
-              <p className="text-sm text-[#ffffff9e] font-medium">
+              </div>
+              <div className="text-sm text-[#ffffff9e] font-medium">
                 Estimated market projection
-              </p>
+              </div>
             </div>
           </div>
-          <div className="col-span-1 flex items-center gap-5 md:gap-3">
-            <FaUserFriends className="text-[35px] lg:text-[55px]" />
-            <div className="flex flex-col h-max justify-between gap-2">
+
+          <div className="col-span-1 flex items-center gap-5 md:gap-5">
+            <img
+              src="/assets/images/about/Already-registsred-users-03.svg"
+              alt={import.meta.env.VITE_APP_NAME}
+              className="w-12"
+            />
+            <div className="flex flex-col h-max justify-between">
               <div className=" text-[#eee] text-[19px] md:text-[20px] font-semibold">
                 10,000
               </div>
@@ -58,13 +69,14 @@ const AboutSectionOne = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-1 flex items-center gap-5 md:gap-3">
+
+          <div className="col-span-1 flex items-center gap-2 md:gap-0 -m-8">
             <img
-              src="/assets/images/icons/home-icons/247-Support-03.svg"
+              src="/assets/images/about/247-Support-03.svg"
               alt={import.meta.env.VITE_APP_NAME}
               className="w-24"
             />
-            <div className="flex flex-col h-max justify-between gap-2">
+            <div className="flex flex-col h-max justify-between">
               <div className=" text-[#eee] text-[19px] md:text-[20px] font-semibold">
                 24/7
               </div>

@@ -11,6 +11,7 @@ const WalletCurrencyEstimatedBalance = ({
 }) => {
   const [selectedCurrency, setSelectedCurrency] = useState(userBalances[0]);
   const [showCurrencyList, setShowCurrencyList] = useState(false);
+  const [hover, sethover] = useState();
 
   const { currencyBalances } = fetchUserCurrencyBalances();
 
@@ -94,35 +95,55 @@ const WalletCurrencyEstimatedBalance = ({
         </div>
         <div className="w-full md:w-max flex justify-between md:justify-normal md:gap-10">
           <div
+            onMouseEnter={() => sethover("Deposit")}
+            onMouseLeave={() => sethover()}
             onClick={() => handleLink("/dashboard/deposit-fiat")}
-            className="text-sm bg-titusChatBg py-2 md:py-1 w-[32%] md:w-40 flex gap-1 md:gap-2 items-center justify-center h-max rounded-md text-white hover:opacity-80 cursor-pointer"
+            className="text-sm bg-titusChatBg py-2 md:py-3 w-[32%] md:w-40 flex gap-1 md:gap-2 items-center justify-center h-max rounded-md text-white hover:opacity-80 cursor-pointer"
           >
-            <img
+            {/* <img
               src="/assets/images/icons/deposit.svg"
               alt=""
               className="w-6 md:w-10"
+            /> */}
+            <img
+              src={
+                hover == "Deposit"
+                  ? `/assets/images/wallet/Deposit-02.svg`
+                  : `/assets/images/wallet/Deposit-03.svg`
+              }
+              className="w-4 md:w-6 rounded-full"
             />
             <span>Deposit</span>
           </div>
           <div
             onClick={() => handleLink("/dashboard/withdraw-fiat")}
-            className="text-sm bg-titusChatBg py-2 md:py-1 w-[32%] md:w-40 flex gap-1 md:gap-2 items-center justify-center h-max rounded-md text-white hover:opacity-80 cursor-pointer"
+            onMouseEnter={() => sethover("Withdraw")}
+            onMouseLeave={() => sethover()}
+            className="text-sm bg-titusChatBg py-2 md:py-3 w-[32%] md:w-40 flex gap-1 md:gap-2 items-center justify-center h-max rounded-md text-white hover:opacity-80 cursor-pointer"
           >
             <img
-              src="/assets/images/icons/deposit.svg"
-              alt=""
-              className="w-6 md:w-10"
+              src={
+                hover == "Withdraw"
+                  ? `/assets/images/wallet/Withdraw-02.svg`
+                  : `/assets/images/wallet/Withdraw-03.svg`
+              }
+              className="w-3 md:w-5 rounded-full"
             />
             <span>Withdraw</span>
           </div>
           <div
+            onMouseEnter={() => sethover("Transfer")}
+            onMouseLeave={() => sethover()}
             onClick={() => handleLink("/dashboard/transfer-fiat")}
-            className="text-sm bg-titusChatBg py-2 md:py-1 w-[32%] md:w-40 flex gap-1 md:gap-2 items-center justify-center h-max rounded-md text-white hover:opacity-80 cursor-pointer"
+            className="text-sm bg-titusChatBg py-2 md:py-3 w-[32%] md:w-40 flex gap-1 md:gap-2 items-center justify-center h-max rounded-md text-white hover:opacity-80 cursor-pointer"
           >
             <img
-              src="/assets/images/icons/deposit.svg"
-              alt=""
-              className="w-6 md:w-10"
+              src={
+                hover == "Transfer"
+                  ? `/assets/images/wallet/Transfer-02.svg`
+                  : `/assets/images/wallet/Transfer-03.svg`
+              }
+              className="w-4 md:w-6 rounded-full"
             />
             <span>Transfer</span>
           </div>

@@ -18,6 +18,7 @@ import { dashboardSidebarMenu } from "../../data/menuData";
 const DashboardFooter = () => {
   let location = useLocation();
   const pathname = location.pathname;
+  const [hover, sethover] = useState();
 
   const handleShowSubmenu = (item) => {
     setSubmenu(item.children);
@@ -35,7 +36,7 @@ const DashboardFooter = () => {
   return (
     <div className="w-full fixed bottom-3 md:bottom-7 left-0 z-[2000]">
       <div
-        className="dash-container-footer rounded-3xl border-[1px] border-titusGreenFaded bg-titusDarkGrey/95 lg:bg-titusDarkGrey/70 overflow-x-scroll lg:overflow-x-hidden"
+        className="dash-container-footer rounded-3xl border-[2px] md:border-[2px] border-black bg-titusDarkGrey/95 lg:bg-titusDarkGrey/70 overflow-x-scroll lg:overflow-x-hidden"
         style={{
           backdropFilter: !showSubmenu ? "blur(8px)" : "",
         }}
@@ -58,25 +59,20 @@ const DashboardFooter = () => {
                     <div
                       className={
                         itemChild?.find(isCherries)?.url === pathname
-                          ? "flex items-center gap-2 cursor-pointer text-titusYellow py-[6px] md:py-2 px-4 md:px-6 rounded-full bg-[#ffffff0c] font-medium"
-                          : "flex items-center gap-2 cursor-pointer"
+                          ? "flex items-center gap-2 text-titusYellow py-[2px] md:py-[6px] px-[2px] md:px-4 rounded-full bg-titusYellow md:bg-[#ffffff0c] font-medium cursor-pointer"
+                          : "flex items-center gap-2 cursor-pointer scale-90 md:scale-100"
                       }
                       onClick={() => handleShowSubmenu(item)}
                       // onMouseEnter={() => handleShowSubmenu(item)}
                     >
-                      {item.title === "Dashboard" ? (
-                        <FaHome className="text-[22px] md:text-[16px]" />
-                      ) : item.title === "Wallet" ? (
-                        <FaWallet className="text-[22px] md:text-[16px]" />
-                      ) : item.title === `${import.meta.env.VITE_P2P_NAME}` ? (
-                        <FaUsers className="text-[25px] md:text-[16px]" />
-                      ) : item.title === "Orders" ? (
-                        <FaShoppingBag className="text-[21px] md:text-[16px]" />
-                      ) : item.title === "Account" ? (
-                        <FaUser className="text-[21px] md:text-[16px]" />
-                      ) : (
-                        <FaToolbox className="text-[25px] md:text-[16px]" />
-                      )}
+                      <img
+                        src={
+                          itemChild?.find(isCherries)?.url === pathname
+                            ? `/assets/images/dahboard/footer-icons/${item?.activeImg}`
+                            : `/assets/images/dahboard/footer-icons/${item?.inactiveImg}`
+                        }
+                        className="h-10 md:h-9 bg-titusDarkBG rounded-full p-2 md:p-2"
+                      />
                       <span className="text-[0px] md:text-sm w-max">
                         {item.title}
                       </span>
@@ -87,7 +83,7 @@ const DashboardFooter = () => {
                         showSubmenu &&
                         submenu.length &&
                         item.children === submenu
-                          ? "fixed right-0 bottom-0 w-screen h-screen bg-black/60 flex items-end justify-end "
+                          ? "fixed z-50 right-0 bottom-0 w-screen h-screen bg-black/60 flex items-end justify-end "
                           : "hidden slideOutRight"
                       }
                       style={{
@@ -123,60 +119,22 @@ const DashboardFooter = () => {
                               to={child.url}
                               className="col-span-1 flex gap-1 md:gap-3 items-center hover:bg-titusDarkGrey rounded-md"
                               onClick={() => setShowSubmenu(false)}
+                              onMouseEnter={() => sethover(child.title)}
+                              onMouseLeave={() => sethover()}
                             >
-                              <div className="p-3 rounded-full bg-black">
-                                {child.title === "Create Trade" ? (
-                                  <FaPlus className="text-[16px] lg:text-xl text-white" />
-                                ) : child.title === "My Trades" ? (
-                                  <FaToolbox className="text-[16px] lg:text-xl text-white" />
-                                ) : child.title ===
-                                  `${import.meta.env.VITE_P2P_NAME} Orders` ? (
-                                  <FaUsers className="text-[16px] lg:text-xl text-white" />
-                                ) : child.title === "Buy/Sell Orders" ? (
-                                  <FaShoppingBag className="text-[16px] lg:text-xl text-white" />
-                                ) : child.title === "Fiat Orders" ? (
-                                  <FaMoneyBill className="text-[16px] lg:text-xl text-white" />
-                                ) : child.title === "Swap Orders" ? (
-                                  <img
-                                    src="/assets/images/icons/swap.png"
-                                    alt=""
-                                    className="w-5"
-                                  />
-                                ) : child.title === "Transaction History" ? (
-                                  <img
-                                    src="/assets/images/icons/transactions.png"
-                                    alt=""
-                                    className="w-5"
-                                  />
-                                ) : child.title === "Manage Profile" ? (
-                                  <FaUserCog className="text-[16px] lg:text-xl text-white" />
-                                ) : child.title === "Manage Password" ? (
-                                  <img
-                                    src="/assets/images/icons/password.png"
-                                    alt=""
-                                    className="w-5"
-                                  />
-                                ) : child.title === "Payment Method" ? (
-                                  <img
-                                    src="/assets/images/icons/payment.png"
-                                    alt=""
-                                    className="w-5"
-                                  />
-                                ) : child.title === "Identification" ? (
-                                  <img
-                                    src="/assets/images/icons/identification.png"
-                                    alt=""
-                                    className="w-5"
-                                  />
-                                ) : (
-                                  <FaCogs className="text-[16px] lg:text-xl text-white" />
-                                )}
-                              </div>
-                              <div className="flex flex-col gap-2">
-                                <span className=" text-white md:font-semibold">
+                              <img
+                                src={
+                                  hover === child.title
+                                    ? `/assets/images/dahboard/footer-icons/${child?.activeImg}`
+                                    : `/assets/images/dahboard/footer-icons/${child?.inactiveImg}`
+                                }
+                                className="h-10 md:h-10 bg-black rounded-full p-2 md:p-2"
+                              />
+                              <div className="flex flex-col gap-1">
+                                <span className=" text-sm text-white md:font-semibold">
                                   {child.title}
                                 </span>
-                                <span className="hidden md:block text-sm">
+                                <span className="hidden md:block text-xs">
                                   {child.subtitle}
                                 </span>
                               </div>
@@ -191,24 +149,18 @@ const DashboardFooter = () => {
                     to={item.url}
                     className={
                       pathname === item.url
-                        ? "flex items-center gap-2 text-titusYellow py-[6px] md:py-2 px-4 md:px-6 rounded-full bg-[#ffffff0c] font-medium"
-                        : "flex items-center gap-2"
+                        ? "flex items-center gap-2 text-titusYellow py-[2px] md:py-[6px] px-[2px] md:px-4 rounded-full bg-titusYellow md:bg-[#ffffff0c] font-medium"
+                        : "flex items-center gap-2 scale-90"
                     }
                   >
-                    {item.title === "Dashboard" ? (
-                      <FaHome className="text-[22px] md:text-[16px]" />
-                    ) : item.title === "Wallet" ? (
-                      <FaWallet className="text-[22px] md:text-[16px]" />
-                    ) : item.title ===
-                      `${import.meta.env.VITE_P2P_NAME} Trading` ? (
-                      <FaUsers className="text-[20px] md:text-[16px]" />
-                    ) : item.title === "Orders" ? (
-                      <FaShoppingBag className="text-[18px] md:text-[16px]" />
-                    ) : item.title === "Account" ? (
-                      <FaUser className="text-[18px] md:text-[16px]" />
-                    ) : (
-                      <FaToolbox className="text-[18px] md:text-[16px]" />
-                    )}
+                    <img
+                      src={
+                        pathname === item.url
+                          ? `/assets/images/dahboard/footer-icons/${item?.activeImg}`
+                          : `/assets/images/dahboard/footer-icons/${item?.inactiveImg}`
+                      }
+                      className="h-10 md:h-9 bg-titusDarkBG rounded-full p-2 md:p-2"
+                    />
                     <span className="hidden md:block w-max">{item.title}</span>
                   </Link>
                 )}

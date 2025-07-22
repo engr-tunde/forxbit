@@ -90,8 +90,10 @@ const CreateTradeSetPrice = () => {
         </div>
       </div>
       <div className="text-[12px]">
-        Pricing formular: {m2moriginal_price && toDecimal(m2moriginal_price, 3)}{" "}
-        Pricing formular: {m2moriginal_price} * {m2mpercent}% ≈{" "}
+        Pricing formular:{" "}
+        {/* {m2moriginal_price ? toDecimal(m2moriginal_price, 3) : null} Pricing */}
+        {m2moriginal_price} Pricing formular: {m2moriginal_price} * {m2mpercent}
+        % ≈{" "}
         <span className="text-white text-md font-semibold">
           {m2masset_price} {m2mCurrency?.ticker}
         </span>

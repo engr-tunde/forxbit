@@ -144,7 +144,7 @@ html {
   @apply max-w-[1200px] mx-auto pt-24 md:pt-24 lg:pt-28 pb-20 md:pb-24 lg:pb-32 px-5 lg:px-0;
 }
 .dash-container-footer {
-  @apply w-[92%] lg:max-w-[75%] mx-auto px-3 lg:px-5 py-3;
+  @apply w-[92%] lg:max-w-[75%] mx-auto px-3 lg:px-5 py-3 md:py-2;
 }
 .card-padding {
   @apply p-5 md:p-10;
@@ -189,7 +189,12 @@ html {
   /* box-shadow: 4px 3px 10px #00dbc2; */
 }
 .card-1 {
-  @apply bg-transparent rounded-lg border-[1px] border-[#ffffff75] p-5 lg:p-7 cursor-pointer;
+  @apply bg-transparent rounded-lg border-[1px] border-[#ffffff4e] p-5 lg:p-7 cursor-pointer hover:scale-95 duration-200 ease-in;
+  box-shadow: 2px 2px 4px #ffffff4e;
+}
+.card-1:hover {
+  @apply border-[#f7a600];
+  box-shadow: 2px 2px 4px #f7a600;
 }
 .team-card {
   @apply bg-transparent rounded-lg border-[1px] border-[#ffffff75] border-dashed;

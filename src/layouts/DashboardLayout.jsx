@@ -11,7 +11,7 @@ const DashboardLayout = () => {
   const { session, sessionLoading } = checkSession();
   useEffect(() => {
     if (!session && !sessionLoading) {
-      window.location.href = "/login";
+      // window.location.href = "/login";
     }
   }, [session]);
 
