@@ -59,7 +59,7 @@ const DashboardFooter = () => {
                     <div
                       className={
                         itemChild?.find(isCherries)?.url === pathname
-                          ? "flex items-center gap-2 text-titusYellow py-[2px] md:py-[6px] px-[2px] md:px-4 rounded-full bg-titusYellow md:bg-[#ffffff0c] font-medium cursor-pointer"
+                          ? "flex items-center gap-2 text-titusYellow py-[2px] md:py-[6px] px-[2px] pr-[6px] md:px-4 rounded-full bg-titusYellow md:bg-[#ffffff0c] font-medium cursor-pointer"
                           : "flex items-center gap-2 cursor-pointer scale-90 md:scale-100"
                       }
                       onClick={() => handleShowSubmenu(item)}
@@ -149,8 +149,8 @@ const DashboardFooter = () => {
                     to={item.url}
                     className={
                       pathname === item.url
-                        ? "flex items-center gap-2 text-titusYellow py-[2px] md:py-[6px] px-[2px] md:px-4 rounded-full bg-titusYellow md:bg-[#ffffff0c] font-medium"
-                        : "flex items-center gap-2 scale-90"
+                        ? "flex items-center gap-2 text-titusYellow py-[2px] md:py-[6px] px-[2px] pr-[6px] md:px-4 rounded-full bg-titusYellow md:bg-[#ffffff0c] font-medium"
+                        : "flex items-center gap-2 scale-90 md:scale-100"
                     }
                   >
                     <img
@@ -161,7 +161,9 @@ const DashboardFooter = () => {
                       }
                       className="h-10 md:h-9 bg-titusDarkBG rounded-full p-2 md:p-2"
                     />
-                    <span className="hidden md:block w-max">{item.title}</span>
+                    <span className="text-[0px] md:text-sm w-max">
+                      {item.title}
+                    </span>
                   </Link>
                 )}
               </div>
