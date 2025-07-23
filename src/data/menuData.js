@@ -38,15 +38,15 @@ export const dashboardSidebarMenu = [
       {
         title: "Create Trade",
         url: `/dashboard/${import.meta.env.VITE_P2P_NAME.toLowerCase()}/create-trade`,
+        inactiveImg: "m2m/Create-trade-02.svg",
+        activeImg: "m2m/Create-trade-03.svg",
       },
       {
         title: "My Trades",
         url: `/dashboard/${import.meta.env.VITE_P2P_NAME.toLowerCase()}/my-trades`,
+        inactiveImg: "m2m/My-trade-02.svg",
+        activeImg: "m2m/My-trade-03.svg",
       },
-      //   {
-      //     title: "Orders",
-      //     url: `/dashboard/orders/${import.meta.env.VITE_P2P_NAME.toLowerCase()}`,
-      //   },
     ],
   },
   {

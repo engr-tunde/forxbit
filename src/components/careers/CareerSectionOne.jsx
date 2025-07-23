@@ -8,8 +8,8 @@ const CareerSectionOne = () => {
   return (
     <div className="w-full">
       <div className="container pt-[120px] md:pt-[200px] pb-[100px] md:pb-[0px] px-7 md:px-0">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-24 md:gap-20 text-[#ffffff9e] items-center mb-10">
-          <div className="w-full lg:w-[85%] col-span-1 lg:col-span-2 p-2 lg:p-1 rounded-lg flex flex-col gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-16 md:gap-10 text-[#ffffff9e] items-center mb-10">
+          <div className="w-full lg:w-[85%] col-span-1 lg:col-span-3 p-2 lg:p-1 rounded-lg flex flex-col gap-5">
             <h1 className="text-white text-[30px] md:text-[40px] mb-5 ">
               Careers at{" "}
               <span className="text-titusGreen">
@@ -33,11 +33,11 @@ const CareerSectionOne = () => {
               <div className="span">Meet The Team</div>
             </Link>
           </div>
-          <div className="col-span-1 flex justify-center lg:justify-start">
+          <div className="col-span-1 md:col-span-2 flex justify-center lg:justify-start">
             <img
-              src="/assets/images/careers/banner.png"
+              src="/assets/images/careers/Career.png"
               alt=""
-              className="w-[200px] lg:w-[900px]"
+              className="w-full lg:w-full dancingSlide"
             />
           </div>
         </div>
