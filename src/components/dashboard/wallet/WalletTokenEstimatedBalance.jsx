@@ -23,6 +23,9 @@ const WalletTokenEstimatedBalance = ({
   const [showTokenList, setShowTokenList] = useState(false);
   const { tokenBalances } = fetchUserTokenBalances();
   const { networks } = fetchUserTokenNetworks();
+  // const { data: token_price } = useFetchCrypComp(
+  //   `price?fsym=${selectedToken?.ticker}&tsyms=${settings?.currency?.ticker}`
+  // );
   const { data: token_price } = useFetchCrypComp(
     `price?fsym=${selectedToken?.ticker}&tsyms=${settings?.currency?.ticker}`
   );

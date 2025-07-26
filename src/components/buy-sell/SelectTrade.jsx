@@ -1,13 +1,7 @@
 import { useBuySellContext } from "../../context/buySellContext";
-import { successNotification } from "../../utils/helpers";
 
 const SelectTrade = () => {
   const { type, settype } = useBuySellContext();
-
-  const handleSelectTradeType = (item) => {
-    settype(item);
-    successNotification(`Trade set to ${item}`);
-  };
 
   return (
     <div className="flex items-center gap-5 md:gap-5">
@@ -17,7 +11,7 @@ const SelectTrade = () => {
             ? "border-b-[2px] border-b-titusYellow rounded-md text-white text-[15px] font-medium cursor-pointer duration-200 ease-in"
             : "py-[6px] text-sm font-medium cursor-pointer duration-200 ease-in"
         }
-        onClick={() => handleSelectTradeType("Buy")}
+        onClick={() => settype("Buy")}
       >
         Buy
       </div>
@@ -27,7 +21,7 @@ const SelectTrade = () => {
             ? "border-b-[2px] border-b-titusYellow rounded-md text-white text-[15px] font-medium cursor-pointer duration-200 ease-in"
             : "py-[6px] text-sm font-medium cursor-pointer duration-200 ease-in"
         }
-        onClick={() => handleSelectTradeType("Sell")}
+        onClick={() => settype("Sell")}
       >
         Sell
       </div>

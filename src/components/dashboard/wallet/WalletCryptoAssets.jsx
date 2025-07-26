@@ -24,6 +24,7 @@ import {
   formatter,
   successNotification,
 } from "../../../utils/helpers";
+import { changeNowFetcher, useFetchChangeNow } from "../../../api/changeNow";
 
 const columns = [
   {
@@ -52,6 +53,8 @@ const WalletCryptoAssets = ({ settings, hideAssets }) => {
   const [assetsData, setAssetsData] = useState();
   const [searchBy, setSearchBy] = useState("");
   const [showAddAsset, setShowAddAsset] = useState(false);
+  // const [token_price_value, settoken_price_value] = useState();
+  // const [token_bal_value, settoken_bal_value] = useState();
 
   const { tokenBalances, tokenBalancesLoading, tokenBalancesError, mutate } =
     fetchUserTokenBalances();
@@ -59,12 +62,54 @@ const WalletCryptoAssets = ({ settings, hideAssets }) => {
   const { unadded_tokens } = fetchUserUnaddedWalletTokens();
 
   const renderRow = (item, i) => {
-    const { data: token_price } = useFetchCrypComp(
-      `price?fsym=${item?.ticker}&tsyms=${settings?.currency?.ticker}`
-    );
-    let token_price_value = token_price && Object.values(token_price)[0];
-    let token_bal_value =
-      token_price_value && Number(item.balance * token_price_value).toFixed(2);
+    // const { data: token_price } = useFetchCrypComp(
+    //   `price?fsym=${item?.ticker}&tsyms=${settings?.currency?.ticker}`
+    // );
+
+    // const { data: token_price, error } = useFetchChangeNow(
+    //   // `v2/exchange/estimated-amount?fromCurrency=${item?.ticker}&toCurrency=${
+    //   //   settings?.currency?.ticker
+    //   // }&fromAmount=${1}&toAmount=&fromNetwork=${
+    //   //   item?.network
+    //   // }&toNetwork=&flow=fixed-rate`
+    //   `v2/markets/estimate?fromCurrency=${item?.ticker}&toCurrency=${settings?.currency?.ticker}&fromAmount=1&toAmount=&type=direct`
+    // );
+
+    let token_price_value;
+    let token_bal_value;
+
+    if (settings) {
+      let toCurrency;
+      toCurrency = settings?.currency?.ticker;
+      const runFuncti = async () => {
+        let toAmountRes = await changeNowFetcher(
+          `v2/markets/estimate?fromCurrency=${item?.ticker}&toCurrency=${toCurrency}&fromAmount=1&toAmount=&type=direct`
+        );
+        if (toAmountRes) {
+          console.log(`${item?.ticker} toAmountRes`, toAmountRes);
+          if (!toAmountRes?.error) {
+            let t_p_v;
+            t_p_v = toAmountRes?.toAmount;
+            let t_b_v = t_p_v && Number(item.balance * t_p_v)?.toFixed(2);
+            // settoken_price_value(t_p_v);
+            token_price_value = t_p_v;
+            token_bal_value = t_b_v;
+            // settoken_bal_value(t_b_v);
+          }
+        }
+
+        console.log("token_price_value 1", token_price_value);
+        console.log("token_bal_value 1", token_bal_value);
+      };
+      runFuncti();
+    }
+
+    console.log("token_price_value", token_price_value);
+    console.log("token_bal_value", token_bal_value);
+
+    // let token_price_value = token_price?.toAmount;
+    // let token_bal_value =
+    //   token_price_value && Number(item.balance * token_price_value)?.toFixed(2);
     return (
       <tr
         key={i}
@@ -111,7 +156,11 @@ const WalletCryptoAssets = ({ settings, hideAssets }) => {
           </div>
           <div className="text-[12px] md:text-sm">
             {settings?.currency?.symbol}
-            {hideAssets ? "*****" : formatter(token_bal_value).substring(1)}
+            {hideAssets
+              ? "*****"
+              : token_price_value
+              ? formatter(token_bal_value).substring(1)
+              : null}
           </div>
         </td>
 
