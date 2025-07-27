@@ -50,6 +50,7 @@ const WithdrawFiatPage = () => {
     const response = await withdrawFiatAsset(values);
     if (response.status == 200) {
       successNotification(response?.data?.message);
+      clearFunc();
       setTimeout(() => {
         history(`/dashboard/transaction-history/${response?.data?.data}`);
       }, 1000);
@@ -58,14 +59,20 @@ const WithdrawFiatPage = () => {
     }
   };
 
+  const clearFunc = () => {
+    setbank_details();
+    setamount(0);
+  };
+
   return (
     <>
       <Head pageTitle="User Dashboard - Withdraw Fiat" />
-      <div className="w-full mt-8">
+      <div className="w-full ">
         <div className="flex flex-col gap-10 max-w-[600px] mx-auto">
           <DepositWithdrawHeader
             title={`Withdraw ${currency?.ticker}`}
             subtitle={`Easily withdraw ${currency?.ticker} from your account via the dialog below`}
+            clearFunc={clearFunc}
           />
 
           <div className="w-full flex flex-col gap-8 p-5 md:p-10 md:pb-20 bg-titusDashCardDarkBG rounded-lg border-[1px] border-titusLightBorder">

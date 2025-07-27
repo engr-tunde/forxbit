@@ -46,11 +46,26 @@ const WalletTokenEstimatedBalance = ({
   };
 
   const history = useNavigate();
+
   const handleLink = (link) => {
     history(`${link}`, {
       state: { suppliedAsset: selectedToken?.ticker },
     });
   };
+  const handleCryptoDepoLink = (link) => {
+    history(`${link}`, {
+      state: {
+        suppliedToken: {
+          network: selectedToken?.network,
+          ticker: selectedToken?.ticker,
+          name: selectedToken?.name,
+          logoURI: selectedToken?.logoURI,
+        },
+      },
+    });
+  };
+
+  console.log("selectedToken", selectedToken);
 
   return (
     <div className="w-full h-full rounded-xl p-5 md:p-8 bg-titusDashCardDarkBG flex flex-col gap-8">
@@ -140,18 +155,20 @@ const WalletTokenEstimatedBalance = ({
           </div>
         </div>
         <div className="w-full md:w-max flex justify-between md:justify-normal gap-3">
-          <Link
-            to={`/dashboard/deposit-asset/${selectedToken?.ticker?.toLowerCase()}`}
-            className="text-sm bg-titusChatBg py-2 w-24 h-max text-center rounded-md text-white hover:opacity-80"
+          <div
+            onClick={() => handleCryptoDepoLink("/dashboard/deposit-crypto")}
+            // to={`/dashboard/deposit-asset/${selectedToken?.ticker?.toLowerCase()}`}
+            className="text-sm bg-titusChatBg py-2 w-24 h-max text-center rounded-md text-white hover:opacity-80 cursor-pointer"
           >
             Deposit
-          </Link>
-          <Link
-            to={`/dashboard/withdraw-asset/${selectedToken?.ticker?.toLowerCase()}`}
-            className="text-sm bg-titusChatBg py-2 w-24 h-max text-center rounded-md text-white hover:opacity-80"
+          </div>
+          <div
+            // to={`/dashboard/withdraw-asset/${selectedToken?.ticker?.toLowerCase()}`}
+            onClick={() => handleLink("/dashboard/withdraw-crypto")}
+            className="text-sm bg-titusChatBg py-2 w-24 h-max text-center rounded-md text-white hover:opacity-80 cursor-pointer"
           >
             Withdraw
-          </Link>
+          </div>
           <div
             onClick={() => handleLink("/dashboard/transfer-crypto")}
             className="text-sm bg-titusChatBg py-2 w-24 h-max text-center rounded-md text-white hover:opacity-80 cursor-pointer"

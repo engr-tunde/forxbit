@@ -36,7 +36,7 @@ const DashboardFooter = () => {
   return (
     <div className="w-full fixed bottom-3 md:bottom-7 left-0 z-[2000]">
       <div
-        className="dash-container-footer rounded-3xl border-[2px] md:border-[2px] border-black bg-titusDarkGrey/95 lg:bg-titusDarkGrey/70 overflow-x-scroll lg:overflow-x-hidden"
+        className="dash-container-footer rounded-3xl border-[2px] md:border-[2px] border-[#ffffff1a] bg-titusDarkGrey/95 lg:bg-titusDarkGrey/70 overflow-x-scroll lg:overflow-x-hidden"
         style={{
           backdropFilter: !showSubmenu ? "blur(8px)" : "",
         }}

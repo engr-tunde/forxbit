@@ -140,6 +140,19 @@ const DashTokenEstimatedBalance = ({
     });
   };
 
+  const handleCryptoDepoLink = (link) => {
+    history(`${link}`, {
+      state: {
+        suppliedToken: {
+          network: selectedToken?.network,
+          ticker: selectedToken?.ticker,
+          name: selectedToken?.name,
+          logoURI: selectedToken?.logoURI,
+        },
+      },
+    });
+  };
+
   return (
     <div className="w-full h-full rounded-xl p-5 md:p-5 bg-titusDashCardDarkBG flex flex-col gap-8">
       <div className="w-full flex flex-col md:flex-row gap-5 md:gap-3 justify-between items-start md:items-end">
@@ -253,21 +266,20 @@ const DashTokenEstimatedBalance = ({
         </div>
         {/* <div className="h-full flex flex-col gap-3 md:gap-0 justify-between"> */}
         <div className="w-full md:w-max flex justify-between md:justify-end gap-3">
-          <Link
-            to=""
-            className="text-sm bg-titusChatBg py-2 w-24 h-max text-center rounded-md text-white hover:opacity-80"
+          <div
+            onClick={() => handleCryptoDepoLink("/dashboard/deposit-crypto")}
+            className="text-sm bg-titusChatBg py-2 w-24 h-max text-center rounded-md text-white hover:opacity-80 cursor-pointer"
           >
             Deposit
-          </Link>
-          <Link
-            to=""
-            className="text-sm bg-titusChatBg py-2 w-24 h-max text-center rounded-md text-white hover:opacity-80"
+          </div>
+          <div
+            onClick={() => handleLink("/dashboard/withdraw-crypto")}
+            className="text-sm bg-titusChatBg py-2 w-24 h-max text-center rounded-md text-white hover:opacity-80 cursor-pointer"
           >
             Withdraw
-          </Link>
+          </div>
           <div
             onClick={() => handleLink("/dashboard/transfer-crypto")}
-            to=""
             className="text-sm bg-titusChatBg py-2 w-24 h-max text-center rounded-md text-white hover:opacity-80 cursor-pointer"
           >
             Transfer

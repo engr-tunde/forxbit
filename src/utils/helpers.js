@@ -96,38 +96,44 @@ export const validateWalletAddress = (value, network) => {
   const moneroPattern = /4[0-9AB][1-9A-HJ-NP-Za-km-z]{93}$/g;
   let check;
 
-  if (network == "btc") {
+  let tokenNetwork = network.toLowerCase();
+
+  if (tokenNetwork == "btc" || tokenNetwork == "bitcoin") {
     check = btcPattern.test(value);
     if (!check) {
       check = btcPattern2.test(value);
     }
-  } else if (network == "eth" || network == "celo") {
+  } else if (
+    tokenNetwork == "eth" ||
+    tokenNetwork == "celo" ||
+    tokenNetwork.includes("ethereum")
+  ) {
     check = ethPattern.test(value);
-  } else if (network == "bch") {
+  } else if (tokenNetwork == "bch") {
     check = bchPattern.test(value);
-  } else if (network == "bsc") {
+  } else if (tokenNetwork == "bsc" || tokenNetwork.includes("binance")) {
     check = bscPattern.test(value);
-  } else if (network == "dash") {
+  } else if (tokenNetwork == "dash" || tokenNetwork.includes("dash")) {
     check = dashPattern.test(value);
-  } else if (network == "trx") {
+  } else if (tokenNetwork == "trx" || tokenNetwork.includes("tron")) {
     check = trxPattern.test(value);
-  } else if (network == "doge") {
+  } else if (tokenNetwork == "doge") {
     check = dogePattern.test(value);
-  } else if (network == "ltc") {
+  } else if (tokenNetwork == "ltc" || tokenNetwork.includes("litecoin")) {
     check = ltcPattern.test(value);
-  } else if (network == "xrp") {
+  } else if (tokenNetwork == "xrp" || tokenNetwork.includes("ripple")) {
     check = xrpPattern.test(value);
-  } else if (network == "sol") {
+  } else if (tokenNetwork == "sol" || tokenNetwork.includes("solana")) {
     check = solPattern.test(value);
-  } else if (network == "ton") {
+  } else if (tokenNetwork == "ton") {
     check = tonPattern.test(value);
-  } else if (network == "xlm" || network == "stellar") {
+  } else if (tokenNetwork == "xlm" || tokenNetwork == "stellar") {
     check = stellarPattern.test(value);
-  } else if (network == "xmr" || network == "monero") {
+  } else if (tokenNetwork == "xmr" || tokenNetwork == "monero") {
     check = moneroPattern.test(value);
-    // } else if (network == "ton") {
+    // } else if (tokenNetwork == "ton") {
     //   check = tonPattern.test(value);
-    // } else if (network == "ton") {
+    // } else if (tokenNetwork == "ton") {
     //   check = tonPattern.test(value);
   }
   console.log("check", check);

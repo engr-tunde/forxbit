@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchUserTokenBalances, transferCryptoAsset } from "../../../api";
+import { fetchUserTokenBalances, withdrawCryptoAsset } from "../../../api";
 import Loader from "../../../components/globals/Loader";
 import Head from "../../../components/Head";
 import { useFiatDepositWithdrawContext } from "../../../context/fiatDepositWithdrawContext";
@@ -11,10 +11,10 @@ import {
   successNotification,
 } from "../../../utils/helpers";
 import DepositWithdrawHeader from "../../../components/globals/DepositWithdrawHeader";
-import TransferRecipient from "../../../components/dashboard/deposit-withdraw/TransferRecipient";
 import ConfirmTransaction from "../../../components/dashboard/deposit-withdraw/ConfirmTransaction";
+import WithdrawCryptoRecipient from "../../../components/dashboard/deposit-withdraw/WithdrawCryptoRecipient";
 
-const TransferCryptoPage = () => {
+const WithdrawCryptoPage = () => {
   const location = useLocation();
   const history = useNavigate();
   const suppliedAsset = location.state?.suppliedAsset;
@@ -27,8 +27,8 @@ const TransferCryptoPage = () => {
     amount,
     setamount,
     errors,
-    recipient,
-    setrecipient,
+    recipientAddress,
+    setrecipientAddress,
   } = useFiatDepositWithdrawContext();
 
   useEffect(() => {
@@ -39,14 +39,14 @@ const TransferCryptoPage = () => {
       settoken(selectedToken);
     }
   }, [tokenBalances]);
-  console.log("token", token);
 
-  const handleTransfer = async () => {
-    const values = { recipient, token, amount };
-    const response = await transferCryptoAsset(values);
+  const handleWithdraw = async () => {
+    const values = { recipient: recipientAddress, token, amount };
+    const response = await withdrawCryptoAsset(values);
     if (response.status == 200) {
       successNotification(response?.data?.message);
       setshowConfirmTrade(false);
+      clearFunc();
       setTimeout(() => {
         history(`/dashboard/transaction-history/${response?.data?.data}`);
       }, 1000);
@@ -62,28 +62,32 @@ const TransferCryptoPage = () => {
   const renderMessage = () => {
     return (
       <div className="text-sm text-center text-titusChatText leading-6">
-        Are you sure you want to transfer{" "}
+        Are you sure you want to withdraw{" "}
         <span className="text-titusYellow text-[16px]">
           {amount} {token?.ticker?.toUpperCase()}
         </span>{" "}
-        to user{" "}
-        <span className="text-titusGreenFaded text-[16px]">{recipient}</span> ?
+        to address{" "}
+        <span className="text-titusGreenFaded text-[16px]">
+          {recipientAddress.substring(0, 6)}...
+          {recipientAddress.substring(recipientAddress.length - 6)}
+        </span>{" "}
+        ?
       </div>
     );
   };
 
   const clearFunc = () => {
-    setrecipient("");
+    setrecipientAddress("");
     setamount(0);
   };
 
   return (
     <>
       <Head pageTitle="User Dashboard - Transfer Crypto" />
-      <div className="w-full mt-2">
+      <div className="w-full">
         <div className="flex flex-col gap-10 max-w-[600px] mx-auto">
           <DepositWithdrawHeader
-            title={`Transfer ${token?.ticker}`}
+            title={`Withdraw ${token?.ticker}`}
             subtitle={`Easily transfer ${
               token?.ticker
             } from your account to another user on ${
@@ -126,25 +130,25 @@ const TransferCryptoPage = () => {
 
             <div className="w-full flex flex-col gap-2 md:gap-2">
               <div className="text-sm md:text-md font-medium text-white">
-                Transfer to
+                Recipient
               </div>
               <div className="">
-                <TransferRecipient
+                <WithdrawCryptoRecipient
                   errors={errors}
-                  setrecipient={setrecipient}
+                  setrecipientAddress={setrecipientAddress}
                 />
               </div>
             </div>
 
             <div
               className={
-                amount && recipient && !Object.keys(errors).length
+                amount && recipientAddress && !Object.keys(errors).length
                   ? "w-full btnn1 py-[8px] px-8 text-center text-sm  font-medium"
                   : "w-full btnn1 py-[8px] px-8 text-center text-sm  font-medium opacity-50"
               }
               onClick={handleConfirmTransaction}
             >
-              Transfer {token?.ticker.toUpperCase()}
+              Withdraw {token?.ticker.toUpperCase()}
             </div>
           </div>
         </div>
@@ -154,11 +158,11 @@ const TransferCryptoPage = () => {
         renderMessage={renderMessage}
         showConfirmTrade={showConfirmTrade}
         setshowConfirmTrade={setshowConfirmTrade}
-        actionFunction={handleTransfer}
-        buttonTitle={`Confirm ${token?.ticker} Transfer`}
+        actionFunction={handleWithdraw}
+        buttonTitle={`Confirm ${token?.ticker} Withdrawal`}
       />
     </>
   );
 };
 
-export default TransferCryptoPage;
+export default WithdrawCryptoPage;

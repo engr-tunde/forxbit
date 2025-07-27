@@ -6,17 +6,11 @@ import { fetchUserTokenNetworks } from "../../../api";
 const DepositWithdrawDropdownMini = ({ data, setdata, array, type }) => {
   const [showAsset, setshowAsset] = useState(false);
   const ref = useRef();
-  useOutsideClick(ref.current, () => setshowAsset(false));
+  // useOutsideClick(ref.current, () => setshowAsset(false));
   const { networks } = fetchUserTokenNetworks();
 
   const [newArr, setnewArr] = useState(array);
   const [search, setsearch] = useState();
-  // const handleSearchToken = (search) => {
-
-  // };
-
-  console.log("data value", data);
-  console.log("networks value", networks);
 
   useEffect(() => {
     // code

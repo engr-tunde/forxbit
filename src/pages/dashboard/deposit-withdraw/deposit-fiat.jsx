@@ -38,6 +38,7 @@ const DepositFiatPage = () => {
     const response = await DepositFiatAsset(values);
     if (response.status == 200) {
       successNotification(response?.data?.message);
+      clearFunc();
       setTimeout(() => {
         history(`/dashboard/transaction-history/${response?.data?.data}`);
       }, 1000);
@@ -46,14 +47,19 @@ const DepositFiatPage = () => {
     }
   };
 
+  const clearFunc = () => {
+    setamount(0);
+  };
+
   return (
     <>
       <Head pageTitle="User Dashboard - Deposit Fiat" />
-      <div className="w-full mt-8">
+      <div className="w-full mt-2">
         <div className="flex flex-col gap-8 max-w-[600px] mx-auto">
           <DepositWithdrawHeader
             title={`Deposit ${currency?.ticker} to your account`}
             subtitle={`Easily deposit ${currency?.ticker} to your account via the dialog below`}
+            clearFunc={clearFunc}
           />
 
           <div className="w-full flex flex-col gap-8 p-5 md:p-10 md:pb-20 bg-titusDashCardDarkBG rounded-lg border-[1px] border-titusLightBorder">

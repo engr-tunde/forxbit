@@ -35,7 +35,7 @@ const TransferFiatPage = () => {
   useEffect(() => {
     if (currencyBalances) {
       const selectedCurrency = currencyBalances?.data?.filter(
-        (item) => item.ticker.toLowerCase() == suppliedAsset.toLowerCase()
+        (item) => item.ticker.toLowerCase() == suppliedAsset?.toLowerCase()
       )[0];
       setcurrency(selectedCurrency);
     }
@@ -47,6 +47,7 @@ const TransferFiatPage = () => {
     if (response.status == 200) {
       successNotification(response?.data?.message);
       setshowConfirmTrade(false);
+      clearFunc();
       setTimeout(() => {
         history(`/dashboard/transaction-history/${response?.data?.data}`);
       }, 1000);
@@ -72,10 +73,15 @@ const TransferFiatPage = () => {
     );
   };
 
+  const clearFunc = () => {
+    setrecipient("");
+    setamount(0);
+  };
+
   return (
     <>
       <Head pageTitle="User Dashboard - Transfer Fiat" />
-      <div className="w-full mt-8">
+      <div className="w-full mt-2">
         <div className="flex flex-col gap-10 max-w-[600px] mx-auto">
           <DepositWithdrawHeader
             title={`Transfer ${currency?.ticker}`}
@@ -84,6 +90,7 @@ const TransferFiatPage = () => {
             } from your account to another user on ${
               import.meta.env.VITE_APP_NAME
             } via the dialog below`}
+            clearFunc={clearFunc}
           />
 
           <div className="w-full flex flex-col gap-8 p-5 md:p-10 md:pb-20 bg-titusDashCardDarkBG rounded-lg border-[1px] border-titusLightBorder">

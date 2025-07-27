@@ -51,6 +51,9 @@ import WithdrawFiatPage from "./pages/dashboard/deposit-withdraw/withdraw-fiat.j
 import TransferFiatPage from "./pages/dashboard/deposit-withdraw/transfer-fiat.jsx";
 import TransactionDetailsPage from "./pages/dashboard/orders/transaction-details.jsx";
 import TransferCryptoPage from "./pages/dashboard/deposit-withdraw/transfer-crypto.jsx";
+import WithdrawCryptoPage from "./pages/dashboard/deposit-withdraw/withdraw-crypto.jsx";
+import DepositPage from "./pages/dashboard/deposit-withdraw/deposit-crypto.jsx";
+import SingleAssetPage from "./pages/dashboard/wallet/single-asset.jsx";
 
 function App() {
   return (
@@ -112,6 +115,10 @@ function App() {
                   <Route element={<DashboardLayout />}>
                     <Route path="/dashboard" element={<DashboardPage />} />
                     <Route path="/dashboard/wallet" element={<WalletPage />} />
+                    <Route
+                      path="/dashboard/single-asset"
+                      element={<SingleAssetPage />}
+                    />
 
                     {/* Fiat */}
                     <Route
@@ -126,11 +133,19 @@ function App() {
                       path="/dashboard/transfer-fiat"
                       element={<TransferFiatPage />}
                     />
+                    {/* Crypto */}
                     <Route
                       path="/dashboard/transfer-crypto"
                       element={<TransferCryptoPage />}
                     />
-                    {/* Crypto */}
+                    <Route
+                      path="/dashboard/withdraw-crypto"
+                      element={<WithdrawCryptoPage />}
+                    />
+                    <Route
+                      path="/dashboard/deposit-crypto"
+                      element={<DepositPage />}
+                    />
 
                     {/* M2M */}
                     <Route
