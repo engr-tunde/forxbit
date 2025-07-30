@@ -1,13 +1,35 @@
-import { FaCheck } from "react-icons/fa";
+import { FaArrowCircleLeft, FaCheck } from "react-icons/fa";
 import { useM2MContext } from "../../../context/m2mContext";
+import { useNavigate } from "react-router-dom";
 
 const CreateTradeHeader = () => {
-  const { m2mCurrentStage, m2mTradeType, setm2mTradeType } = useM2MContext();
+  const {
+    m2mCurrentStage,
+    m2mTradeType,
+    setm2mTradeType,
+    setpopulate,
+    setpopulateData,
+  } = useM2MContext();
+
+  const history = useNavigate();
+  const handleClick = () => {
+    history(-1);
+    setpopulate(false);
+    setpopulateData();
+  };
 
   return (
     <div className="w-full flex flex-col gap-9 md:gap-7">
-      <div className="text-xl md:text-2xl font-semibold text-white">
-        Create Trade
+      <div className="flex items-center gap-3">
+        <div
+          onClick={handleClick}
+          className="p-2 bg-titusChatBg text-titusYellow text-[18px] cursor-pointer font-medium duration-200 ease-in rounded-md hover:opacity-50"
+        >
+          <FaArrowCircleLeft />
+        </div>
+        <div className="text-xl md:text-2xl font-semibold text-white">
+          Create Trade
+        </div>
       </div>
 
       <div className=" w-full items-start grid grid-cols-3">

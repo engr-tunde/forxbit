@@ -18,14 +18,13 @@ import {
 } from "../../../api";
 import Loader from "../../globals/Loader";
 import ErrorWidget from "../../globals/ErrorWidget";
-import useFetchCrypComp from "../../../api/useFetchCrypComp";
 import {
   errorNotification,
   formatter,
   successNotification,
 } from "../../../utils/helpers";
-import { changeNowFetcher, useFetchChangeNow } from "../../../api/changeNow";
 import { useNavigate } from "react-router-dom";
+import { useFetchCG } from "../../../api/coinGecko";
 
 const columns = [
   {
@@ -54,8 +53,6 @@ const WalletCryptoAssets = ({ settings, hideAssets }) => {
   const [assetsData, setAssetsData] = useState();
   const [searchBy, setSearchBy] = useState("");
   const [showAddAsset, setShowAddAsset] = useState(false);
-  // const [token_price_value, settoken_price_value] = useState();
-  // const [token_bal_value, settoken_bal_value] = useState();
 
   const { tokenBalances, tokenBalancesLoading, tokenBalancesError, mutate } =
     fetchUserTokenBalances();
@@ -71,39 +68,20 @@ const WalletCryptoAssets = ({ settings, hideAssets }) => {
   };
 
   const renderRow = (item, i) => {
-    const { data: token_price } = useFetchCrypComp(
-      `price?fsym=${item?.ticker}&tsyms=${settings?.currency?.ticker}`
-    );
+    const { data: token_price } = useFetchCG(`coins/${item.id}`);
 
-    // let token_price_value;
-    // let token_bal_value;
-    // if (settings) {
-    //   let toCurrency;
-    //   toCurrency = settings?.currency?.ticker;
-    //   const runFuncti = async () => {
-    //     let toAmountRes = await changeNowFetcher(
-    //       `v2/markets/estimate?fromCurrency=${item?.ticker}&toCurrency=${toCurrency}&fromAmount=1&toAmount=&type=direct`
-    //     );
-    //     if (toAmountRes) {
-    //       console.log(`${item?.ticker} toAmountRes`, toAmountRes);
-    //       if (!toAmountRes?.error) {
-    //         let t_p_v;
-    //         t_p_v = toAmountRes?.toAmount;
-    //         let t_b_v = t_p_v && Number(item.balance * t_p_v)?.toFixed(2);
-    //         token_price_value = t_p_v;
-    //         token_bal_value = t_b_v;
-    //       }
-    //     }
-    //   };
-    //   runFuncti();
-    // }
+    let tpv = token_price?.market_data?.current_price;
+    let ggg = tpv && Object.entries(tpv);
+    let newVal = ggg?.filter((obj) => {
+      return obj[0] == settings?.currency?.ticker?.toLowerCase();
+    });
+    let token_price_value = newVal && newVal[0];
 
-    let token_price_value = token_price?.toAmount;
+    token_price_value = token_price_value && token_price_value[1];
     let token_bal_value =
-      token_price_value && Number(item.balance * token_price_value)?.toFixed(2);
+      token_price_value &&
+      Number(item.available_balance * token_price_value)?.toFixed(2);
 
-    // console.log("token_price_value", token_price_value);
-    // console.log("token_bal_value", token_bal_value);
     return (
       <tr
         key={i}
@@ -146,7 +124,7 @@ const WalletCryptoAssets = ({ settings, hideAssets }) => {
 
         <td className="table-cell ">
           <div className="text-white text-[12px] md:text-sm">
-            {hideAssets ? "*****" : item.balance.toFixed(3)}
+            {hideAssets ? "*****" : item.available_balance.toFixed(3)}
           </div>
           <div className="text-[12px] md:text-sm">
             {settings?.currency?.symbol}
@@ -170,13 +148,15 @@ const WalletCryptoAssets = ({ settings, hideAssets }) => {
 
         <td
           className={
-            item.change > 0
+            token_price?.market_data?.price_change_percentage_24h > 0
               ? "text-green-500 table-cell text-sm"
-              : "text-red-500 table-cell text-sm"
+              : token_price?.market_data?.price_change_percentage_24h < 0
+              ? "text-red-500 table-cell text-sm"
+              : "table-cell text-sm"
           }
         >
-          {item.change > 0 ? "+" : ""}
-          {item.change}%
+          {token_price?.market_data?.price_change_percentage_24h > 0 ? "+" : ""}
+          {token_price?.market_data?.price_change_percentage_24h?.toFixed(2)}%
         </td>
       </tr>
     );
@@ -201,9 +181,6 @@ const WalletCryptoAssets = ({ settings, hideAssets }) => {
       console.log("searchBy", searchBy);
     }
   }, [searchBy, tokenBalances]);
-  const openAsset = (ticker) => {
-    // `/dashboard/token/${item.ticker}`
-  };
 
   const handleAddAsset = async (id) => {
     try {

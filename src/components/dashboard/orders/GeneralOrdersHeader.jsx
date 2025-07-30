@@ -30,10 +30,8 @@ const GeneralOrdersHeader = ({ componentData }) => {
     sett_id("");
   };
 
-  const { tokens, tokensLoading, tokensError } = fetchP2PTokenList();
-  console.log("tokens", tokens);
-  const { currencies, currenciesLoading, currenciesError } = fetchCurrencies();
-  console.log("currencies", currencies);
+  const { tokens } = fetchP2PTokenList();
+  const { currencies } = fetchCurrencies();
 
   return (
     <div className="flex flex-col gap-6">

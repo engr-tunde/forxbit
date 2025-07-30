@@ -122,7 +122,7 @@ const TransferFiatPage = () => {
                   Your balance:{" "}
                   <span className="text-titusGreenFaded">
                     {currency?.symbol}
-                    {formatter(currency?.balance).substring(1)}
+                    {formatter(currency?.available_balance).substring(1)}
                   </span>
                 </div>
               </div>

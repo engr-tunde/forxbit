@@ -1,17 +1,11 @@
 import { useEffect, useState } from "react";
-import {
-  FaArrowAltCircleDown,
-  FaEye,
-  FaShoppingCart,
-  FaToolbox,
-  FaUsers,
-} from "react-icons/fa";
+import { FaArrowAltCircleDown, FaEye } from "react-icons/fa";
 import { userBalances } from "../../../utils/data";
 import { Link, useNavigate } from "react-router-dom";
-import { dashActionsMenu } from "../../../data/menuData";
+import { dashWalletActionsMenu } from "../../../data/menuData";
 import { fetchUserTokenBalances, fetchUserTokenNetworks } from "../../../api";
-import useFetchCrypComp from "../../../api/useFetchCrypComp";
 import { formatter } from "../../../utils/helpers";
+import { balancePriceCG, useFetchCG } from "../../../api/coinGecko";
 
 const WalletTokenEstimatedBalance = ({
   settings,
@@ -21,18 +15,22 @@ const WalletTokenEstimatedBalance = ({
   const [selectedToken, setSelectedToken] = useState(userBalances[0]);
   const [hover, sethover] = useState();
   const [showTokenList, setShowTokenList] = useState(false);
+  const [token_balance_value, settoken_balance_value] = useState(0);
   const { tokenBalances } = fetchUserTokenBalances();
   const { networks } = fetchUserTokenNetworks();
   // const { data: token_price } = useFetchCrypComp(
   //   `price?fsym=${selectedToken?.ticker}&tsyms=${settings?.currency?.ticker}`
   // );
-  const { data: token_price } = useFetchCrypComp(
-    `price?fsym=${selectedToken?.ticker}&tsyms=${settings?.currency?.ticker}`
-  );
-  let token_price_value = token_price && Object.values(token_price)[0];
-  let token_bal_value =
-    token_price_value &&
-    Number(selectedToken.balance * token_price_value).toFixed(2);
+  const { data: token_price } = useFetchCG(`coins/${selectedToken?.id}`);
+
+  useEffect(() => {
+    if (token_price && selectedToken && settings) {
+      const balance = selectedToken.available_balance;
+      const curTicker = settings?.currency?.ticker?.toLowerCase();
+      const price = balancePriceCG(balance, token_price, curTicker);
+      settoken_balance_value(price);
+    }
+  }, [token_price, selectedToken, settings]);
 
   useEffect(() => {
     if (tokenBalances) {
@@ -65,8 +63,6 @@ const WalletTokenEstimatedBalance = ({
     });
   };
 
-  console.log("selectedToken", selectedToken);
-
   return (
     <div className="w-full h-full rounded-xl p-5 md:p-8 bg-titusDashCardDarkBG flex flex-col gap-8">
       <div className="w-full flex flex-col md:flex-row gap-10 md:gap-0 justify-between items-start md:items-end">
@@ -78,7 +74,9 @@ const WalletTokenEstimatedBalance = ({
           {tokenBalances && (
             <div className="flex items-end gap-2 text-white">
               <span className=" font-semibold text-[28px]">
-                {hideAssets ? "*****" : selectedToken.balance.toFixed(3)}
+                {hideAssets
+                  ? "*****"
+                  : selectedToken?.available_balance?.toFixed(3)}
               </span>
               <div className="relative">
                 <div
@@ -140,9 +138,12 @@ const WalletTokenEstimatedBalance = ({
           {}
           <div className="text-sm font-semibold flex items-center gap-2">
             <div className="span">
-              {/* ≈ {formatter(selectedToken.balance * 1500)} */}
+              {/* ≈ {formatter(selectedToken.available_balance * 1500)} */}
               {settings?.currency?.symbol}
-              {hideAssets ? "*****" : formatter(token_bal_value).substring(1)}
+              {hideAssets
+                ? "*****"
+                : token_balance_value &&
+                  formatter(token_balance_value)?.substring(1)}
             </div>
             <span
               className={
@@ -178,7 +179,7 @@ const WalletTokenEstimatedBalance = ({
         </div>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-7">
-        {dashActionsMenu.map((item, i) => (
+        {dashWalletActionsMenu.map((item, i) => (
           <Link
             to={item.url}
             className="col-span-1 rounded-lg p-3 md:p-2 bg-titusDashCardDarkItemBG flex items-center gap-3 hover:text-white ease-in duration-200 hover:scale-95"

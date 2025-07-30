@@ -24,7 +24,7 @@ const DashRecentTransactions = () => {
 
       <div className="flex items-center gap-5 md:gap-7">
         {transactions && (
-          <TransactionHisBody data={transactions?.data?.slice(0, 5)} />
+          <TransactionHisBody data={transactions?.data?.slice(0, 3)} />
         )}
         {transactionsLoading && <Loader />}
       </div>

@@ -77,7 +77,7 @@ const CreateTradeSelectAsset = ({
             <div
               key={i}
               onClick={() => handleSelectAsset(item)}
-              className="flex items-center justify-between pe-3"
+              className="flex items-center justify-between pe-3 cursor-pointer"
             >
               <div className="flex items-center gap-4 px-0 py-3">
                 <div className="relative">

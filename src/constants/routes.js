@@ -28,19 +28,6 @@ const OPEN_M2M_POSTS = "/website/m2m/fetch-open-m2m-posts";
 const CLOSE_M2M_POSTS = "/website/m2m/fetch-close-m2m-posts";
 const SINGLE_M2M_POST = "/website/m2m/fetch-single-m2m-post";
 
-// SWAP
-const CHANGE_NOW_HEADERS = {
-  "x-changenow-api-key": import.meta.env.VITE_CHANGE_N_IPA_YEK,
-  Accept: "*/*",
-  "Access-Control-Allow-Headers": "*",
-  "Content-Type": "application/json",
-};
-const CHANGE_NOW_HEADERS_AUTH = {
-  Accept: "*/*",
-  // "Access-Control-Allow-Headers": "*",
-  "Content-Type": "application/json",
-};
-
 // USER APP
 const USER_LOGOUT = "/user-auth/logout";
 const USER_PROFILE = "/user-app/user-profile/user";
@@ -79,6 +66,27 @@ const ADD_BANK_ACCOUNTS = "/user-app/user-profile/add-bank-details";
 const UPDATE_BANK_ACCOUNTS = "/user-app/user-profile/update-bank-details";
 const DELETE_BANK_ACCOUNT = "/user-app/user-profile/delete-bank-details";
 const FETCH_BANK_ACCOUNTS = "/user-app/user-profile/bank-details";
+
+// HEADERS
+const CHANGE_NOW_HEADERS = {
+  "x-changenow-api-key": import.meta.env.VITE_CHANGE_N_IPA_YEK,
+  Accept: "*/*",
+  "Access-Control-Allow-Headers": "*",
+  "Content-Type": "application/json",
+};
+const CHANGE_NOW_HEADERS_AUTH = {
+  Accept: "*/*",
+  // "Access-Control-Allow-Headers": "*",
+  "Content-Type": "application/json",
+};
+const CG_HEADERS = {
+  "x-cg-pro-api-key": import.meta.env.VITE_CC_IPA_YEK,
+  Accept: "application/json",
+};
+
+//
+const TRADE_MIN_PERCENT = 70;
+const TRADE_MAX_PERCENT = 130;
 
 export {
   USER_REGISTER,
@@ -146,4 +154,8 @@ export {
   //
   CHANGE_NOW_HEADERS,
   CHANGE_NOW_HEADERS_AUTH,
+  CG_HEADERS,
+  //
+  TRADE_MIN_PERCENT,
+  TRADE_MAX_PERCENT,
 };

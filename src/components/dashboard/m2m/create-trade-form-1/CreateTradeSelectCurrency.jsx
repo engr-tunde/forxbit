@@ -44,7 +44,7 @@ const CreateTradeSelectCurrency = ({
       <div
         className={
           showCurrencyList
-            ? "w-full absolute px-2 py-5 border-titusLightBorder flex flex-col gap-1 left-0 top-[90px] rounded-lg bg-titusDarkGrey"
+            ? "w-full absolute px-2 py-5 border-titusLightBorder max-h-[30vh] overflow-y-scroll flex flex-col gap-1 left-0 top-[90px] rounded-lg bg-titusDarkGrey"
             : "hidden"
         }
         onMouseLeave={() => setshowCurrencyList(false)}

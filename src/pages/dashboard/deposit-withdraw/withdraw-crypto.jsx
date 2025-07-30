@@ -122,7 +122,8 @@ const WithdrawCryptoPage = () => {
                 <div className="mt-5">
                   Your balance:{" "}
                   <span className="text-titusGreenFaded">
-                    {formatter(token?.balance).substring(1)} {token?.ticker}
+                    {formatter(token?.available_balance).substring(1)}{" "}
+                    {token?.ticker}
                   </span>
                 </div>
               </div>

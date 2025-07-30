@@ -1,6 +1,7 @@
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { useM2MContext } from "../../../../context/m2mContext";
 import { toDecimal } from "../../../../utils/helpers";
+import { useState } from "react";
 
 const CreateTradeSetPrice = () => {
   const {
@@ -12,6 +13,8 @@ const CreateTradeSetPrice = () => {
     setm2mPercent,
     m2moriginal_price,
   } = useM2MContext();
+
+  const [error, seterror] = useState();
 
   const handleIncreasePrice = () => {
     let pc = parseFloat((m2mpercent + 0.2).toFixed(2));
@@ -38,6 +41,13 @@ const CreateTradeSetPrice = () => {
     let newpriceDiff = parseFloat(
       ((pc / 100) * Number(m2moriginal_price)).toFixed(2)
     );
+    if (pc > 130) {
+      seterror("Cannot go higher than 130% of the market price");
+    } else if (pc < 70) {
+      seterror("Cannot go lower than 70% of the market price");
+    } else {
+      seterror();
+    }
     setm2mPercent(pc);
     setm2masset_price(newpriceDiff);
   };
@@ -46,6 +56,13 @@ const CreateTradeSetPrice = () => {
     let value = Number(val);
     let newPercent = Number((value * 100) / Number(m2moriginal_price));
     newPercent = parseFloat(newPercent.toFixed(2));
+    if (newPercent > 130) {
+      seterror("Cannot go higher than 130% of the market price");
+    } else if (newPercent < 70) {
+      seterror("Cannot go lower than 70% of the market price");
+    } else {
+      seterror();
+    }
     setm2mPercent(newPercent);
     setm2masset_price(val);
   };
@@ -98,6 +115,8 @@ const CreateTradeSetPrice = () => {
           {m2masset_price} {m2mCurrency?.ticker}
         </span>
       </div>
+
+      {error ? <div className="error">{error}</div> : null}
     </div>
   );
 };

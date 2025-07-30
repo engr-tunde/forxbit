@@ -2,38 +2,17 @@ import { useReducer, useState } from "react";
 import { FaArrowAltCircleDown, FaCheck, FaInfo } from "react-icons/fa";
 import { tradeTermsTags } from "../../../utils/data";
 import { useM2MContext } from "../../../context/m2mContext";
-import { postM2MTrade } from "../../../api";
-import { successNotification, errorNotification } from "../../../utils/helpers";
-import { useNavigate } from "react-router-dom";
 import HandleFuncButton from "../../forms/buttons/HandleFuncButton";
+import ConfirmPostTrade from "./ConfirmPostTrade";
 
 const CreateTradeForm3 = () => {
-  const {
-    m2mCurrency,
-    m2mAsset,
-    m2masset_price,
-    m2mTradeType,
-    min_limit,
-    max_limit,
-    fiat_amount,
-    token_amount,
-    payment_methods,
-    payment_time_limit,
-    terms_tags,
-    remarks,
-
-    setterms_tags,
-    setm2mCurrentStage,
-    setremarks,
-
-    setreset,
-  } = useM2MContext();
+  const { terms_tags, remarks, setterms_tags, setm2mCurrentStage, setremarks } =
+    useM2MContext();
   const [isSubmitting, setisSubmitting] = useState(false);
   const [disabled, setdisabled] = useState(false);
+  const [showConfirmTrade, setshowConfirmTrade] = useState();
 
   const [showAddTermsTags, setshowAddTermsTags] = useState(false);
-  const history = useNavigate();
-
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
   const handleAddTermsTags = (item) => {
@@ -51,44 +30,15 @@ const CreateTradeForm3 = () => {
   };
 
   const handleRemoveAddTermsTags = (item) => {
-    console.log("remove clicked");
     let termsArr = terms_tags;
     let updatedTermsArr = termsArr.filter((it) => it.title !== item.title);
     setterms_tags(updatedTermsArr);
     forceUpdate();
   };
 
-  const handleSubmit = async () => {
-    setisSubmitting(true);
-    setdisabled(true);
-    const payload = {
-      currency: m2mCurrency,
-      token: m2mAsset,
-      price: Number(m2masset_price),
-      type: m2mTradeType,
-      min_limit: Number(min_limit),
-      max_limit: Number(max_limit),
-      token_amount: Number(token_amount),
-      fiat_amount: Number(fiat_amount),
-      payment_methods: payment_methods,
-      completion_window: payment_time_limit,
-      terms_tags: terms_tags,
-      remarks: remarks,
-    };
-    console.log("payload", payload);
-    const response = await postM2MTrade(payload);
-    console.log("response", response);
-    if (response.status === 200) {
-      const data = response.data;
-      successNotification(data.message);
-      setreset(true);
-      setTimeout(() => history("/dashboard/m2m/my-trades"), 1500);
-      setisSubmitting(false);
-      setdisabled(false);
-    } else {
-      errorNotification(response?.data?.error);
-      setisSubmitting(false);
-      setdisabled(false);
+  const handleTradeShowConfirm = () => {
+    if (terms_tags.length) {
+      setshowConfirmTrade(true);
     }
   };
 
@@ -203,7 +153,7 @@ const CreateTradeForm3 = () => {
                 className="w-full h-24 border-0 bg-transparent text-white text-[14px] input-no-border"
                 value={remarks}
                 onChange={(e) => setremarks(e.target.value)}
-                maxlength="1000"
+                maxLength="1000"
               />
             </div>
             <div className="h-full w-[8%] text-sm flex items-end justify-end">
@@ -222,13 +172,20 @@ const CreateTradeForm3 = () => {
           Previous
         </div>
         <HandleFuncButton
-          handleSubmit={handleSubmit}
+          handleSubmit={handleTradeShowConfirm}
           title="Post Trade"
           className="w-[140px] btnn1"
           isSubmitting={isSubmitting}
           disabled={disabled}
         />
       </div>
+
+      <ConfirmPostTrade
+        showConfirmTrade={showConfirmTrade}
+        setshowConfirmTrade={setshowConfirmTrade}
+        setisSubmitting={setisSubmitting}
+        setdisabled={setdisabled}
+      />
     </>
   );
 };

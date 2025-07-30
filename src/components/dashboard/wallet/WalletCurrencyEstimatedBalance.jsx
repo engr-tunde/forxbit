@@ -48,7 +48,7 @@ const WalletCurrencyEstimatedBalance = ({
                 {selectedCurrency?.symbol}
                 {hideAssets
                   ? "*****"
-                  : formatter(selectedCurrency?.balance).substring(1)}
+                  : formatter(selectedCurrency?.available_balance).substring(1)}
               </span>
               <div className="relative">
                 <div

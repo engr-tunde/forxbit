@@ -17,7 +17,7 @@ const DepositWithdrawField = ({
         delete errors["amount"];
       } else if (val == 0) {
         errors.amount = "You cannot withdraw 0. Go higher or fund wallet!";
-      } else if (val > data?.balance) {
+      } else if (val > data?.available_balance) {
         errors.amount = "Insufficient balance. Go lower!";
       } else {
         // errors.amount = null;

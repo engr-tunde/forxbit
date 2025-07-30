@@ -10,9 +10,9 @@ const MyM2MTradesPage = () => {
   const [type, settype] = useState("");
   const [t_id, sett_id] = useState("");
   const [status, setstatus] = useState("");
-  const [reset, setreset] = useState(false);
+  const [setreset] = useState(false);
 
-  const { m2mPosts, m2mPostsLoading, m2mPostsError } = userM2MPosts();
+  const { m2mPosts, m2mPostsLoading } = userM2MPosts();
 
   const [data, setdata] = useState();
 
@@ -49,8 +49,6 @@ const MyM2MTradesPage = () => {
     //   setdata(m2mPosts?.data);
     // }
   }, [asset, type, status, t_id]);
-
-  console.log("data", data);
 
   return (
     <>

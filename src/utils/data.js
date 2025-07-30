@@ -645,6 +645,7 @@ export const userBalances = [
     balance: 0.29837,
     change: 1,
     price: 85000,
+    id: "bitcoin",
   },
   {
     token: "Ethereum",
@@ -652,6 +653,7 @@ export const userBalances = [
     balance: 2.29837,
     change: -1.5,
     price: 2530.4,
+    id: "ethereum",
   },
   {
     token: "Tether USD",
@@ -683,77 +685,7 @@ export const userBalances = [
   },
 ];
 
-export const dashboardMarketChart = [
-  {
-    title: "Holding",
-    assets: [
-      {
-        asset: {
-          name: "TetherUS",
-          ticker: "USDT",
-          balance: 532.5,
-        },
-        price: 1,
-        change: 0.02,
-      },
-      {
-        asset: {
-          name: "Binance Coin",
-          ticker: "BNB",
-          balance: 34.5,
-        },
-        price: 574,
-        change: -4.782,
-      },
-    ],
-  },
-  {
-    title: "Hot",
-    assets: [
-      {
-        asset: {
-          name: "TetherUS",
-          ticker: "USDT",
-          balance: 532.5,
-        },
-        price: 1,
-        change: 0.02,
-      },
-      {
-        asset: {
-          name: "Binance Coin",
-          ticker: "BNB",
-          balance: 34.5,
-        },
-        price: 574,
-        change: -4.782,
-      },
-    ],
-  },
-  {
-    title: "New Listing",
-    assets: [
-      {
-        asset: {
-          name: "TetherUS",
-          ticker: "USDT",
-          balance: 532.5,
-        },
-        price: 1,
-        change: 0.02,
-      },
-      {
-        asset: {
-          name: "Binance Coin",
-          ticker: "BNB",
-          balance: 34.5,
-        },
-        price: 574,
-        change: -4.782,
-      },
-    ],
-  },
-];
+export const dashboardMarketChart = ["Gainers", "Losers", "New"];
 
 export const listedTokens = [
   {

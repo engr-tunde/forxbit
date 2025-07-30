@@ -151,7 +151,7 @@ export const relatedLinks = [
   },
 ];
 
-export const dashActionsMenu = [
+export const dashWalletActionsMenu = [
   {
     title: "Buy/Sell",
     url: "/buy-sell",
@@ -176,4 +176,31 @@ export const dashActionsMenu = [
     img: "Convert-02.svg",
     hoverImg: "Convert-03.svg",
   },
+];
+
+export const dashActionsMenu = [
+  {
+    title: "Trade",
+    url: "/buy-sell",
+    img: "Buy-n-Sell-01.svg",
+    hoverImg: "Buy-n-Sell-03.svg",
+  },
+  // {
+  //   title: `Trade ${import.meta.env.VITE_P2P_NAME}`,
+  //   url: "/m2m",
+  //   img: "Trade-M2M-2.svg",
+  //   hoverImg: "Trade-M2M.svg",
+  // },
+  {
+    title: `Swap`,
+    url: "/swap",
+    img: "Asset-Swap-02.svg",
+    hoverImg: "Asset-Swap-03.svg",
+  },
+  // {
+  //   title: `Convert`,
+  //   url: "/dashboard/convert",
+  //   img: "Convert-02.svg",
+  //   hoverImg: "Convert-03.svg",
+  // },
 ];

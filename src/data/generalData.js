@@ -592,3 +592,76 @@ export const m2mTradeHeaderAssets = [
   "DOGE",
   "DAI",
 ];
+
+export const totalWalletValueAssets = [
+  {
+    name: "BTC",
+    id: "btc",
+    img: "BTC.png",
+  },
+  {
+    name: "ETH",
+    id: "eth",
+    img: "ETH.png",
+  },
+  {
+    name: "SOL",
+    id: "sol",
+    img: "SOL.png",
+  },
+  {
+    name: "BNB",
+    id: "bnb",
+    img: "BNB.png",
+  },
+  {
+    name: "USD",
+    id: "usd",
+    img: "USD.png",
+  },
+  {
+    name: "CAD",
+    id: "cad",
+    img: "CAD.png",
+  },
+  {
+    name: "GBP",
+    id: "gbp",
+    img: "GBP.png",
+  },
+  {
+    name: "EUR",
+    id: "eur",
+    img: "EUR.png",
+  },
+  {
+    name: "CN¥",
+    id: "cny",
+    img: "CNY.png",
+  },
+  {
+    name: "NGN",
+    id: "ngn",
+    img: "NGN.png",
+  },
+  {
+    name: "ZAR",
+    id: "zar",
+    img: "ZAR.png",
+  },
+  {
+    name: "GHS",
+    id: "ghs",
+    img: "GHS.png",
+  },
+  {
+    name: "KES",
+    id: "kes",
+    img: "KES.png",
+  },
+  {
+    name: "XOF",
+    id: "xof",
+    img: "XOF.png",
+  },
+];

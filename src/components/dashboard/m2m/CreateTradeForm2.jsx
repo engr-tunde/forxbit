@@ -7,6 +7,7 @@ import CTF2_SelectPaymentMethod from "./create-trade-form-2/CTF2_SelectPaymentMe
 import { fetchPaymentMethods } from "../../../api";
 import CTF2_PaymentMethods from "./create-trade-form-2/CTF2_PaymentMethods";
 import CTF2_TradeTimeWindow from "./create-trade-form-2/CTF2_TradeTimeWindow";
+import CTF2_OrderLimits from "./create-trade-form-2/CTF2_OrderLimits";
 
 const CreateTradeForm2 = () => {
   const {
@@ -15,9 +16,7 @@ const CreateTradeForm2 = () => {
     m2masset_price,
     setm2mCurrentStage,
     min_limit,
-    setmin_limit,
     max_limit,
-    setmax_limit,
     payment_time_limit,
     setpayment_time_limit,
     fiat_amount,
@@ -31,13 +30,6 @@ const CreateTradeForm2 = () => {
   } = useM2MContext();
 
   const { paymentMethods } = fetchPaymentMethods();
-
-  const [min_limitInAsset, setmin_limitInAsset] = useState(
-    min_limit / m2masset_price
-  );
-  const [max_limitInAsset, setmax_limitInAsset] = useState(
-    max_limit / m2masset_price
-  );
   const [disabled, setdisabled] = useState(true);
 
   const [showAddPaymentMethod, setShowAddPaymentMethod] = useState(false);
@@ -51,7 +43,7 @@ const CreateTradeForm2 = () => {
       setFiat_amount(amntInCurrency);
       if (
         m2mTradeType?.toLowerCase() == "sell" &&
-        m2masset_price > m2mAsset?.balance
+        m2masset_price > m2mAsset?.available_balance
       ) {
         settoken_amountErr(`You cannot sell more than your balance`);
       } else {
@@ -59,40 +51,6 @@ const CreateTradeForm2 = () => {
       }
     }
   }, [token_amount]);
-
-  useEffect(() => {
-    if (min_limit && min_limit > 0) {
-      let min = Number(min_limit / m2masset_price);
-      setmin_limitInAsset(min);
-
-      if (max_limit && min_limit >= max_limit) {
-        setmin_limErr(
-          "Minimum limit cannot be more than or equal to Maximum limit!"
-        );
-      } else if (fiat_amount && min_limit >= fiat_amount) {
-        setmin_limErr("Minimum limit must be lower!");
-      } else {
-        setmin_limErr();
-      }
-    }
-  }, [min_limit, fiat_amount, max_limit]);
-
-  useEffect(() => {
-    if (max_limit && max_limit > 0) {
-      let max = Number(max_limit / m2masset_price);
-      setmax_limitInAsset(max);
-
-      if (min_limit && max_limit <= min_limit) {
-        setmax_limErr(
-          "Maximum limit cannot be less than or equal to Minimum limit!"
-        );
-      } else if (fiat_amount && max_limit > fiat_amount) {
-        setmax_limErr("Already more than expected value!");
-      } else {
-        setmax_limErr();
-      }
-    }
-  }, [max_limit, fiat_amount, min_limit]);
 
   useEffect(() => {
     if (
@@ -147,8 +105,8 @@ const CreateTradeForm2 = () => {
 
   const ref = useRef();
   useOutsideClick(ref.current, () => {
-    // setShowAddPaymentMethod(false);
-    // setShowPaymentTimeWindow(false);
+    setShowAddPaymentMethod(false);
+    setShowPaymentTimeWindow(false);
   });
 
   const handleShowNextTab = () => {
@@ -156,59 +114,21 @@ const CreateTradeForm2 = () => {
   };
 
   const [token_amountErr, settoken_amountErr] = useState();
-  const [min_limErr, setmin_limErr] = useState();
-  const [max_limErr, setmax_limErr] = useState();
 
   const handleTokenAmount = (val) => {
     if (!val) {
-      let err = `How many ${m2mAsset?.symbol?.toUpperCase()} are you ${m2mTradeType}ing?`;
+      let err = `How many ${m2mAsset?.ticker} are you ${m2mTradeType}ing?`;
       settoken_amountErr(err);
       setToken_amount(val);
     } else if (
       m2mTradeType?.toLowerCase() == "sell" &&
-      val > m2mAsset?.balance
+      val > m2mAsset?.available_balance
     ) {
       settoken_amountErr(`You cannot sell more than your balance`);
       setToken_amount(val);
     } else {
       settoken_amountErr();
       setToken_amount(val);
-    }
-  };
-
-  const handleMinAmount = (val) => {
-    if (!val || val == 0) {
-      setmin_limErr(`Minimum limit cannot be empty`);
-      setmin_limit(val);
-    } else if (max_limit && val >= max_limit) {
-      setmin_limErr(
-        "Minimum limit cannot be more than or equal to Maximum limit!"
-      );
-      setmin_limit(val);
-    } else if (fiat_amount && val >= fiat_amount) {
-      setmin_limErr("Minimum limit must be lower!");
-      setmin_limit(val);
-    } else {
-      setmin_limErr();
-      setmin_limit(val);
-    }
-  };
-
-  const handleMaxAmount = (val) => {
-    if (!val || val == 0) {
-      setmax_limErr(`Maximum limit cannot be empty`);
-      setmax_limit(val);
-    } else if (min_limit && val <= min_limit) {
-      setmax_limErr(
-        "Maximum limit cannot be less than or equal to Minimum limit!"
-      );
-      setmax_limit(val);
-    } else if (fiat_amount && val > fiat_amount) {
-      setmax_limErr("Already more than expected value!");
-      setmax_limit(val);
-    } else {
-      setmax_limErr();
-      setmax_limit(val);
     }
   };
 
@@ -223,7 +143,7 @@ const CreateTradeForm2 = () => {
             <div className="text-sm">
               (balance:{" "}
               <span className="text-titusYellow">
-                {m2mAsset?.balance} {m2mAsset?.ticker}
+                {m2mAsset?.available_balance} {m2mAsset?.ticker}
               </span>
               )
             </div>
@@ -258,43 +178,7 @@ const CreateTradeForm2 = () => {
           Order Limits (in fiat)
         </div>
         <div className="w-full md:w-[95%] flex justify-between">
-          <div className="w-[43%] flex flex-col gap-1">
-            <div className="w-full flex items-center justify-between border-[1px] border-titusLightBorder rounded-lg md:py-1 px-2 md:px-3">
-              <input
-                type="number"
-                className="border-0 bg-transparent text-white font-medium text-[16px] input-no-border w-[85%]"
-                value={min_limit}
-                onChange={(e) => handleMinAmount(e.target.value)}
-              />
-              <div className="text-sm">{m2mCurrency.ticker}</div>
-            </div>
-            <div className="text-[12px] font-medium">
-              ≈ {min_limitInAsset && toDecimal(min_limitInAsset, 6)}{" "}
-              {m2mAsset.ticker}
-            </div>
-            {min_limErr ? (
-              <div className="error text-xs">{min_limErr}</div>
-            ) : null}
-          </div>
-          <div className="pt-4 text-white">~</div>
-          <div className="w-[43%] flex flex-col gap-1">
-            <div className="w-full flex items-center justify-between border-[1px] border-titusLightBorder rounded-lg md:py-1 px-2 md:px-3">
-              <input
-                type="number"
-                className="border-0 bg-transparent text-white font-medium text-[16px] input-no-border w-[85%]"
-                value={max_limit}
-                onChange={(e) => handleMaxAmount(e.target.value)}
-              />
-              <div className="text-sm">{m2mCurrency.ticker}</div>
-            </div>
-            <div className="text-[12px] font-medium">
-              ≈ {max_limitInAsset && toDecimal(max_limitInAsset, 8)}{" "}
-              {m2mAsset.ticker}
-            </div>
-            {max_limErr ? (
-              <div className="error text-xs">{max_limErr}</div>
-            ) : null}
-          </div>
+          <CTF2_OrderLimits />
         </div>
       </div>
 
@@ -313,7 +197,7 @@ const CreateTradeForm2 = () => {
           <div
             className="w-max flex gap-2 items-center btnn-dark py-[6px] px-10 md:px-14 text-sm"
             onClick={() => setShowAddPaymentMethod(true)}
-            // onMouseOver={() => setShowAddPaymentMethod(true)}
+            onMouseOver={() => setShowAddPaymentMethod(true)}
           >
             <FaPlus />
             <span>Add </span>
