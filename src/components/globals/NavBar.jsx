@@ -227,7 +227,7 @@ const NavBar = () => {
             )}
 
             <div onClick={handleNavToggle} className="md:hidden">
-              <AiOutlineMenu className="text-gray-100" size={22} />
+              <AiOutlineMenu className="text-gray-100" size={30} />
             </div>
           </div>
         </div>
