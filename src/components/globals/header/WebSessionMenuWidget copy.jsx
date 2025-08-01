@@ -16,7 +16,7 @@ import Loader from "../Loader";
 import ErrorWidget from "../ErrorWidget";
 import Cookies from "js-cookie";
 
-const SessionMenuWidget = ({ nav, setNav }) => {
+const WebSessionMenuWidget = ({ nav, setNav }) => {
   const history = useNavigate();
   const { user, userLoading, userError } = userProfile();
   const [showLang, setshowLang] = useState(false);
@@ -168,4 +168,4 @@ const SessionMenuWidget = ({ nav, setNav }) => {
   );
 };
 
-export default SessionMenuWidget;
+export default WebSessionMenuWidget;

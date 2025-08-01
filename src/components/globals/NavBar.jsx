@@ -10,6 +10,7 @@ import {
   FaTelegram,
   FaDiscord,
   FaUser,
+  FaSignOutAlt,
 } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { useOutsideClick } from "../../utils/helpers";
@@ -17,7 +18,8 @@ import { companyMenu, exploreMenu } from "../../utils/data";
 import NoSessionMenuWidget from "./header/NoSessionMenuWidget";
 import { checkSession } from "../../api";
 import Loader from "./Loader";
-import SessionMenuWidget from "./header/SessionMenuWidget";
+import SessionMenuWidget from "./header/WebSessionMenuWidget";
+import WebSessionMenuWidget from "./header/WebSessionMenuWidget";
 
 const NavBar = () => {
   const [nav, setNav] = useState(false);
@@ -44,11 +46,23 @@ const NavBar = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
 
+  const handleLogout = async () => {
+    const response = await userLogout();
+    if (response.status === 200) {
+      setNav(false);
+      successNotification(response.data.message);
+      Cookies.remove("u-x");
+      history("/login");
+    } else {
+      errorNotification(response?.data?.error);
+    }
+  };
+
   return (
     <>
-      <div className="fixed w-full shadow-lg z-[100] py-[1.5%] md:py-[3px] px-2 md:px-10 lg:px-16 bg-titusDarkGrey">
+      <div className="fixed w-full shadow-lg z-[100] py-[1.5%] md:py-[3px] px-5 md:px-10 lg:px-16 bg-titusDarkGrey">
         <div className="flex justify-between items-center w-full h-full">
-          <div className="flex items-center gap-14">
+          <div className="flex items-center gap-10 lg:gap-14">
             <Link to="/" className="flex items-center justify-center">
               <img
                 src="/assets/images/logo-green-2.png"
@@ -67,7 +81,7 @@ const NavBar = () => {
             </Link>
             <div
               // style={{ color: `${linkColor}` }}
-              className="hidden md:flex gap-10 text-[14px] font-medium items-center"
+              className="hidden md:flex gap-6 lg:gap-10 text-[14px] font-medium items-center"
             >
               <Link
                 to={`/${import.meta.env.VITE_P2P_NAME.toLowerCase()}`}
@@ -148,7 +162,11 @@ const NavBar = () => {
               </div>
               <Link
                 to="/support"
-                className={pathname === "/support" ? "active" : "menu-link"}
+                className={
+                  pathname === "/support"
+                    ? "active"
+                    : "menu-link hidden lg:inline"
+                }
                 onMouseEnter={() => {
                   setShowExplore(false);
                   setShowCompany(false);
@@ -201,14 +219,16 @@ const NavBar = () => {
             </div>
           </div>
 
-          {session ? (
-            <SessionMenuWidget nav={nav} setNav={setNav} />
-          ) : (
-            <NoSessionMenuWidget handleNavToggle={handleNavToggle} />
-          )}
+          <div className="flex items-center">
+            {session ? (
+              <WebSessionMenuWidget nav={nav} setNav={setNav} />
+            ) : (
+              <NoSessionMenuWidget handleNavToggle={handleNavToggle} />
+            )}
 
-          <div onClick={handleNavToggle} className="md:hidden">
-            <AiOutlineMenu className="text-gray-100" size={22} />
+            <div onClick={handleNavToggle} className="md:hidden">
+              <AiOutlineMenu className="text-gray-100" size={22} />
+            </div>
           </div>
         </div>
 
@@ -228,15 +248,15 @@ const NavBar = () => {
             }
           >
             {session && (
-              <Link
-                to="/dashboard"
-                className="w-[37%] flex btnn-dark py-[8px] px-4 text-[13px] font-semibold justify-center items-center ease-in duration-300 mb-4"
+              <div
+                onClick={handleLogout}
+                className="w-[28%] flex btnn-dark py-[8px] px-4 text-[13px] font-semibold justify-center items-center ease-in duration-300 mb-4"
               >
-                <span className="mr-2">Dashboard</span>
+                <span className="mr-2">Logout</span>
                 <span>
-                  <FaUser className="text-titusYellow" />
+                  <FaSignOutAlt className="text-titusYellow" />
                 </span>
-              </Link>
+              </div>
             )}
             <div
               onClick={handleNavToggle}

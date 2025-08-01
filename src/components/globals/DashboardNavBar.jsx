@@ -1,9 +1,7 @@
-import React, { useRef } from "react";
-
+import { useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useOutsideClick } from "../../utils/helpers";
-
-import SessionMenuWidget from "./header/SessionMenuWidget";
+import DashSessionMenuWidget from "./header/DashSessionMenuWidget";
 
 const DashboardNavBar = ({ nav, setNav }) => {
   let location = useLocation();
@@ -40,7 +38,7 @@ const DashboardNavBar = ({ nav, setNav }) => {
               </Link>
             </div>
 
-            <SessionMenuWidget nav={nav} setNav={setNav} />
+            <DashSessionMenuWidget nav={nav} setNav={setNav} />
           </div>
         </div>
       </div>

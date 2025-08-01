@@ -6,6 +6,8 @@ import Loader from "../../../components/globals/Loader";
 import { useFetchCG } from "../../../api/coinGecko";
 import { dateFormatter, formatter } from "../../../utils/helpers";
 import { userSettings } from "../../../api";
+import SingleCoinMCInfo from "../../../components/dashboard/wallet/SingleCoinMCInfo";
+import SingleCoinTradeWidget from "../../../components/dashboard/wallet/SingleCoinTradeWidget";
 
 const SingleAssetPage = () => {
   const [hideAssets, sethideAssets] = useState(false);
@@ -177,9 +179,6 @@ const SingleAssetPage = () => {
     }
   }, [data]);
 
-  console.log("token_bal_value", token_bal_value);
-  console.log("data", data);
-
   const handleCryptoDepoLink = () => {
     history(`/dashboard/deposit-crypto`, {
       state: {
@@ -294,37 +293,15 @@ const SingleAssetPage = () => {
                 </div>
               </div>
 
-              <div className="w-full bg-titusDashCardDarkBG p-7 flex flex-col gap-5">
-                <div className="text-white font-medium">Info</div>
-                <div className="flex items-center justify-between text-sm pb-1 border-b-[1px] border-b-titusLightBorder">
-                  <div className="">Market Cap</div>
-                  <div className="text-white font-medium">
-                    {currencySymbol}
-                    {formatter(market_cap).substring(1)}
-                  </div>
-                </div>
-                <div className="flex items-center justify-between text-sm pb-1 border-b-[1px] border-b-titusLightBorder">
-                  <div className="">Fully Diluted Valuation</div>
-                  <div className="text-white font-medium">
-                    {currencySymbol}
-                    {formatter(fully_diluted_valuation).substring(1)}
-                  </div>
-                </div>
-                <div className="flex items-center justify-between text-sm pb-1 border-b-[1px] border-b-titusLightBorder">
-                  <div className="">Total Supply</div>
-                  <div className="text-white font-medium">
-                    {currencySymbol}
-                    {formatter(total_supply).substring(1)}
-                  </div>
-                </div>
-                <div className="flex items-center justify-between text-sm pb-1 border-b-[1px] border-b-titusLightBorder">
-                  <div className="">Circulating Supply</div>
-                  <div className="text-white font-medium">
-                    {currencySymbol}
-                    {formatter(circulating_supply).substring(1)}
-                  </div>
-                </div>
-              </div>
+              <SingleCoinTradeWidget suppliedAsset={suppliedAsset} />
+
+              <SingleCoinMCInfo
+                currencySymbol={currencySymbol}
+                market_cap={market_cap}
+                fully_diluted_valuation={fully_diluted_valuation}
+                total_supply={total_supply}
+                circulating_supply={circulating_supply}
+              />
 
               <div className="w-full bg-titusDashCardDarkBG p-7 flex flex-col gap-5">
                 <div className="text-white font-medium">Historical Data</div>
