@@ -91,7 +91,7 @@ const DashSessionMenuWidget = ({ nav, setNav }) => {
         <div
           className={
             nav
-              ? "absolute z-[150] -left-20 lg:left-0 top-16 lg:top-20 w-[50vw] lg:w-[300px] bg-titusDarkBG p-5  ease-in duration-500 border-[1px] border-titusLightBorder rounded-lg"
+              ? "absolute z-[150] -left-24 lg:left-0 top-16 lg:top-20 w-[50vw] lg:w-[300px] bg-titusDarkBG p-5  ease-in duration-500 border-[1px] border-titusLightBorder rounded-lg"
               : "hidden"
           }
         >
