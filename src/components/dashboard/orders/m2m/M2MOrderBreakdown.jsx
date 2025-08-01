@@ -35,13 +35,13 @@ const M2MOrderBreakdown = ({ orderData }) => {
             <span>Trade Pair</span>
             {orderData?.order.type === "Sell" ? (
               <span className="font-medium text-titusChatText">
-                {orderData?.order?.token?.symbol}/
+                {orderData?.order?.token?.ticker}/
                 {orderData?.order?.currency.ticker}
               </span>
             ) : (
               <span className="font-medium text-titusChatText">
                 {orderData?.order?.currency.ticker}/
-                {orderData?.order?.token?.symbol}
+                {orderData?.order?.token?.ticker}
               </span>
             )}
           </div>
@@ -64,7 +64,7 @@ const M2MOrderBreakdown = ({ orderData }) => {
           <div className="flex items-center justify-between">
             <span>Token Amount</span>
             <span className="font-medium text-titusYellowFaded">
-              {`${orderData?.order?.token_amount} ${orderData?.order?.token?.symbol}`}
+              {`${orderData?.order?.token_amount} ${orderData?.order?.token?.ticker}`}
             </span>
           </div>
         </div>

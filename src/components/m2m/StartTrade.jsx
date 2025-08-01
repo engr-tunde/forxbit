@@ -174,7 +174,7 @@ const StartTrade = ({
                       <div className="text-sm text-white">
                         {selectedTrade?.order?.type === "Sell"
                           ? "You Pay"
-                          : "You Sell"}
+                          : "You Get"}
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="w-[50%] md:w-[70%]">
@@ -248,8 +248,8 @@ const StartTrade = ({
                           />
                           <div className="text-sm">
                             {selectedTrade?.order?.type === "Sell"
-                              ? selectedTrade?.order?.currency?.ticker
-                              : selectedTrade?.order?.token.ticker}
+                              ? selectedTrade?.order?.token.symbol
+                              : selectedTrade?.order?.currency?.ticker}
                           </div>
                         </div>
                       </div>
