@@ -81,6 +81,8 @@ const StartTrade = ({
     // };
   };
 
+  console.log("selectedTrade?.order?.type", selectedTrade?.order?.type);
+
   return (
     <div
       className={
@@ -206,16 +208,16 @@ const StartTrade = ({
                             <img
                               src={
                                 selectedTrade?.order?.type === "Sell"
-                                  ? selectedTrade?.order?.currency?.icon
-                                  : selectedTrade?.order?.token.logoURI
+                                  ? selectedTrade?.order?.token.logoURI
+                                  : selectedTrade?.order?.currency?.icon
                               }
                               alt={import.meta.env.VITE_APP_NAME}
                               className="h-6 w-6"
                             />
                             <div className="text-sm">
                               {selectedTrade?.order?.type === "Sell"
-                                ? selectedTrade?.order?.currency?.ticker
-                                : selectedTrade?.order?.token.symbol}
+                                ? selectedTrade?.order?.token.ticker
+                                : selectedTrade?.order?.currency?.ticker}
                             </div>
                           </div>
                         </div>
@@ -226,7 +228,7 @@ const StartTrade = ({
                       <div className="text-sm text-white">
                         {selectedTrade?.order?.type === "Sell"
                           ? "You Get"
-                          : "You Receive"}
+                          : "Buyer Receive"}
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="w-[70%]">
@@ -238,16 +240,16 @@ const StartTrade = ({
                           <img
                             src={
                               selectedTrade?.order?.type === "Sell"
-                                ? selectedTrade?.order?.token?.logoURI
-                                : selectedTrade?.order?.currency.icon
+                                ? selectedTrade?.order?.currency.icon
+                                : selectedTrade?.order?.token?.logoURI
                             }
                             alt={import.meta.env.VITE_APP_NAME}
                             className="h-6 w-6"
                           />
                           <div className="text-sm">
                             {selectedTrade?.order?.type === "Sell"
-                              ? selectedTrade?.order?.token.symbol
-                              : selectedTrade?.order?.currency?.ticker}
+                              ? selectedTrade?.order?.currency?.ticker
+                              : selectedTrade?.order?.token.ticker}
                           </div>
                         </div>
                       </div>

@@ -21,7 +21,7 @@ const OpenAds = ({
         item?.user?.username.toLowerCase()
       ) {
         errorNotification(
-          `You cannot ${item.order.type} ${item.order.token.symbol} from yourself. Trade with another user`
+          `You cannot ${item.order.type} ${item.order.token.ticker} from yourself. Trade with another user`
         );
       } else {
         setShowStartTrade(true);
@@ -94,7 +94,7 @@ const OpenAds = ({
             </div>
             <div className="col-span-2 lg:col-span-2 flex flex-col gap-1">
               <span className="text-sm text-[#ffffffc4]">
-                {item.order.token_amount} {item.order.token.symbol}
+                {item.order.token_amount} {item.order.token.ticker}
               </span>
               <span className="text-[13px] text-white">
                 <span className="lg:hidden">Order Limit: </span>
@@ -128,8 +128,8 @@ const OpenAds = ({
                 }
               >
                 {item.order.type === "Sell"
-                  ? `Buy ${item.order.token.symbol}`
-                  : `Sell ${item.order.token.symbol}`}
+                  ? `Buy ${item.order.token.ticker}`
+                  : `Sell ${item.order.token.ticker}`}
               </div>
             </div>
           </div>
