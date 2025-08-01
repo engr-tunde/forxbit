@@ -60,7 +60,7 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="fixed w-full shadow-lg z-[100] py-[1.5%] md:py-[3px] px-5 md:px-10 lg:px-16 bg-titusDarkGrey">
+      <div className="fixed w-full shadow-lg z-[100] py-[1.5%] md:py-[3px] px-7 md:px-10 lg:px-16 bg-titusDarkGrey">
         <div className="flex justify-between items-center w-full h-full">
           <div className="flex items-center gap-10 lg:gap-14">
             <Link to="/" className="flex items-center justify-center">
@@ -219,7 +219,7 @@ const NavBar = () => {
             </div>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             {session ? (
               <WebSessionMenuWidget nav={nav} setNav={setNav} />
             ) : (
