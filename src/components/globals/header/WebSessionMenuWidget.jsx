@@ -1,12 +1,20 @@
 import { useState } from "react";
-import { userLogout, userProfile } from "../../../api";
+import {
+  fetchCurrencies,
+  updateUserSettings,
+  userLogout,
+  userProfile,
+} from "../../../api";
 import { errorNotification, successNotification } from "../../../utils/helpers";
 import { Link, useNavigate } from "react-router-dom";
 import {
+  FaArrowAltCircleRight,
   FaArrowCircleRight,
   FaCog,
   FaDownload,
   FaGlobe,
+  FaHome,
+  FaMoneyBill,
   FaQuestionCircle,
   FaSignOutAlt,
   FaTimesCircle,
@@ -21,6 +29,8 @@ const WebSessionMenuWidget = ({ nav, setNav }) => {
   const { user, userLoading, userError } = userProfile();
   const [showLang, setshowLang] = useState(false);
   const [showLogout, setshowLogout] = useState(false);
+  const [showChangeCurrency, setshowChangeCurrency] = useState(false);
+  const { currencies, currenciesLoading } = fetchCurrencies();
 
   const handleNavToggle = () => {
     setNav(!nav);
@@ -35,6 +45,20 @@ const WebSessionMenuWidget = ({ nav, setNav }) => {
       history("/login");
     } else {
       errorNotification(response?.data?.error);
+    }
+  };
+
+  const handleUpdateCurrency = async (item) => {
+    try {
+      const response = await updateUserSettings({ currency: item });
+      if (response.status === 200) {
+        setshowChangeCurrency(false);
+        window.location.reload();
+      } else {
+        errorNotification(response?.data?.error);
+      }
+    } catch (error) {
+      errorNotification(error?.response?.data?.error);
     }
   };
 
@@ -65,7 +89,11 @@ const WebSessionMenuWidget = ({ nav, setNav }) => {
                   {user?.data?.name?.split(" ")[1]?.charAt(0)}
                 </div>
                 <div className="flex gap-2 md:gap-7 items-center">
-                  <div className="text-sm font-medium">Dashboard</div>
+                  <div className="text-sm font-medium">
+                    {`${user?.data?.name?.split(" ")[0]} ${
+                      user?.data?.name?.split(" ")[1]
+                    }`.substr(0, 8)}
+                  </div>
                 </div>
               </div>
             </>
@@ -91,12 +119,22 @@ const WebSessionMenuWidget = ({ nav, setNav }) => {
             <div className="flex flex-col gap-6 text-sm text-[#ffffffdc] lg:font-normal">
               <Link
                 onClick={() => setNav(false)}
-                to="/dashboard/account/manage-profile"
+                to="/dashboard"
                 className="flex items-center gap-4"
               >
-                <FaUserCircle className="text-[17px]" />
-                <span className="">Manage Profile</span>
+                <FaHome className="text-[17px]" />
+                <span className="">Dashboard</span>
               </Link>
+              <div
+                onClick={() => {
+                  setNav(false);
+                  setshowChangeCurrency(true);
+                }}
+                className="flex items-center gap-4 cursor-pointer"
+              >
+                <FaMoneyBill className="text-[17px]" />
+                <span className="">Change Currency</span>
+              </div>
               <Link
                 onClick={() => setNav(false)}
                 to="/"
@@ -170,6 +208,46 @@ const WebSessionMenuWidget = ({ nav, setNav }) => {
         className="hidden md:block scaleItem cursor-pointer text-white"
       >
         <FaDownload className="text-sm" />
+      </div>
+
+      <div
+        className={
+          showChangeCurrency
+            ? "fixed w-screen h-screen top-0 left-0 flex items-center justify-center bg-black/50"
+            : "hidden"
+        }
+        style={{
+          backdropFilter: showChangeCurrency ? "blur(5px)" : "",
+        }}
+      >
+        <div className="w-[85%] mx-auto md:w-[500px]  bg-titusDashCardDarkBG p-5 md:p-7">
+          <div className="flex justify-between items-center mb-5">
+            <div className="text-white font-medium">Change App Currency</div>
+            <div className="p-1 cursor-pointer hover:text-white ease-in duration-200">
+              <FaTimesCircle
+                onClick={() => setshowChangeCurrency(false)}
+                className="text-xl"
+              />
+            </div>
+          </div>
+          <div className="h-[350px] md:h-[400px] overflow-y-scroll">
+            {currencies &&
+              currencies?.data?.map((item, i) => (
+                <div
+                  className="p-3 py-4 border-b-titusLightBorder border-b-[0.4px] flex items-center justify-between cursor-pointer"
+                  key={i}
+                  onClick={() => handleUpdateCurrency(item)}
+                >
+                  <div className="flex gap-5">
+                    <img src={item?.icon} alt="" className="w-6 h-6" />
+                    <span className="text-sm">{item?.name}</span>
+                  </div>
+                  <FaArrowAltCircleRight className="text-white" />
+                </div>
+              ))}
+            {currenciesLoading ? <Loader /> : null}
+          </div>
+        </div>
       </div>
     </div>
   );

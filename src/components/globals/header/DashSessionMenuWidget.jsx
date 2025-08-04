@@ -15,6 +15,7 @@ import {
   FaCog,
   FaDownload,
   FaGlobe,
+  FaMoneyBill,
   FaQuestionCircle,
   FaSignOutAlt,
   FaTimesCircle,
@@ -52,7 +53,7 @@ const DashSessionMenuWidget = ({ nav, setNav }) => {
       const response = await updateUserSettings({ currency: item });
       if (response.status === 200) {
         setshowChangeCurrency(false);
-        window.location.reload();
+        setNav(!nav);
       } else {
         errorNotification(response?.data?.error);
       }
@@ -119,7 +120,7 @@ const DashSessionMenuWidget = ({ nav, setNav }) => {
                 }}
                 className="flex items-center gap-4 cursor-pointer"
               >
-                <FaCog className="text-[17px]" />
+                <FaMoneyBill className="text-[17px]" />
                 <span className="">Change Currency</span>
               </div>
               <Link
