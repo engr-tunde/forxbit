@@ -41,32 +41,42 @@ const WebSessionMenuWidget = ({ nav, setNav }) => {
   return (
     <div className="flex items-center gap-4 md:gap-5">
       <div className="relative">
-        <div
-          className="flex items-center gap-2 md:gap-3 bg-titusDarkLightBG p-2 rounded-md text-white cursor-pointer"
-          onClick={handleNavToggle}
-        >
+        <div className="flex bg-titusDarkLightBG p-2 lg:px-3 rounded-md text-white cursor-pointer">
           {user ? (
             <>
-              <div className="h-6 w-6 md:h-7 md:w-7 rounded-full bg-titusYellow flex items-center justify-center text-black text-sm md:text-md font-medium">
-                {user?.data?.name?.split(" ")[0]?.charAt(0)}
-                {user?.data?.name?.split(" ")[1]?.charAt(0)}
-              </div>
               <Link
                 to="/dashboard"
-                className="flex gap-2 md:gap-7 items-center"
+                className="flex md:hidden items-center gap-2 md:gap-3"
               >
-                <div className="text-sm font-medium">Dashboard</div>
+                <div className="h-6 w-6 md:h-7 md:w-7 rounded-full bg-titusYellow flex items-center justify-center text-black text-sm md:text-md font-medium">
+                  {user?.data?.name?.split(" ")[0]?.charAt(0)}
+                  {user?.data?.name?.split(" ")[1]?.charAt(0)}
+                </div>
+                <div className="flex gap-2 md:gap-7 items-center">
+                  <div className="text-sm font-medium">Dashboard</div>
+                </div>
               </Link>
+              <div
+                className="hidden md:flex items-center gap-2 md:gap-3"
+                onClick={handleNavToggle}
+              >
+                <div className="h-6 w-6 md:h-7 md:w-7 rounded-full bg-titusYellow flex items-center justify-center text-black text-sm md:text-md font-medium">
+                  {user?.data?.name?.split(" ")[0]?.charAt(0)}
+                  {user?.data?.name?.split(" ")[1]?.charAt(0)}
+                </div>
+                <div className="flex gap-2 md:gap-7 items-center">
+                  <div className="text-sm font-medium">Dashboard</div>
+                </div>
+              </div>
             </>
           ) : null}
-          {/* {userLoading && <Loader />} */}
-          {/* {userError ? <ErrorWidget error={userError} color="white" /> : null} */}
         </div>
+
         {/* menu */}
         <div
           className={
             nav
-              ? "absolute z-[150] -left-5 lg:left-0 top-16 lg:top-20 w-[50vw] lg:w-[300px] bg-titusDarkBG p-5  ease-in duration-500 border-[1px] border-titusLightBorder rounded-lg"
+              ? "absolute z-[150] -left-14 lg:-left-14 top-[70px] lg:top-20 w-[30vw] lg:w-[300px] bg-titusDarkBG p-5  ease-in duration-500 border-[1px] border-titusLightBorder rounded-lg"
               : "hidden"
           }
         >
@@ -118,7 +128,7 @@ const WebSessionMenuWidget = ({ nav, setNav }) => {
         </div>
       </div>
 
-      <div className="hidden md:block relative">
+      <div className="hidden lg:block relative">
         <FaGlobe
           className="hidden lg:block text-xl text-white cursor-pointer"
           onMouseEnter={() => setshowLang(true)}
@@ -135,7 +145,7 @@ const WebSessionMenuWidget = ({ nav, setNav }) => {
         </div>
       </div>
 
-      <div className="relative">
+      <div className="hidden lg:block relative">
         <FaSignOutAlt
           className="hidden lg:block text-xl text-white cursor-pointer"
           onMouseEnter={() => setshowLogout(true)}
