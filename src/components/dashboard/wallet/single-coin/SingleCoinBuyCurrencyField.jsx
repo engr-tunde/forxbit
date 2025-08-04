@@ -1,6 +1,6 @@
-import DepositWithdrawDropdownMini from "../deposit-withdraw/DepositWithdrawDropdownMini";
+import DepositWithdrawDropdownMini from "./DepositWithdrawDropdownMini";
 
-const SingleCoinBuyField = ({
+const SingleCoinBuyTokenField = ({
   data,
   setdata,
   array,
@@ -37,41 +37,6 @@ const SingleCoinBuyField = ({
           array={array}
           type={assetType}
         />
-        <div className="w-[30%]">
-          {type == "fiat" ? (
-            <img
-              src={data?.icon}
-              alt={import.meta.env.VITE_APP_NAME}
-              className="w-5 rounded-full"
-            />
-          ) : (
-            <div className="relative">
-              <img
-                alt=""
-                src={data.logoURI}
-                width={20}
-                height={20}
-                className="md:hidden xl:block w-6 h-6 rounded-full object-cover"
-              />
-              {data.network && (
-                <img
-                  alt=""
-                  src={
-                    networks &&
-                    networks?.data.filter((net) => net.name == data.network)[0]
-                      ?.logoURI
-                  }
-                  width={20}
-                  height={20}
-                  className="absolute bottom-0 -right-1 w-[14px] h-[14px] rounded-full object-cover"
-                />
-              )}
-            </div>
-          )}
-          <div className="text-white text-sm">
-            {data?.ticker?.toUpperCase()}
-          </div>
-        </div>
       </div>
 
       <div className="w-[1px] h-[53px] bg-titusLightBorder"></div>
@@ -90,4 +55,4 @@ const SingleCoinBuyField = ({
   );
 };
 
-export default SingleCoinBuyField;
+export default SingleCoinBuyTokenField;

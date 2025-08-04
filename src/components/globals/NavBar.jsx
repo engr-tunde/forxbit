@@ -60,9 +60,9 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="fixed w-full shadow-lg z-[100] py-[1.5%] md:py-[3px] px-6 pe-10 md:px-10 lg:px-16 bg-titusDarkGrey">
+      <div className="fixed w-full shadow-lg z-[100] py-[1.5%] md:py-[3px] px-6 pe-10 md:px-6 lg:px-16 bg-titusDarkGrey">
         <div className="flex justify-between items-center w-full h-full">
-          <div className="flex items-center gap-10 lg:gap-14">
+          <div className="flex items-center gap-10 md:gap-6 lg:gap-14">
             <Link to="/" className="flex items-center justify-center">
               <img
                 src="/assets/images/logo-green-2.png"
@@ -81,7 +81,7 @@ const NavBar = () => {
             </Link>
             <div
               // style={{ color: `${linkColor}` }}
-              className="hidden md:flex gap-6 lg:gap-10 text-[14px] font-medium items-center"
+              className="hidden md:flex gap-6 md:gap-4 lg:gap-10 text-[14px] font-medium items-center"
             >
               <Link
                 to={`/${import.meta.env.VITE_P2P_NAME.toLowerCase()}`}
