@@ -3,7 +3,6 @@ import { errorNotification, successNotification } from "../../utils/helpers";
 import { useSwapContext } from "../../context/swapContext";
 import SwapTokenField from "./SwapTokenField";
 import SwapExternalAddress from "./SwapExternalAddress";
-import { FaTimesCircle } from "react-icons/fa";
 import {
   CG_fetchSwapTokens,
   changeNowFetcher,
@@ -79,9 +78,6 @@ const SwapPageBody = () => {
       setto_token(fromtk);
       setfrom_token_amount(totk_amnt);
       setrecipient_address("");
-      successNotification("FROM token switched to TO token");
-    } else {
-      errorNotification("Choose tokens first!");
     }
   };
 
@@ -210,14 +206,12 @@ const SwapPageBody = () => {
           </div>
         </div>
 
-        {/* {show_recipient ? ( */}
         <div className="w-full flex flex-col gap-3 md:gap-3">
           <div className="text-sm md:text-md font-medium text-white">
             Recipient Address
           </div>
           <SwapExternalAddress />{" "}
         </div>
-        {/* ) : null} */}
 
         <div
           className={`my-5 w-full btnn1 py-[12px] px-8 flex justify-center items-center gap-2 text-sm font-medium ${

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { FaArrowCircleDown, FaChevronDown } from "react-icons/fa";
+import { useEffect, useRef, useState } from "react";
+import { FaChevronDown } from "react-icons/fa";
 import { useOutsideClick } from "../../utils/helpers";
 import InfiniteScroll from "react-infinite-scroller";
 
