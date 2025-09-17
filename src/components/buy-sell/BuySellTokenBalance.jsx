@@ -1,8 +1,7 @@
-import React from "react";
 import { useBuySellContext } from "../../context/buySellContext";
 
 const BuySellTokenBalance = () => {
-  const { token } = useBuySellContext();
+  const { token, currency } = useBuySellContext();
   return (
     <div className="w-max rounded-md p-2 bg-titusDashCardDarkItemBG text-sm">
       <span>Available balance</span>{" "}

@@ -38,13 +38,13 @@ const NetworkDropdown = ({ data, setdata, array, firstItem }) => {
           }}
         >
           <div
-            className={
-              !Object.keys(data).length
-                ? "text-white text-sm font-medium"
-                : "text-white text-sm font-light"
-            }
+          // className={
+          //   !Object.keys(data).length
+          //     ? "text-white text-sm font-medium"
+          //     : "text-white text-sm font-light"
+          // }
           >
-            {firstItem}
+            {/* {firstItem} */}dddd
           </div>
         </div>
         {array &&

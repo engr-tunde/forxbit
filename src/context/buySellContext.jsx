@@ -6,8 +6,8 @@ const BuySellProvider = ({ children }) => {
   const [page, setpage] = useState(1);
   const [type, settype] = useState("Buy");
   const [recipient, setrecipient] = useState("External");
-  const [recipientAddress, setrecipientAddress] = useState("");
-  const [recipientNetwork, setrecipientNetwork] = useState("");
+  const [recipientAddress, setrecipientAddress] = useState();
+  const [recipientNetwork, setrecipientNetwork] = useState();
   const [bank_name, setbank_name] = useState("");
   const [account_name, setaccount_name] = useState("");
   const [account_number, setaccount_number] = useState("");
@@ -15,6 +15,7 @@ const BuySellProvider = ({ children }) => {
   const [currency, setcurrency] = useState();
   const [fiat_amount, setfiat_amount] = useState(0);
   const [token_amount, settoken_amount] = useState(0);
+  const [networks, setnetworks] = useState();
 
   const [errors, seterrors] = useState({});
 
@@ -27,6 +28,8 @@ const BuySellProvider = ({ children }) => {
         settype,
         recipient,
         setrecipient,
+        networks,
+        setnetworks,
         recipientAddress,
         setrecipientAddress,
         recipientNetwork,

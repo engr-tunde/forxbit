@@ -18,6 +18,10 @@ import {
 import Loader from "../globals/Loader";
 import ErrorWidget from "../globals/ErrorWidget";
 import BuySellRecipientType from "./BuySellRecipientType";
+import BuyCurrencyAssetDropdown from "./BuyAssetDropdown";
+import BuyAssetDropdown from "./BuyAssetDropdown";
+import BuyCurrencyDropdown from "./BuyCurrencyDropdown";
+import BuyNetworkDropdown from "./BuyNetworkDropdown";
 // import handleNextToScreenTwo from "./funcs";
 // import { handleNextToScreenTwo } from "./funcs";
 
@@ -25,18 +29,13 @@ const BuySellPageOne = () => {
   const {
     setpage,
     errors,
-    seterrors,
     type,
     token,
-    settoken,
     currency,
-    setcurrency,
     recipient,
-    setrecipient,
     recipientAddress,
-    setrecipientAddress,
     recipientNetwork,
-
+    networks,
     bank_name,
     account_name,
     account_number,
@@ -60,7 +59,7 @@ const BuySellPageOne = () => {
         type.toLowerCase() === "buy" &&
         recipient.toLowerCase() == "external"
       ) {
-        if (recipientAddress.length && recipientNetwork.length) {
+        if (recipientAddress && recipientNetwork) {
           setdisabled(false);
         } else {
           setdisabled(true);
@@ -69,7 +68,7 @@ const BuySellPageOne = () => {
         type.toLowerCase() === "buy" &&
         recipient.toLowerCase() == import.meta.env.VITE_APP_NAME.toLowerCase()
       ) {
-        if (recipientAddress.length) {
+        if (recipientAddress) {
           setdisabled(false);
         } else {
           setdisabled(true);
@@ -106,89 +105,66 @@ const BuySellPageOne = () => {
     account_number,
   ]);
 
-  console.log("tokens", tokens);
-
   const handleNextToScreenTwo = () => {
     setpage(2);
   };
 
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-3 md:gap-2">
-        <div className="text-sm md:text-md font-medium text-white">
-          Select Trade Type
-        </div>
+    <div className="w-full md:w-[80%] mx-auto flex flex-col gap-8">
+      <div className="mb-1">
         <SelectTrade />
       </div>
 
-      <div className="flex flex-col gap-8 md:flex-row md:items-center justify-between">
-        <div className="w-full md:w-[45%] flex flex-col gap-3 md:gap-3">
-          <div className="text-sm md:text-md font-medium text-white">
-            Select Token
-          </div>
-          <div className="w-full relative border-[1px] border-titusLightBorder rounded-lg bg-titusDarkBG">
-            {tokens && (
-              <CurrencyAssetDropdownMini
-                data={token}
-                setdata={settoken}
-                array={tokens}
-                title="Select token"
-                firstItem="Select token"
-                type="asset"
-              />
-            )}
-            {tokensLoading && <Loader color="#00dbc2" size={25} />}
-            {tokensError && (
-              <ErrorWidget
-                color="#fff"
-                error="Unable to fetch tokens"
-                className="font-normal text-xs"
-              />
-            )}
-            {errors?.token ? <div className="error">{errors.token}</div> : null}
-          </div>
+      <div className="w-full mx-auto flex flex-col gap-4 justify-between">
+        <div className="w-full flex flex-col gap-3 md:gap-3">
+          {tokens && <BuyAssetDropdown array={tokens} />}
+          {tokensError && (
+            <ErrorWidget
+              color="#fff"
+              error="Unable to fetch tokens"
+              className="font-normal text-xs"
+            />
+          )}
+          {errors?.token ? <div className="error">{errors.token}</div> : null}
+        </div>
+        <div className="w-full flex flex-col gap-3 md:gap-3">
+          {currencies && <BuyCurrencyDropdown array={currencies} />}
+
+          {currenciesError && (
+            <ErrorWidget
+              color="#fff"
+              error="Unable to fetch currencies"
+              className="font-normal text-xs text-end"
+            />
+          )}
+          {errors?.currency ? (
+            <div className="error">{errors.currency}</div>
+          ) : null}
         </div>
 
-        <div className="w-full md:w-[45%] flex flex-col gap-3 md:gap-3">
-          <div className="text-sm md:text-md font-medium text-white md:text-end">
-            Select Currency
-          </div>
-          <div className="w-full relative border-[1px] border-titusLightBorder rounded-lg bg-titusDarkBG">
-            {currencies && (
-              <CurrencyAssetDropdownMini
-                data={currency}
-                setdata={setcurrency}
-                array={currencies}
-                title="Select currency"
-                firstItem="Select currency"
-              />
-            )}
-            {currenciesLoading && <Loader color="#00dbc2" size={25} />}
-            {currenciesError && (
-              <ErrorWidget
-                color="#fff"
-                error="Unable to fetch currencies"
-                className="font-normal text-xs text-end"
-              />
-            )}
-            {errors?.token ? <div className="error">{errors.token}</div> : null}
-          </div>
+        <div className="w-full flex flex-col gap-3 md:gap-3">
+          {networks && <BuyNetworkDropdown />}
         </div>
       </div>
+      {currenciesLoading || tokensLoading ? (
+        <Loader color="#00dbc2" size={25} />
+      ) : null}
 
-      <div className="flex flex-col gap-3 md:gap-1">
-        <div className="text-sm md:text-md font-medium text-white">
-          {type} To
-        </div>
-        <div className="flex items-center gap-5 md:gap-5">
-          <BuySellRecipientType
-            setrecipientAddressVal=""
-            setrecipientVAl="External"
-          />
-          <BuySellRecipientType
-            setrecipientAddressVal=""
-            setrecipientVAl={import.meta.env.VITE_APP_NAME}
-          />
+      <div className="w-full flex flex-col gap-3 md:gap-1 ">
+        <div className="flex gap-5 items-center">
+          <div className="text-sm md:text-md font-medium text-white">
+            {type} To
+          </div>
+          <div className="flex items-center gap-5 md:gap-5">
+            <BuySellRecipientType
+              setrecipientAddressVal=""
+              setrecipientVAl="External"
+            />
+            <BuySellRecipientType
+              setrecipientAddressVal=""
+              setrecipientVAl={import.meta.env.VITE_APP_NAME}
+            />
+          </div>
         </div>
 
         {type === "Buy" && recipient === "External" && <BuyExternalAddress />}
@@ -205,11 +181,7 @@ const BuySellPageOne = () => {
       </div>
       <button
         disabled={disabled}
-        className={
-          !disabled
-            ? "btnn1 py-[6px] px-8 text-center"
-            : "btnn1 py-[6px] px-8 text-center opacity-50"
-        }
+        className={`btnn1 py-3 px-8 text-center ${disabled && "opacity-50"}`}
         onClick={handleNextToScreenTwo}
       >
         Next

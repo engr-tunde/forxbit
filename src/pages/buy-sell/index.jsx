@@ -14,7 +14,7 @@ const BuySellPage = () => {
   return (
     <>
       <Head pageTitle="Buy/Sell Cryptocurrencies" />
-      <div className="col-span-1 md:col-span-3 p-5 md:p-10 md:pb-20 bg-titusDashCardDarkBG rounded-lg border-[1px] border-titusLightBorder">
+      <div className="col-span-1 md:col-span-3 py-10 px-5 md:p-10 md:pb-20 bg-titusDashCardDarkBG rounded-lg">
         {page === 1 ? (
           <BuySellPageOne />
         ) : page === 2 ? (
